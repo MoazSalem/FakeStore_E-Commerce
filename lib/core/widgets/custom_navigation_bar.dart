@@ -11,7 +11,7 @@ class CustomNavigationBar extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(
         horizontal: SizesManager.padding20,
-        vertical: SizesManager.padding32,
+        vertical: SizesManager.padding10,
       ),
       child: SizedBox(
         width: double.infinity,

@@ -9,20 +9,18 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return Container(
-      color: theme.colorScheme.surface,
-      child: Stack(
-        alignment: Alignment.bottomCenter,
-        children: [
-          CustomScrollView(
-            slivers: [
-              CustomHomeAppBar(),
-              CustomCategoryScrollView(),
-              SliverFillRemaining(),
-            ],
-          ),
-          CustomNavigationBar(),
-        ],
+    return Scaffold(
+      backgroundColor: theme.colorScheme.surface,
+      body: SafeArea(
+        child: Stack(
+          alignment: Alignment.bottomCenter,
+          children: [
+            CustomScrollView(
+              slivers: [CustomHomeAppBar(), CustomCategoryScrollView()],
+            ),
+            CustomNavigationBar(),
+          ],
+        ),
       ),
     );
   }

@@ -6,23 +6,22 @@ class CustomCategoryScrollView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SliverToBoxAdapter(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(
-          horizontal: SizesManager.padding20,
-          vertical: SizesManager.padding,
-        ),
-        child: SizedBox(
-          height: SizesManager.categoryHeight,
-          child: ListView(
-            scrollDirection: Axis.horizontal,
-            children: [
-              ...List.generate(
-                8,
-                (index) => CategoryItem(isSelected: index == 0),
-              ),
-            ],
-          ),
+    return SliverAppBar(
+      primary: false,
+      titleSpacing: SizesManager.padding20,
+      expandedHeight: 20,
+      surfaceTintColor: Colors.transparent,
+      pinned: true,
+      title: SizedBox(
+        height: SizesManager.categoryHeight,
+        child: ListView(
+          scrollDirection: Axis.horizontal,
+          children: [
+            ...List.generate(
+              8,
+              (index) => CategoryItem(isSelected: index == 0),
+            ),
+          ],
         ),
       ),
     );
