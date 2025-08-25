@@ -19,7 +19,10 @@ class HomeScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     spacing: 5,
                     children: [
-                      Text('Hello, Welcome 👋', style: TextStyle(fontSize: 11)),
+                      Text(
+                        'Hello, Welcome 👋',
+                        style: TextStyle(fontSize: 11, color: Colors.grey),
+                      ),
                       Text(
                         'John Doe',
                         style: TextStyle(
@@ -34,7 +37,11 @@ class HomeScreen extends StatelessWidget {
                     child: CircleAvatar(
                       radius: 16,
                       backgroundColor: theme.colorScheme.inverseSurface,
-                      child: Icon(Icons.person, color: Colors.white, size: 20),
+                      child: Icon(
+                        Icons.person,
+                        color: theme.colorScheme.surface,
+                        size: 20,
+                      ),
                     ),
                   ),
                 ],
