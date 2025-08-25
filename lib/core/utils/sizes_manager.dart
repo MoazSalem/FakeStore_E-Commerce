@@ -1,5 +1,6 @@
 class SizesManager {
   static const double appBarHeight = 140;
+  static const double padding32 = 32;
   static const double padding20 = 20;
   static const double padding = 16;
   static const double padding14 = 14;
@@ -8,9 +9,11 @@ class SizesManager {
   static const double font18 = 18;
   static const double font12 = 12;
   static const double roundedCorners = 10;
+  static const double circularBorderRadius = 100;
   static const double iconSize = 24;
   static const double iconSize20 = 20;
   static const double squareButtonSide = 52;
   static const double categoryHeight = 36;
   static const double userRadius = 16;
+  static const double circularContainerRadius = 44;
 }

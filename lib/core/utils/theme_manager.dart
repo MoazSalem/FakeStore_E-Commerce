@@ -8,6 +8,7 @@ class ThemeManager {
       primary: ColorsManager.primary,
       onPrimary: ColorsManager.onPrimary,
       primaryContainer: ColorsManager.primaryContainer,
+      onPrimaryContainer: ColorsManager.onPrimaryContainer,
       surface: ColorsManager.surface,
       onSurface: ColorsManager.onSurface,
       secondary: ColorsManager.subtitleColor,
