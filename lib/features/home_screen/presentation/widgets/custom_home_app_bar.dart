@@ -13,12 +13,13 @@ class CustomHomeAppBar extends StatelessWidget {
     final theme = Theme.of(context);
     return SliverAppBar(
       title: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           AppBarUserDetails(),
           SizedBox(height: 16),
           Row(
             mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
             spacing: 10,
             children: [
               Flexible(flex: 5, child: CustomSearchBar()),

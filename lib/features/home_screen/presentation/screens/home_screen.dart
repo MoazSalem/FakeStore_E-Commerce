@@ -1,3 +1,4 @@
+import 'package:ecommerce/features/home_screen/presentation/widgets/custom_category_scroll_view.dart';
 import 'package:ecommerce/features/home_screen/presentation/widgets/custom_home_app_bar.dart';
 import 'package:flutter/material.dart';
 
@@ -10,7 +11,11 @@ class HomeScreen extends StatelessWidget {
     return Container(
       color: theme.colorScheme.surface,
       child: CustomScrollView(
-        slivers: [CustomHomeAppBar(), SliverFillRemaining()],
+        slivers: [
+          CustomHomeAppBar(),
+          CustomCategoryScrollView(),
+          SliverFillRemaining(),
+        ],
       ),
     );
   }
