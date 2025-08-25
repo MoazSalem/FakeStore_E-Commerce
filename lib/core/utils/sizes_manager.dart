@@ -8,12 +8,17 @@ class SizesManager {
   static const double padding5 = 5;
   static const double font18 = 18;
   static const double font12 = 12;
+  static const double font14 = 14;
+  static const double font16 = 16;
   static const double roundedCorners = 10;
+  static const double bigRoundedCorners = 30;
   static const double circularBorderRadius = 100;
   static const double iconSize = 24;
   static const double iconSize20 = 20;
+  static const double iconSize16 = 16;
   static const double squareButtonSide = 52;
   static const double categoryHeight = 36;
   static const double userRadius = 16;
+  static const double heartRadius = 24;
   static const double circularContainerRadius = 44;
 }
