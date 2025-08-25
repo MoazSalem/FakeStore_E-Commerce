@@ -21,14 +21,16 @@ class AppBarUserDetails extends StatelessWidget {
               'Hello, Welcome 👋',
               style: TextStyle(
                 fontSize: SizesManager.font12,
-                color: Colors.grey,
+                color: theme.colorScheme.secondary,
+                fontWeight: FontWeight.w400,
               ),
             ),
             Text(
               'John Doe',
               style: TextStyle(
                 fontSize: SizesManager.font18,
-                fontWeight: FontWeight.bold,
+                fontWeight: FontWeight.w800,
+                color: theme.colorScheme.onSurface,
               ),
             ),
           ],
@@ -39,14 +41,14 @@ class AppBarUserDetails extends StatelessWidget {
           ),
           child: CircleAvatar(
             radius: SizesManager.userRadius,
-            backgroundColor: theme.colorScheme.inverseSurface,
+            backgroundColor: theme.colorScheme.primary,
             child: SvgPicture(
               AssetBytesLoader(AssetsManager.profile),
               colorFilter: ColorFilter.mode(
-                theme.colorScheme.surface,
+                theme.colorScheme.onPrimary,
                 BlendMode.srcIn,
               ),
-              height: SizesManager.iconSize,
+              height: SizesManager.iconSize20,
             ),
           ),
         ),

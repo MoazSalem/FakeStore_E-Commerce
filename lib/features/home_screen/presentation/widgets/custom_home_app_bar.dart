@@ -28,8 +28,8 @@ class CustomHomeAppBar extends StatelessWidget {
                   onPressed: () {},
                   style: ElevatedButton.styleFrom(
                     padding: EdgeInsets.zero,
-                    backgroundColor: theme.colorScheme.inverseSurface,
-                    foregroundColor: theme.colorScheme.surface,
+                    backgroundColor: theme.colorScheme.primary,
+                    foregroundColor: theme.colorScheme.onPrimary,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(
                         SizesManager.roundedCorners,

@@ -9,6 +9,7 @@ class SizesManager {
   static const double font12 = 12;
   static const double roundedCorners = 10;
   static const double iconSize = 24;
+  static const double iconSize20 = 20;
   static const double squareButtonSide = 52;
   static const double categoryHeight = 36;
   static const double userRadius = 16;

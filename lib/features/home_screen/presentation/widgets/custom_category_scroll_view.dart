@@ -37,31 +37,35 @@ class CategoryItem extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final color = isSelected
-        ? theme.colorScheme.inverseSurface
+        ? theme.colorScheme.primary
         : theme.colorScheme.surface;
     final foregroundColor = isSelected
-        ? theme.colorScheme.surface
-        : theme.colorScheme.inverseSurface;
+        ? theme.colorScheme.onPrimary
+        : theme.colorScheme.onSurface;
     return SizedBox(
       width: 100,
       height: 6,
       child: Card(
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(SizesManager.roundedCorners),
           side: BorderSide(
-            width: 1,
-            color: isSelected ? Colors.transparent : Colors.grey,
+            width: isSelected ? 0 : 1,
+            color: theme.colorScheme.outline,
           ),
         ),
         elevation: 0,
         color: color,
-        margin: EdgeInsets.only(right: 16),
+        margin: EdgeInsets.only(right: SizesManager.padding),
         child: Center(
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             spacing: 5,
             children: [
-              Icon(Icons.gamepad_outlined, size: 20, color: foregroundColor),
+              Icon(
+                Icons.gamepad_outlined,
+                size: SizesManager.iconSize20,
+                color: foregroundColor,
+              ),
               Text('Item', style: TextStyle(color: foregroundColor)),
             ],
           ),

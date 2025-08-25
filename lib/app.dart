@@ -1,3 +1,4 @@
+import 'package:ecommerce/core/utils/theme_manager.dart';
 import 'package:ecommerce/features/home_screen/presentation/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -8,10 +9,7 @@ class App extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        fontFamily: 'Encoded Sans',
-      ),
+      theme: ThemeManager.lightTheme,
       home: const HomeScreen(),
     );
   }

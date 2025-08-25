@@ -9,6 +9,7 @@ class CustomSearchBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return TextField(
       decoration: InputDecoration(
         contentPadding: EdgeInsets.symmetric(
@@ -17,19 +18,22 @@ class CustomSearchBar extends StatelessWidget {
         ),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(SizesManager.roundedCorners),
-          borderSide: BorderSide(color: Colors.grey),
+          borderSide: BorderSide(color: theme.colorScheme.outline),
         ),
         hint: Row(
           spacing: SizesManager.padding10,
           children: [
             SvgPicture(
               AssetBytesLoader(AssetsManager.search),
-              colorFilter: ColorFilter.mode(Colors.grey, BlendMode.srcIn),
+              colorFilter: ColorFilter.mode(
+                theme.colorScheme.outline,
+                BlendMode.srcIn,
+              ),
             ),
             Text(
               'Search...',
               style: TextStyle(
-                color: Colors.grey,
+                color: theme.colorScheme.outline,
                 fontSize: SizesManager.font18,
               ),
             ),
