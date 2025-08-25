@@ -1,4 +1,5 @@
 import 'package:ecommerce/core/utils/assets_manager.dart';
+import 'package:ecommerce/core/utils/sizes_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:vector_graphics/vector_graphics.dart';
@@ -10,13 +11,16 @@ class CustomSearchBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextField(
       decoration: InputDecoration(
-        contentPadding: EdgeInsets.symmetric(vertical: 14, horizontal: 14),
+        contentPadding: EdgeInsets.symmetric(
+          vertical: SizesManager.padding14,
+          horizontal: SizesManager.padding14,
+        ),
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(SizesManager.roundedCorners),
           borderSide: BorderSide(color: Colors.grey),
         ),
         hint: Row(
-          spacing: 10,
+          spacing: SizesManager.padding10,
           children: [
             SvgPicture(
               AssetBytesLoader(AssetsManager.search),
@@ -24,7 +28,10 @@ class CustomSearchBar extends StatelessWidget {
             ),
             Text(
               'Search...',
-              style: TextStyle(color: Colors.grey, fontSize: 18),
+              style: TextStyle(
+                color: Colors.grey,
+                fontSize: SizesManager.font18,
+              ),
             ),
           ],
         ),

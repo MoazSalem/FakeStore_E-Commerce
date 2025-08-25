@@ -1,3 +1,4 @@
+import 'package:ecommerce/core/utils/sizes_manager.dart';
 import 'package:flutter/material.dart';
 
 class CustomCategoryScrollView extends StatelessWidget {
@@ -7,9 +8,12 @@ class CustomCategoryScrollView extends StatelessWidget {
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 18.0, vertical: 16),
+        padding: const EdgeInsets.symmetric(
+          horizontal: SizesManager.padding20,
+          vertical: SizesManager.padding,
+        ),
         child: SizedBox(
-          height: 36,
+          height: SizesManager.categoryHeight,
           child: ListView(
             scrollDirection: Axis.horizontal,
             children: [

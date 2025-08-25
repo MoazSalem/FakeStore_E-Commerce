@@ -1,4 +1,5 @@
 import 'package:ecommerce/core/utils/assets_manager.dart';
+import 'package:ecommerce/core/utils/sizes_manager.dart';
 import 'package:ecommerce/features/home_screen/presentation/widgets/app_bar_user_details.dart';
 import 'package:ecommerce/features/home_screen/presentation/widgets/custom_search_bar.dart';
 import 'package:flutter/material.dart';
@@ -13,14 +14,13 @@ class CustomHomeAppBar extends StatelessWidget {
     final theme = Theme.of(context);
     return SliverAppBar(
       title: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           AppBarUserDetails(),
-          SizedBox(height: 16),
+          SizedBox(height: SizesManager.padding),
           Row(
             mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
-            spacing: 10,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Flexible(flex: 5, child: CustomSearchBar()),
               Flexible(
@@ -31,9 +31,14 @@ class CustomHomeAppBar extends StatelessWidget {
                     backgroundColor: theme.colorScheme.inverseSurface,
                     foregroundColor: theme.colorScheme.surface,
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
+                      borderRadius: BorderRadius.circular(
+                        SizesManager.roundedCorners,
+                      ),
                     ),
-                    minimumSize: Size(55, 52),
+                    minimumSize: Size(
+                      SizesManager.squareButtonSide,
+                      SizesManager.squareButtonSide,
+                    ),
                   ),
                   child: SvgPicture(
                     AssetBytesLoader(AssetsManager.setting),
@@ -49,7 +54,7 @@ class CustomHomeAppBar extends StatelessWidget {
         ],
       ),
       floating: true,
-      toolbarHeight: 140,
+      toolbarHeight: SizesManager.appBarHeight,
     );
   }
 }
