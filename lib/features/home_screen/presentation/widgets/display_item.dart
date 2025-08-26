@@ -1,12 +1,14 @@
 import 'package:ecommerce/core/utils/assets_manager.dart';
 import 'package:ecommerce/core/utils/sizes_manager.dart';
+import 'package:ecommerce/features/home_screen/domain/entities/product.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:vector_graphics/vector_graphics.dart';
 
 class DisplayItem extends StatelessWidget {
+  final Product product;
   final bool isTall;
-  const DisplayItem({super.key, this.isTall = false});
+  const DisplayItem({super.key, this.isTall = false, required this.product});
 
   @override
   Widget build(BuildContext context) {
@@ -29,23 +31,30 @@ class DisplayItem extends StatelessWidget {
                   borderRadius: BorderRadius.circular(
                     SizesManager.bigRoundedCorners,
                   ),
+                  image: DecorationImage(
+                    image: NetworkImage(product.image),
+                    fit: BoxFit.fitWidth,
+                  ),
                 ),
-                child: Container(color: Colors.lightBlue),
               ),
               const SizedBox(height: SizesManager.padding10),
               Text(
-                "Title",
+                product.title,
                 style: TextStyle(
                   fontWeight: FontWeight.w600,
                   fontSize: SizesManager.font16,
                 ),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
               ),
               const SizedBox(height: SizesManager.padding5),
               Text(
-                "Description",
+                product.description,
                 style: theme.textTheme.bodySmall!.copyWith(
                   color: theme.colorScheme.secondary,
                 ),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
               ),
               const SizedBox(height: SizesManager.padding10),
               SizedBox(
@@ -54,7 +63,7 @@ class DisplayItem extends StatelessWidget {
                   spacing: 20,
                   children: [
                     Text(
-                      "\$212.99",
+                      "\$${product.price}",
                       style: TextStyle(fontWeight: FontWeight.w600),
                     ),
                     Row(

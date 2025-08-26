@@ -22,13 +22,20 @@ class ItemsListWidget extends StatelessWidget {
                     SliverFixedExtentList(
                       itemExtent: 344,
                       delegate: SliverChildBuilderDelegate((context, index) {
-                        return Center(child: DisplayItem());
+                        return Center(
+                          child: DisplayItem(product: state.products[index]),
+                        );
                       }, childCount: 12),
                     ),
                     SliverFixedExtentList(
                       itemExtent: 364,
                       delegate: SliverChildBuilderDelegate((context, index) {
-                        return Center(child: DisplayItem(isTall: true));
+                        return Center(
+                          child: DisplayItem(
+                            isTall: true,
+                            product: state.products[index],
+                          ),
+                        );
                       }, childCount: 11),
                     ),
                   ],
