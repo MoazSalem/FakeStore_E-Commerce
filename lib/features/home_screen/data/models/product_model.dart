@@ -1,6 +1,5 @@
 import 'package:ecommerce/features/home_screen/data/models/rating_model.dart';
 import 'package:ecommerce/features/home_screen/domain/entities/product.dart';
-import 'package:ecommerce/features/home_screen/domain/entities/rating.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
 

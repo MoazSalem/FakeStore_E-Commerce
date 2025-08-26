@@ -17,15 +17,16 @@ class ItemsListWidget extends StatelessWidget {
       sliver: BlocBuilder<ProductsCubit, ProductsState>(
         builder: (context, state) {
           return state is ProductsLoaded
+              // the view is split into two lists one taller than the other
               ? SliverCrossAxisGroup(
                   slivers: [
                     SliverFixedExtentList(
                       itemExtent: 344,
                       delegate: SliverChildBuilderDelegate((context, index) {
                         return Center(
-                          child: DisplayItem(product: state.products[index]),
+                          child: DisplayItem(product: state.firstList[index]),
                         );
-                      }, childCount: 12),
+                      }, childCount: state.firstList.length),
                     ),
                     SliverFixedExtentList(
                       itemExtent: 364,
@@ -33,10 +34,10 @@ class ItemsListWidget extends StatelessWidget {
                         return Center(
                           child: DisplayItem(
                             isTall: true,
-                            product: state.products[index],
+                            product: state.secondList[index],
                           ),
                         );
-                      }, childCount: 11),
+                      }, childCount: state.secondList.length),
                     ),
                   ],
                 )

@@ -18,74 +18,92 @@ class DisplayItem extends StatelessWidget {
       child: Stack(
         alignment: Alignment.topRight,
         children: [
-          Column(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                clipBehavior: Clip.antiAlias,
-                width: 170,
-                height: isTall ? 260 : 240,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(
-                    SizesManager.bigRoundedCorners,
+          SizedBox(
+            width: SizesManager.displayItemWidth,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  width: SizesManager.displayItemWidth,
+                  clipBehavior: Clip.antiAlias,
+                  height: isTall
+                      ? SizesManager.tallDisplayItemHeight
+                      : SizesManager.displayItemHeight,
+                  decoration: BoxDecoration(
+                    color: theme.colorScheme.primaryContainer,
+                    borderRadius: BorderRadius.circular(
+                      SizesManager.bigRoundedCorners,
+                    ),
                   ),
-                  image: DecorationImage(
-                    image: NetworkImage(product.image),
-                    fit: BoxFit.fitWidth,
+                  child: Padding(
+                    padding: const EdgeInsets.all(SizesManager.padding14),
+                    child: Image.network(
+                      product.image,
+                      fit: BoxFit.scaleDown,
+                      loadingBuilder: (context, child, loadingProgress) {
+                        if (loadingProgress == null) {
+                          // Image has finished loading, return the image
+                          return child;
+                        } else {
+                          return const Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        }
+                      },
+                      errorBuilder: (context, error, stackTrace) {
+                        return const Icon(Icons.error);
+                      },
+                    ),
                   ),
                 ),
-              ),
-              const SizedBox(height: SizesManager.padding10),
-              Text(
-                product.title,
-                style: TextStyle(
-                  fontWeight: FontWeight.w600,
-                  fontSize: SizesManager.font14,
+                const SizedBox(height: SizesManager.padding10),
+                Text(
+                  product.title,
+                  style: TextStyle(
+                    fontWeight: FontWeight.w600,
+                    fontSize: SizesManager.font14,
+                  ),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                 ),
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-              ),
-              const SizedBox(height: SizesManager.padding5),
-              Text(
-                product.category,
-                style: theme.textTheme.bodySmall!.copyWith(
-                  color: theme.colorScheme.secondary,
+                const SizedBox(height: SizesManager.padding5),
+                Text(
+                  product.category,
+                  style: theme.textTheme.bodySmall!.copyWith(
+                    color: theme.colorScheme.secondary,
+                  ),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                 ),
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-              ),
-              const SizedBox(height: SizesManager.padding10),
-              SizedBox(
-                width: 170,
-                child: Row(
-                  spacing: 20,
+                const SizedBox(height: SizesManager.padding10),
+                Row(
+                  spacing: SizesManager.padding5,
                   children: [
                     Text(
                       "\$${product.price}",
                       style: TextStyle(fontWeight: FontWeight.w600),
                     ),
-                    Row(
-                      spacing: 5,
-                      children: [
-                        SvgPicture(AssetBytesLoader(AssetsManager.star)),
-                        Text(
-                          product.rating.rate.toString(),
-                          style: TextStyle(
-                            fontWeight: FontWeight.w300,
-                            fontSize: SizesManager.font12,
-                          ),
-                        ),
-                      ],
+                    const SizedBox(width: SizesManager.padding5),
+                    SvgPicture(AssetBytesLoader(AssetsManager.star)),
+                    Text(
+                      product.rating.rate.toString(),
+                      style: TextStyle(
+                        fontWeight: FontWeight.w300,
+                        fontSize: SizesManager.font12,
+                      ),
                     ),
                   ],
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
           Padding(
-            padding: const EdgeInsets.all(SizesManager.padding20),
+            padding: const EdgeInsets.only(
+              top: SizesManager.padding,
+              right: SizesManager.padding,
+            ),
             child: Container(
               width: SizesManager.heartRadius,
               height: SizesManager.heartRadius,
@@ -102,8 +120,8 @@ class DisplayItem extends StatelessWidget {
                     theme.colorScheme.surface,
                     BlendMode.srcIn,
                   ),
-                  height: SizesManager.iconSize16,
-                  width: SizesManager.iconSize16,
+                  height: SizesManager.iconSize20,
+                  width: SizesManager.iconSize20,
                 ),
               ),
             ),

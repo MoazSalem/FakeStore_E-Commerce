@@ -16,7 +16,14 @@ class ProductsCubit extends Cubit<ProductsState> {
       final products = await GetProductsImpl(
         GetIt.instance.get<ProductRepository>(),
       ).call();
-      emit(ProductsLoaded(products));
+      // split the products into two lists for the alternating items lists
+      final firstList = [
+        for (var i = 0; i < products.length; i += 2) products[i],
+      ];
+      final secondList = [
+        for (var i = 1; i < products.length; i += 2) products[i],
+      ];
+      emit(ProductsLoaded(firstList, secondList));
     } catch (e) {
       emit(ProductsError(e.toString()));
     }
