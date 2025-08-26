@@ -1,3 +1,4 @@
+import 'package:ecommerce/features/home_screen/domain/entities/rating.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
 
@@ -12,5 +13,6 @@ abstract class Product with _$Product {
     required String description,
     required String category,
     required String image,
+    required Rating rating,
   }) = _Product;
 }

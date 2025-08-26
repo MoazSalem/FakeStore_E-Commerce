@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$ProductModel implements DiagnosticableTreeMixin {
 
- int get id; String get title; double get price; String get description; String get category; String get image;
+ int get id; String get title; double get price; String get description; String get category; String get image; RatingModel get rating;
 /// Create a copy of ProductModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -29,21 +29,21 @@ $ProductModelCopyWith<ProductModel> get copyWith => _$ProductModelCopyWithImpl<P
 void debugFillProperties(DiagnosticPropertiesBuilder properties) {
   properties
     ..add(DiagnosticsProperty('type', 'ProductModel'))
-    ..add(DiagnosticsProperty('id', id))..add(DiagnosticsProperty('title', title))..add(DiagnosticsProperty('price', price))..add(DiagnosticsProperty('description', description))..add(DiagnosticsProperty('category', category))..add(DiagnosticsProperty('image', image));
+    ..add(DiagnosticsProperty('id', id))..add(DiagnosticsProperty('title', title))..add(DiagnosticsProperty('price', price))..add(DiagnosticsProperty('description', description))..add(DiagnosticsProperty('category', category))..add(DiagnosticsProperty('image', image))..add(DiagnosticsProperty('rating', rating));
 }
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ProductModel&&(identical(other.id, id) || other.id == id)&&(identical(other.title, title) || other.title == title)&&(identical(other.price, price) || other.price == price)&&(identical(other.description, description) || other.description == description)&&(identical(other.category, category) || other.category == category)&&(identical(other.image, image) || other.image == image));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ProductModel&&(identical(other.id, id) || other.id == id)&&(identical(other.title, title) || other.title == title)&&(identical(other.price, price) || other.price == price)&&(identical(other.description, description) || other.description == description)&&(identical(other.category, category) || other.category == category)&&(identical(other.image, image) || other.image == image)&&(identical(other.rating, rating) || other.rating == rating));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,title,price,description,category,image);
+int get hashCode => Object.hash(runtimeType,id,title,price,description,category,image,rating);
 
 @override
 String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
-  return 'ProductModel(id: $id, title: $title, price: $price, description: $description, category: $category, image: $image)';
+  return 'ProductModel(id: $id, title: $title, price: $price, description: $description, category: $category, image: $image, rating: $rating)';
 }
 
 
@@ -54,11 +54,11 @@ abstract mixin class $ProductModelCopyWith<$Res>  {
   factory $ProductModelCopyWith(ProductModel value, $Res Function(ProductModel) _then) = _$ProductModelCopyWithImpl;
 @useResult
 $Res call({
- int id, String title, double price, String description, String category, String image
+ int id, String title, double price, String description, String category, String image, RatingModel rating
 });
 
 
-
+$RatingModelCopyWith<$Res> get rating;
 
 }
 /// @nodoc
@@ -71,7 +71,7 @@ class _$ProductModelCopyWithImpl<$Res>
 
 /// Create a copy of ProductModel
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? title = null,Object? price = null,Object? description = null,Object? category = null,Object? image = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? title = null,Object? price = null,Object? description = null,Object? category = null,Object? image = null,Object? rating = null,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int,title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
@@ -79,10 +79,20 @@ as String,price: null == price ? _self.price : price // ignore: cast_nullable_to
 as double,description: null == description ? _self.description : description // ignore: cast_nullable_to_non_nullable
 as String,category: null == category ? _self.category : category // ignore: cast_nullable_to_non_nullable
 as String,image: null == image ? _self.image : image // ignore: cast_nullable_to_non_nullable
-as String,
+as String,rating: null == rating ? _self.rating : rating // ignore: cast_nullable_to_non_nullable
+as RatingModel,
   ));
 }
-
+/// Create a copy of ProductModel
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$RatingModelCopyWith<$Res> get rating {
+  
+  return $RatingModelCopyWith<$Res>(_self.rating, (value) {
+    return _then(_self.copyWith(rating: value));
+  });
+}
 }
 
 
@@ -164,10 +174,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id,  String title,  double price,  String description,  String category,  String image)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id,  String title,  double price,  String description,  String category,  String image,  RatingModel rating)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _ProductModel() when $default != null:
-return $default(_that.id,_that.title,_that.price,_that.description,_that.category,_that.image);case _:
+return $default(_that.id,_that.title,_that.price,_that.description,_that.category,_that.image,_that.rating);case _:
   return orElse();
 
 }
@@ -185,10 +195,10 @@ return $default(_that.id,_that.title,_that.price,_that.description,_that.categor
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id,  String title,  double price,  String description,  String category,  String image)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id,  String title,  double price,  String description,  String category,  String image,  RatingModel rating)  $default,) {final _that = this;
 switch (_that) {
 case _ProductModel():
-return $default(_that.id,_that.title,_that.price,_that.description,_that.category,_that.image);case _:
+return $default(_that.id,_that.title,_that.price,_that.description,_that.category,_that.image,_that.rating);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -205,10 +215,10 @@ return $default(_that.id,_that.title,_that.price,_that.description,_that.categor
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id,  String title,  double price,  String description,  String category,  String image)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id,  String title,  double price,  String description,  String category,  String image,  RatingModel rating)?  $default,) {final _that = this;
 switch (_that) {
 case _ProductModel() when $default != null:
-return $default(_that.id,_that.title,_that.price,_that.description,_that.category,_that.image);case _:
+return $default(_that.id,_that.title,_that.price,_that.description,_that.category,_that.image,_that.rating);case _:
   return null;
 
 }
@@ -220,7 +230,7 @@ return $default(_that.id,_that.title,_that.price,_that.description,_that.categor
 @JsonSerializable()
 
 class _ProductModel with DiagnosticableTreeMixin implements ProductModel {
-  const _ProductModel({required this.id, required this.title, required this.price, required this.description, required this.category, required this.image});
+  const _ProductModel({required this.id, required this.title, required this.price, required this.description, required this.category, required this.image, required this.rating});
   factory _ProductModel.fromJson(Map<String, dynamic> json) => _$ProductModelFromJson(json);
 
 @override final  int id;
@@ -229,6 +239,7 @@ class _ProductModel with DiagnosticableTreeMixin implements ProductModel {
 @override final  String description;
 @override final  String category;
 @override final  String image;
+@override final  RatingModel rating;
 
 /// Create a copy of ProductModel
 /// with the given fields replaced by the non-null parameter values.
@@ -244,21 +255,21 @@ Map<String, dynamic> toJson() {
 void debugFillProperties(DiagnosticPropertiesBuilder properties) {
   properties
     ..add(DiagnosticsProperty('type', 'ProductModel'))
-    ..add(DiagnosticsProperty('id', id))..add(DiagnosticsProperty('title', title))..add(DiagnosticsProperty('price', price))..add(DiagnosticsProperty('description', description))..add(DiagnosticsProperty('category', category))..add(DiagnosticsProperty('image', image));
+    ..add(DiagnosticsProperty('id', id))..add(DiagnosticsProperty('title', title))..add(DiagnosticsProperty('price', price))..add(DiagnosticsProperty('description', description))..add(DiagnosticsProperty('category', category))..add(DiagnosticsProperty('image', image))..add(DiagnosticsProperty('rating', rating));
 }
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ProductModel&&(identical(other.id, id) || other.id == id)&&(identical(other.title, title) || other.title == title)&&(identical(other.price, price) || other.price == price)&&(identical(other.description, description) || other.description == description)&&(identical(other.category, category) || other.category == category)&&(identical(other.image, image) || other.image == image));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ProductModel&&(identical(other.id, id) || other.id == id)&&(identical(other.title, title) || other.title == title)&&(identical(other.price, price) || other.price == price)&&(identical(other.description, description) || other.description == description)&&(identical(other.category, category) || other.category == category)&&(identical(other.image, image) || other.image == image)&&(identical(other.rating, rating) || other.rating == rating));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,title,price,description,category,image);
+int get hashCode => Object.hash(runtimeType,id,title,price,description,category,image,rating);
 
 @override
 String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
-  return 'ProductModel(id: $id, title: $title, price: $price, description: $description, category: $category, image: $image)';
+  return 'ProductModel(id: $id, title: $title, price: $price, description: $description, category: $category, image: $image, rating: $rating)';
 }
 
 
@@ -269,11 +280,11 @@ abstract mixin class _$ProductModelCopyWith<$Res> implements $ProductModelCopyWi
   factory _$ProductModelCopyWith(_ProductModel value, $Res Function(_ProductModel) _then) = __$ProductModelCopyWithImpl;
 @override @useResult
 $Res call({
- int id, String title, double price, String description, String category, String image
+ int id, String title, double price, String description, String category, String image, RatingModel rating
 });
 
 
-
+@override $RatingModelCopyWith<$Res> get rating;
 
 }
 /// @nodoc
@@ -286,7 +297,7 @@ class __$ProductModelCopyWithImpl<$Res>
 
 /// Create a copy of ProductModel
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? title = null,Object? price = null,Object? description = null,Object? category = null,Object? image = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? title = null,Object? price = null,Object? description = null,Object? category = null,Object? image = null,Object? rating = null,}) {
   return _then(_ProductModel(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int,title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
@@ -294,11 +305,21 @@ as String,price: null == price ? _self.price : price // ignore: cast_nullable_to
 as double,description: null == description ? _self.description : description // ignore: cast_nullable_to_non_nullable
 as String,category: null == category ? _self.category : category // ignore: cast_nullable_to_non_nullable
 as String,image: null == image ? _self.image : image // ignore: cast_nullable_to_non_nullable
-as String,
+as String,rating: null == rating ? _self.rating : rating // ignore: cast_nullable_to_non_nullable
+as RatingModel,
   ));
 }
 
-
+/// Create a copy of ProductModel
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$RatingModelCopyWith<$Res> get rating {
+  
+  return $RatingModelCopyWith<$Res>(_self.rating, (value) {
+    return _then(_self.copyWith(rating: value));
+  });
+}
 }
 
 // dart format on
