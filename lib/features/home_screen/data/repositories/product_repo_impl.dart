@@ -18,8 +18,7 @@ class ProductRepoImpl implements ProductRepository {
       final data = response.data;
       // convert the data to a list of products
       return data
-          .map((e) => ProductModel.fromJson(e))
-          .map((e) => e.toEntity())
+          .map<Product>((e) => ProductModel.fromJson(e).toEntity())
           .toList();
     } else {
       // TODO: handle errors
