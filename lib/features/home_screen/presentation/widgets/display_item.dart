@@ -42,14 +42,14 @@ class DisplayItem extends StatelessWidget {
                 product.title,
                 style: TextStyle(
                   fontWeight: FontWeight.w600,
-                  fontSize: SizesManager.font16,
+                  fontSize: SizesManager.font14,
                 ),
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
               ),
               const SizedBox(height: SizesManager.padding5),
               Text(
-                product.description,
+                product.category,
                 style: theme.textTheme.bodySmall!.copyWith(
                   color: theme.colorScheme.secondary,
                 ),
@@ -67,10 +67,11 @@ class DisplayItem extends StatelessWidget {
                       style: TextStyle(fontWeight: FontWeight.w600),
                     ),
                     Row(
+                      spacing: 5,
                       children: [
                         SvgPicture(AssetBytesLoader(AssetsManager.star)),
                         Text(
-                          "5.0",
+                          product.rating.rate.toString(),
                           style: TextStyle(
                             fontWeight: FontWeight.w300,
                             fontSize: SizesManager.font12,
