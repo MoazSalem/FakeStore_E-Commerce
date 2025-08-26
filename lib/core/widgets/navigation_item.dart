@@ -7,31 +7,37 @@ import 'package:vector_graphics/vector_graphics.dart';
 class NavigationItem extends StatelessWidget {
   final bool isSelected;
   final int index;
+  final Function() onTap;
   const NavigationItem({
     super.key,
     this.isSelected = false,
     required this.index,
+    required this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return Container(
-      width: SizesManager.circularContainerRadius,
-      height: SizesManager.circularContainerRadius,
-      decoration: BoxDecoration(
-        color: theme.colorScheme.onPrimaryContainer,
+    return Material(
+      color: theme.colorScheme.onPrimaryContainer,
+      borderRadius: BorderRadius.circular(SizesManager.circularBorderRadius),
+      child: InkWell(
         borderRadius: BorderRadius.circular(SizesManager.circularBorderRadius),
-      ),
-      child: SvgPicture(
-        AssetBytesLoader(getNavigationItems(index, isSelected)),
-        colorFilter: ColorFilter.mode(
-          theme.colorScheme.surface,
-          BlendMode.srcIn,
+        onTap: onTap,
+        child: SizedBox(
+          width: SizesManager.circularContainerRadius,
+          height: SizesManager.circularContainerRadius,
+          child: SvgPicture(
+            AssetBytesLoader(getNavigationItems(index, isSelected)),
+            colorFilter: ColorFilter.mode(
+              theme.colorScheme.surface,
+              BlendMode.srcIn,
+            ),
+            height: SizesManager.iconSize20,
+            width: SizesManager.iconSize20,
+            fit: BoxFit.scaleDown,
+          ),
         ),
-        height: SizesManager.iconSize20,
-        width: SizesManager.iconSize20,
-        fit: BoxFit.scaleDown,
       ),
     );
   }

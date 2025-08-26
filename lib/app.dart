@@ -1,5 +1,5 @@
 import 'package:ecommerce/core/utils/theme_manager.dart';
-import 'package:ecommerce/features/home_screen/presentation/screens/home_screen.dart';
+import 'package:ecommerce/features/main_screen/presentation/screens/main_screen.dart';
 import 'package:flutter/material.dart';
 
 class App extends StatelessWidget {
@@ -10,7 +10,7 @@ class App extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeManager.lightTheme,
-      home: const HomeScreen(),
+      home: const MainScreen(),
     );
   }
 }
