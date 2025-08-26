@@ -1,9 +1,16 @@
 import 'package:ecommerce/core/utils/sizes_manager.dart';
 import 'package:flutter/material.dart';
 
-class CustomCategoryScrollView extends StatelessWidget {
+class CustomCategoryScrollView extends StatefulWidget {
   const CustomCategoryScrollView({super.key});
 
+  @override
+  State<CustomCategoryScrollView> createState() =>
+      _CustomCategoryScrollViewState();
+}
+
+class _CustomCategoryScrollViewState extends State<CustomCategoryScrollView> {
+  int _currentIndex = 0;
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
@@ -19,7 +26,12 @@ class CustomCategoryScrollView extends StatelessWidget {
           children: [
             ...List.generate(
               8,
-              (index) => CategoryItem(isSelected: index == 0),
+              (index) => GestureDetector(
+                onTap: () => setState(() {
+                  _currentIndex = index;
+                }),
+                child: CategoryItem(isSelected: index == _currentIndex),
+              ),
             ),
           ],
         ),
