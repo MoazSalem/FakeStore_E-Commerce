@@ -1,4 +1,3 @@
-import 'package:ecommerce/core/widgets/custom_navigation_bar.dart';
 import 'package:ecommerce/features/home_screen/presentation/widgets/custom_category_scroll_view.dart';
 import 'package:ecommerce/features/home_screen/presentation/widgets/custom_home_app_bar.dart';
 import 'package:ecommerce/features/home_screen/presentation/widgets/items_list_widget.dart';
@@ -9,7 +8,6 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
     return CustomScrollView(
       slivers: [
         CustomHomeAppBar(),

@@ -25,13 +25,21 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBody: true,
-      body: PageView(
-        scrollBehavior: const ScrollBehavior().copyWith(
-          physics: NeverScrollableScrollPhysics(),
+      body: SafeArea(
+        bottom: false,
+        child: PageView(
+          scrollBehavior: const ScrollBehavior().copyWith(
+            physics: NeverScrollableScrollPhysics(),
+          ),
+          controller: pageController,
+          onPageChanged: (index) {},
+          children: [
+            HomeScreen(),
+            CartScreen(),
+            SavedScreen(),
+            ProfileScreen(),
+          ],
         ),
-        controller: pageController,
-        onPageChanged: (index) {},
-        children: [HomeScreen(), CartScreen(), SavedScreen(), ProfileScreen()],
       ),
       bottomNavigationBar: CustomNavigationBar(pageController: pageController),
     );
