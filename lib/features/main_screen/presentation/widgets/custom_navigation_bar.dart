@@ -1,17 +1,13 @@
 import 'package:ecommerce/core/utils/sizes_manager.dart';
-import 'package:ecommerce/core/widgets/navigation_item.dart';
+import 'package:ecommerce/features/main_screen/presentation/controller/main_screen_cubit.dart';
+import 'package:ecommerce/features/main_screen/presentation/widgets/navigation_item.dart';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 
-class CustomNavigationBar extends StatefulWidget {
-  final PageController pageController;
-  const CustomNavigationBar({super.key, required this.pageController});
+class CustomNavigationBar extends StatelessWidget {
+  final int index;
+  const CustomNavigationBar({super.key, required this.index});
 
-  @override
-  State<CustomNavigationBar> createState() => _CustomNavigationBarState();
-}
-
-class _CustomNavigationBarState extends State<CustomNavigationBar> {
-  int _currentIndex = 0;
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -38,15 +34,8 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
                 4,
                 (i) => NavigationItem(
                   index: i,
-                  isSelected: i == _currentIndex,
-                  onTap: () => setState(() {
-                    _currentIndex = i;
-                    widget.pageController.animateToPage(
-                      i,
-                      duration: const Duration(milliseconds: 300),
-                      curve: Curves.easeInOut,
-                    );
-                  }),
+                  isSelected: i == index,
+                  onTap: () => GetIt.I<MainScreenCubit>().changeIndex(i),
                 ),
               ),
             ],

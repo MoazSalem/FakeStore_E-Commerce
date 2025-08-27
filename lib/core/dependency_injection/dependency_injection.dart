@@ -4,6 +4,7 @@ import 'package:ecommerce/features/home_screen/data/usecases/get_products_impl.d
 import 'package:ecommerce/features/home_screen/domain/repositories/product_repository.dart';
 import 'package:ecommerce/features/home_screen/domain/usecases/get_products.dart';
 import 'package:ecommerce/features/home_screen/presentation/controller/products_cubit.dart';
+import 'package:ecommerce/features/main_screen/presentation/controller/main_screen_cubit.dart';
 import 'package:get_it/get_it.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
@@ -11,6 +12,8 @@ final getIt = GetIt.instance;
 
 // Register dependencies
 void setupDI() {
+  // Register main screen cubit as a singleton
+  getIt.registerLazySingleton<MainScreenCubit>(() => MainScreenCubit());
   // Register dio as a singleton
   getIt.registerLazySingleton<Dio>(() => Dio());
   // Add pretty dio logger to dio

@@ -1,0 +1,16 @@
+import 'package:bloc/bloc.dart';
+import 'package:meta/meta.dart';
+
+part 'main_screen_state.dart';
+
+class MainScreenCubit extends Cubit<MainScreenState> {
+  MainScreenCubit() : super(MainScreenInitial());
+
+  void init() {
+    emit(MainScreenLoaded(index: 0));
+  }
+
+  void changeIndex(int index) {
+    emit(MainScreenLoaded(index: index));
+  }
+}
