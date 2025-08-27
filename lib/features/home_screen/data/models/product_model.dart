@@ -1,3 +1,4 @@
+import 'package:ecommerce/core/utils/helper_functions.dart';
 import 'package:ecommerce/features/home_screen/data/models/rating_model.dart';
 import 'package:ecommerce/features/home_screen/domain/entities/product.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -28,7 +29,7 @@ extension ProductModelToEntity on ProductModel {
     title: title,
     price: price,
     description: description,
-    category: category,
+    category: HelperFunctions.capitalizeWords(category),
     image: image,
     rating: rating.toEntity(),
   );

@@ -13,6 +13,7 @@ class ProductsCubit extends Cubit<ProductsState> {
     emit(ProductsLoading());
     try {
       final products = await GetIt.I.get<GetProducts>().call();
+      // extract set of categories from the products
       final Set<String> categories = products.map((e) => e.category).toSet();
       // split the products into two lists for the alternating items lists
       final firstList = [
@@ -27,6 +28,7 @@ class ProductsCubit extends Cubit<ProductsState> {
     }
   }
 
+  // filter products by category
   Future<void> filterProducts(String category) async {
     emit(ProductsLoading());
     try {
