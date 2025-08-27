@@ -4,6 +4,7 @@ import 'package:ecommerce/features/home_screen/presentation/widgets/custom_home_
 import 'package:ecommerce/features/home_screen/presentation/widgets/items_list_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -11,7 +12,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => ProductsCubit()..getProducts(),
+      create: (context) => GetIt.I.get<ProductsCubit>()..getProducts(),
       child: CustomScrollView(
         slivers: [
           CustomHomeAppBar(),

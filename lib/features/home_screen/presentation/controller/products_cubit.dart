@@ -1,7 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ecommerce/features/home_screen/data/usecases/get_products_impl.dart';
 import 'package:ecommerce/features/home_screen/domain/entities/product.dart';
-import 'package:ecommerce/features/home_screen/domain/repositories/product_repository.dart';
+import 'package:ecommerce/features/home_screen/domain/usecases/get_products.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get_it/get_it.dart';
 
@@ -13,9 +12,7 @@ class ProductsCubit extends Cubit<ProductsState> {
   Future<void> getProducts() async {
     emit(ProductsLoading());
     try {
-      final products = await GetProductsImpl(
-        GetIt.instance.get<ProductRepository>(),
-      ).call();
+      final products = await GetIt.I.get<GetProducts>().call();
       // split the products into two lists for the alternating items lists
       final firstList = [
         for (var i = 0; i < products.length; i += 2) products[i],
