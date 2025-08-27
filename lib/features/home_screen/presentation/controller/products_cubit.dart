@@ -13,6 +13,7 @@ class ProductsCubit extends Cubit<ProductsState> {
     emit(ProductsLoading());
     try {
       final products = await GetIt.I.get<GetProducts>().call();
+      final Set<String> categories = products.map((e) => e.category).toSet();
       // split the products into two lists for the alternating items lists
       final firstList = [
         for (var i = 0; i < products.length; i += 2) products[i],
@@ -20,7 +21,7 @@ class ProductsCubit extends Cubit<ProductsState> {
       final secondList = [
         for (var i = 1; i < products.length; i += 2) products[i],
       ];
-      emit(ProductsLoaded(firstList, secondList));
+      emit(ProductsLoaded(firstList, secondList, categories));
     } catch (e) {
       emit(ProductsError(e.toString()));
     }
