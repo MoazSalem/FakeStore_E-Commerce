@@ -11,7 +11,7 @@ class App extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeManager.lightTheme,
       initialRoute: NavigationManager.mainScreen,
-      routes: NavigationManager.routes,
+      onGenerateRoute: NavigationManager.onGenerateRoute,
     );
   }
 }

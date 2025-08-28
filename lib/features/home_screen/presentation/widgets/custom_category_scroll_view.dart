@@ -17,6 +17,7 @@ class _CustomCategoryScrollViewState extends State<CustomCategoryScrollView> {
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
+      automaticallyImplyLeading: false,
       primary: false,
       titleSpacing: SizesManager.padding20,
       expandedHeight: 20,

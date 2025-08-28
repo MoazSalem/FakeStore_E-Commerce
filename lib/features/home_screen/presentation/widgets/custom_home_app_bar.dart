@@ -13,6 +13,7 @@ class CustomHomeAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return SliverAppBar(
+      automaticallyImplyLeading: false,
       titleSpacing: SizesManager.padding20,
       surfaceTintColor: Colors.transparent,
       title: Column(
