@@ -7,19 +7,25 @@ import 'package:ecommerce/features/home_screen/domain/repositories/product_repos
 import 'package:ecommerce/features/home_screen/domain/usecases/get_products.dart';
 import 'package:ecommerce/features/home_screen/presentation/controller/products_cubit.dart';
 import 'package:ecommerce/features/main_screen/presentation/controller/main_screen_cubit.dart';
+import 'package:ecommerce/features/saved_screen/presentation/controller/saved_cubit.dart';
 import 'package:get_it/get_it.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 final getIt = GetIt.instance;
 
 // Register dependencies
-void setupDI() {
+void setupDI() async {
+  // Register an instance of shared preferences as a singleton
+  getIt.registerSingletonAsync<SharedPreferences>(
+    () async => await SharedPreferences.getInstance(),
+  );
   // Register main screen cubit as a singleton
   getIt.registerLazySingleton<MainScreenCubit>(() => MainScreenCubit());
   // Register dio as a singleton
   getIt.registerLazySingleton<Dio>(() => Dio());
   // Add pretty dio logger to dio
-  getIt<Dio>().interceptors.add(PrettyDioLogger());
+  //getIt<Dio>().interceptors.add(PrettyDioLogger());
   // Register product repository as a singleton
   getIt.registerLazySingleton<ProductRepository>(
     () => ProductRepoImpl(dio: getIt<Dio>()),
@@ -34,4 +40,7 @@ void setupDI() {
   );
   // Register product cubit as a singleton
   getIt.registerLazySingleton<ProductsCubit>(() => ProductsCubit());
+
+  // Register saved screen cubit as a singleton
+  getIt.registerLazySingleton<SavedCubit>(() => SavedCubit());
 }
