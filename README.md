@@ -1,16 +1,5 @@
-# ecommerce
+# E-Commerce Flutter App
 
-A new Flutter project.
+WIP Flutter project of an e-commerce app using fakestoreapi.
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+<img width="300" alt="Home Screen" src="https://github.com/user-attachments/assets/0d11b567-b484-4133-887b-6fc6a7d16e4b" />
