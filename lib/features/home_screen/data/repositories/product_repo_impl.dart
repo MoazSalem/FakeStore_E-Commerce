@@ -25,4 +25,20 @@ class ProductRepoImpl implements ProductRepository {
       throw Exception("Failed to load products");
     }
   }
+
+  @override
+  Future<Product> getProduct({required String id}) async {
+    // get product from the api
+    final response = await dio.get(
+      "${ConstsManager.baseUrl}${ConstsManager.productsEndpoint}/$id",
+    );
+    if (response.statusCode == 200) {
+      final data = response.data;
+      // convert the data to a product
+      return ProductModel.fromJson(data).toEntity();
+    } else {
+      // TODO: handle errors
+      throw Exception("Failed to load product");
+    }
+  }
 }

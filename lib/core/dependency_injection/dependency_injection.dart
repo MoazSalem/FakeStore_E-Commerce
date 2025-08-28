@@ -1,4 +1,6 @@
 import 'package:dio/dio.dart';
+import 'package:ecommerce/features/details_screen/data/usecases/get_product.dart';
+import 'package:ecommerce/features/details_screen/domain/usecases/get_product.dart';
 import 'package:ecommerce/features/home_screen/data/repositories/product_repo_impl.dart';
 import 'package:ecommerce/features/home_screen/data/usecases/get_products_impl.dart';
 import 'package:ecommerce/features/home_screen/domain/repositories/product_repository.dart';
@@ -25,6 +27,10 @@ void setupDI() {
   // Register product use case as a singleton
   getIt.registerLazySingleton<GetProducts>(
     () => GetProductsImpl(getIt<ProductRepository>()),
+  );
+  // Register product use case as a singleton
+  getIt.registerFactoryParam<GetProduct, int, void>(
+    (id, _) => GetProductImpl(repository: getIt<ProductRepository>(), id: id),
   );
   // Register product cubit as a singleton
   getIt.registerLazySingleton<ProductsCubit>(() => ProductsCubit());

@@ -24,7 +24,9 @@ class NavigationManager {
         // Handle dynamic routes
         if (settings.name != null && settings.name!.startsWith(detailsScreen)) {
           final uri = Uri.parse(settings.name!);
-          final id = uri.pathSegments.length > 1 ? uri.pathSegments[1] : null;
+          final id = uri.pathSegments.length > 1
+              ? int.parse(uri.pathSegments[1])
+              : 0;
 
           return MaterialPageRoute(builder: (context) => DetailsScreen(id: id));
         }
