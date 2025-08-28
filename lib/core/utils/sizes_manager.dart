@@ -6,6 +6,7 @@ class SizesManager {
   static const double padding = 16;
   static const double padding14 = 14;
   static const double padding10 = 10;
+  static const double padding8 = 8;
   static const double padding5 = 5;
   static const double font18 = 18;
   static const double font12 = 12;
