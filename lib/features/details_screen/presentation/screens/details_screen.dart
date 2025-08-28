@@ -5,6 +5,7 @@ import 'package:ecommerce/features/details_screen/presentation/controller/detail
 import 'package:ecommerce/features/details_screen/presentation/widgets/amount_row.dart';
 import 'package:ecommerce/features/details_screen/presentation/widgets/controls_bar.dart';
 import 'package:ecommerce/features/details_screen/presentation/widgets/rating_widget.dart';
+import 'package:ecommerce/features/saved_screen/presentation/controller/saved_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -16,8 +17,11 @@ class DetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return BlocProvider(
-      create: (context) => DetailsCubit()..getProduct(id: id),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => DetailsCubit()..getProduct(id: id)),
+        BlocProvider(create: (context) => SavedCubit()..getSavedProductsIds()),
+      ],
       child: BlocBuilder<DetailsCubit, DetailsState>(
         builder: (context, state) {
           return state is DetailsLoaded
@@ -40,7 +44,7 @@ class DetailsScreen extends StatelessWidget {
                                       imageUrl: state.product.image,
                                     ),
                                   ),
-                                  ControlsBar(),
+                                  ControlsBar(productId: state.product.id),
                                 ],
                               ),
                               Column(

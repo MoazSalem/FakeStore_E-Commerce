@@ -1,20 +1,19 @@
 import 'package:ecommerce/core/utils/assets_manager.dart';
 import 'package:ecommerce/core/utils/sizes_manager.dart';
 import 'package:ecommerce/core/widgets/circular_button.dart';
+import 'package:ecommerce/core/widgets/save_button.dart';
 import 'package:ecommerce/core/widgets/svg_image.dart';
+import 'package:ecommerce/features/saved_screen/presentation/controller/saved_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 
-class ControlsBar extends StatefulWidget {
-  const ControlsBar({super.key});
+class ControlsBar extends StatelessWidget {
+  final int productId;
+  const ControlsBar({super.key, required this.productId});
 
-  @override
-  State<ControlsBar> createState() => _ControlsBarState();
-}
-
-class _ControlsBarState extends State<ControlsBar> {
-  bool isFavorite = false;
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Padding(
       padding: const EdgeInsets.all(SizesManager.padding20),
       child: Row(
@@ -24,19 +23,16 @@ class _ControlsBarState extends State<ControlsBar> {
             child: SvgImage(asset: AssetsManager.back),
             onTap: () {
               Navigator.pop(context);
+              // refresh saved products ids on back button press
+              GetIt.instance.get<SavedCubit>().getSavedProductsIds();
             },
           ),
-          CircularButton(
-            child: SvgImage(
-              asset: isFavorite
-                  ? AssetsManager.heartFilled
-                  : AssetsManager.heart,
-            ),
-            onTap: () {
-              setState(() {
-                isFavorite = !isFavorite;
-              });
-            },
+          SaveButton(
+            productId: productId,
+            backgroundColor: theme.colorScheme.surface,
+            foregroundColor: theme.colorScheme.onSurface,
+            padding: SizesManager.padding8,
+            size: SizesManager.iconSize,
           ),
         ],
       ),
