@@ -8,16 +8,18 @@ class CircularButton extends StatelessWidget {
     this.onTap,
     this.backgroundColor,
     this.padding,
+    this.elevation,
   });
   final Widget child;
   final VoidCallback? onTap;
   final Color? backgroundColor;
   final double? padding;
+  final double? elevation;
 
   @override
   Widget build(BuildContext context) {
     return Material(
-      elevation: 2,
+      elevation: elevation ?? 2,
       color: backgroundColor ?? Theme.of(context).colorScheme.surface,
       borderRadius: BorderRadius.circular(SizesManager.circularContainerRadius),
       child: InkWell(

@@ -1,6 +1,8 @@
+import 'package:ecommerce/core/utils/helper_functions.dart';
 import 'package:ecommerce/core/utils/sizes_manager.dart';
+import 'package:ecommerce/core/widgets/circular_button.dart';
+import 'package:ecommerce/core/widgets/svg_image.dart';
 import 'package:ecommerce/features/main_screen/presentation/controller/main_screen_cubit.dart';
-import 'package:ecommerce/features/main_screen/presentation/widgets/navigation_item.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 
@@ -18,7 +20,7 @@ class CustomNavigationBar extends StatelessWidget {
       ),
       child: SizedBox(
         width: double.infinity,
-        height: 70,
+        height: SizesManager.navigationHeight,
         child: Card(
           color: theme.colorScheme.primary,
           elevation: 0,
@@ -32,10 +34,14 @@ class CustomNavigationBar extends StatelessWidget {
             children: [
               ...List.generate(
                 4,
-                (i) => NavigationItem(
-                  index: i,
-                  isSelected: i == index,
+                (i) => CircularButton(
+                  backgroundColor: theme.colorScheme.onPrimaryContainer,
                   onTap: () => GetIt.I<MainScreenCubit>().changeIndex(i),
+                  elevation: 0,
+                  child: SvgImage(
+                    asset: HelperFunctions.getNavigationItemsSvg(i, index == i),
+                    color: theme.colorScheme.surface,
+                  ),
                 ),
               ),
             ],
