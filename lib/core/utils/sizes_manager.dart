@@ -1,5 +1,6 @@
 class SizesManager {
   static const double appBarHeight = 140;
+  static const double padding80 = 80;
   static const double padding32 = 32;
   static const double padding26 = 26;
   static const double padding20 = 20;

@@ -1,6 +1,6 @@
 import 'package:ecommerce/core/utils/sizes_manager.dart';
 import 'package:ecommerce/features/home_screen/presentation/controller/products_cubit.dart';
-import 'package:ecommerce/features/home_screen/presentation/widgets/display_item.dart';
+import 'package:ecommerce/features/home_screen/presentation/widgets/product_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -10,9 +10,11 @@ class ItemsListWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverPadding(
-      padding: EdgeInsets.symmetric(
-        vertical: SizesManager.padding,
-        horizontal: SizesManager.padding,
+      padding: EdgeInsets.only(
+        top: SizesManager.padding,
+        bottom: SizesManager.padding80,
+        left: SizesManager.padding,
+        right: SizesManager.padding,
       ),
       sliver: BlocBuilder<ProductsCubit, ProductsState>(
         builder: (context, state) {
