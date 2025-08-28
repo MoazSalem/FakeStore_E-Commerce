@@ -7,8 +7,6 @@ import 'package:ecommerce/core/widgets/svg_image.dart';
 import 'package:ecommerce/features/details_screen/presentation/screens/details_screen.dart';
 import 'package:ecommerce/features/home_screen/domain/entities/product.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:vector_graphics/vector_graphics.dart';
 
 class DisplayItem extends StatelessWidget {
   final Product product;
@@ -101,7 +99,10 @@ class ProductDetails extends StatelessWidget {
               style: TextStyle(fontWeight: FontWeight.w600),
             ),
             const SizedBox(width: SizesManager.padding10),
-            SvgPicture(AssetBytesLoader(AssetsManager.star)),
+            SvgImage(
+              asset: AssetsManager.star,
+              height: SizesManager.iconSize18,
+            ),
             Text(
               product.rating.rate.toString(),
               style: TextStyle(

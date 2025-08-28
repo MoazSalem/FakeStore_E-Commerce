@@ -105,11 +105,6 @@ class CategoryItem extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               spacing: 5,
               children: [
-                // Icon(
-                //   Icons.gamepad_outlined,
-                //   size: SizesManager.iconSize20,
-                //   color: foregroundColor,
-                // ),
                 Text(category, style: TextStyle(color: foregroundColor)),
               ],
             ),

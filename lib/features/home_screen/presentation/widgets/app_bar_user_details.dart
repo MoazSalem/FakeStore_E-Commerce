@@ -1,8 +1,7 @@
 import 'package:ecommerce/core/utils/assets_manager.dart';
 import 'package:ecommerce/core/utils/sizes_manager.dart';
+import 'package:ecommerce/core/widgets/svg_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:vector_graphics/vector_graphics.dart';
 
 class AppBarUserDetails extends StatelessWidget {
   const AppBarUserDetails({super.key});
@@ -42,12 +41,9 @@ class AppBarUserDetails extends StatelessWidget {
           child: CircleAvatar(
             radius: SizesManager.userRadius,
             backgroundColor: theme.colorScheme.primary,
-            child: SvgPicture(
-              AssetBytesLoader(AssetsManager.profile),
-              colorFilter: ColorFilter.mode(
-                theme.colorScheme.onPrimary,
-                BlendMode.srcIn,
-              ),
+            child: SvgImage(
+              asset: AssetsManager.profile,
+              color: theme.colorScheme.surface,
               height: SizesManager.iconSize20,
             ),
           ),

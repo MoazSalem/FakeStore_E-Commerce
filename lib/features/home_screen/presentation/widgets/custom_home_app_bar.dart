@@ -1,10 +1,9 @@
 import 'package:ecommerce/core/utils/assets_manager.dart';
 import 'package:ecommerce/core/utils/sizes_manager.dart';
+import 'package:ecommerce/core/widgets/svg_image.dart';
 import 'package:ecommerce/features/home_screen/presentation/widgets/app_bar_user_details.dart';
 import 'package:ecommerce/features/home_screen/presentation/widgets/custom_search_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:vector_graphics/vector_graphics.dart';
 
 class CustomHomeAppBar extends StatelessWidget {
   const CustomHomeAppBar({super.key});
@@ -43,12 +42,9 @@ class CustomHomeAppBar extends StatelessWidget {
                       SizesManager.squareButtonSide,
                     ),
                   ),
-                  child: SvgPicture(
-                    AssetBytesLoader(AssetsManager.setting),
-                    colorFilter: ColorFilter.mode(
-                      theme.colorScheme.surface,
-                      BlendMode.srcIn,
-                    ),
+                  child: SvgImage(
+                    asset: AssetsManager.setting,
+                    color: theme.colorScheme.surface,
                   ),
                 ),
               ),

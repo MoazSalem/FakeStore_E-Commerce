@@ -19,6 +19,7 @@ class SizesManager {
   static const double circularBorderRadius = 100;
   static const double iconSize = 24;
   static const double iconSize20 = 20;
+  static const double iconSize18 = 18;
   static const double iconSize16 = 16;
   static const double squareButtonSide = 52;
   static const double categoryHeight = 36;
