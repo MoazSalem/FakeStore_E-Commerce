@@ -2,14 +2,18 @@ import 'package:ecommerce/core/utils/helper_functions.dart';
 import 'package:ecommerce/core/utils/sizes_manager.dart';
 import 'package:ecommerce/core/widgets/circular_button.dart';
 import 'package:ecommerce/core/widgets/svg_image.dart';
-import 'package:ecommerce/features/main_screen/presentation/controller/main_screen_cubit.dart';
 import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
 
-class CustomNavigationBar extends StatelessWidget {
-  final int index;
-  const CustomNavigationBar({super.key, required this.index});
+class CustomNavigationBar extends StatefulWidget {
+  final PageController pageController;
+  const CustomNavigationBar({super.key, required this.pageController});
 
+  @override
+  State<CustomNavigationBar> createState() => _CustomNavigationBarState();
+}
+
+class _CustomNavigationBarState extends State<CustomNavigationBar> {
+  int currentPage = 0;
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -36,10 +40,22 @@ class CustomNavigationBar extends StatelessWidget {
                 4,
                 (i) => CircularButton(
                   backgroundColor: theme.colorScheme.onPrimaryContainer,
-                  onTap: () => GetIt.I<MainScreenCubit>().changeIndex(i),
+                  onTap: () => {
+                    setState(() {
+                      currentPage = i;
+                    }),
+                    widget.pageController.animateToPage(
+                      i,
+                      duration: const Duration(milliseconds: 500),
+                      curve: Curves.easeInOut,
+                    ),
+                  },
                   elevation: 0,
                   child: SvgImage(
-                    asset: HelperFunctions.getNavigationItemsSvg(i, index == i),
+                    asset: HelperFunctions.getNavigationItemsSvg(
+                      i,
+                      currentPage == i,
+                    ),
                     color: theme.colorScheme.surface,
                   ),
                 ),

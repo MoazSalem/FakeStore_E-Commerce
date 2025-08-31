@@ -7,7 +7,6 @@ import 'package:ecommerce/features/home_screen/data/usecases/get_products_impl.d
 import 'package:ecommerce/features/home_screen/domain/repositories/product_repository.dart';
 import 'package:ecommerce/features/home_screen/domain/usecases/get_products.dart';
 import 'package:ecommerce/features/home_screen/presentation/controller/products_cubit.dart';
-import 'package:ecommerce/features/main_screen/presentation/controller/main_screen_cubit.dart';
 import 'package:ecommerce/features/saved_screen/presentation/controller/saved_cubit.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -20,8 +19,6 @@ void setupDI() async {
   getIt.registerSingletonAsync<SharedPreferences>(
     () async => await SharedPreferences.getInstance(),
   );
-  // Register main screen cubit as a singleton
-  getIt.registerLazySingleton<MainScreenCubit>(() => MainScreenCubit());
   // Register dio as a singleton
   getIt.registerLazySingleton<Dio>(() => Dio());
   // Add pretty dio logger to dio
