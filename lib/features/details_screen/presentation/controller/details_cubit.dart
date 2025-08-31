@@ -13,9 +13,13 @@ class DetailsCubit extends Cubit<DetailsState> {
     emit(DetailsLoading());
     try {
       final product = await GetIt.I.get<GetProduct>(param1: id).call();
-      emit(DetailsLoaded(product: product));
+      emit(DetailsLoaded(product: product, productCount: 1));
     } catch (e) {
       emit(DetailsError(message: e.toString()));
     }
+  }
+
+  void changeProductCount(final int count, final Product product) {
+    emit(DetailsLoaded(product: product, productCount: count));
   }
 }

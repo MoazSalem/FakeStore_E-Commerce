@@ -8,6 +8,7 @@ import 'package:ecommerce/features/details_screen/presentation/widgets/rating_wi
 import 'package:ecommerce/features/saved_screen/presentation/controller/saved_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
 
 class DetailsScreen extends StatelessWidget {
   final int id;
@@ -19,8 +20,12 @@ class DetailsScreen extends StatelessWidget {
     final theme = Theme.of(context);
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => DetailsCubit()..getProduct(id: id)),
-        BlocProvider(create: (context) => SavedCubit()..getSavedProductsIds()),
+        BlocProvider(
+          create: (context) => GetIt.I<DetailsCubit>()..getProduct(id: id),
+        ),
+        BlocProvider(
+          create: (context) => GetIt.I<SavedCubit>()..getSavedProductsIds(),
+        ),
       ],
       child: BlocBuilder<DetailsCubit, DetailsState>(
         builder: (context, state) {
@@ -70,7 +75,7 @@ class DetailsScreen extends StatelessWidget {
                                         padding: const EdgeInsets.symmetric(
                                           horizontal: SizesManager.padding,
                                         ),
-                                        child: AmountRow(theme: theme),
+                                        child: AmountRow(),
                                       ),
                                     ],
                                   ),

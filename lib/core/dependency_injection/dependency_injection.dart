@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:ecommerce/features/details_screen/data/usecases/get_product.dart';
 import 'package:ecommerce/features/details_screen/domain/usecases/get_product.dart';
+import 'package:ecommerce/features/details_screen/presentation/controller/details_cubit.dart';
 import 'package:ecommerce/features/home_screen/data/repositories/product_repo_impl.dart';
 import 'package:ecommerce/features/home_screen/data/usecases/get_products_impl.dart';
 import 'package:ecommerce/features/home_screen/domain/repositories/product_repository.dart';
@@ -9,7 +10,6 @@ import 'package:ecommerce/features/home_screen/presentation/controller/products_
 import 'package:ecommerce/features/main_screen/presentation/controller/main_screen_cubit.dart';
 import 'package:ecommerce/features/saved_screen/presentation/controller/saved_cubit.dart';
 import 'package:get_it/get_it.dart';
-import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 final getIt = GetIt.instance;
@@ -43,4 +43,6 @@ void setupDI() async {
 
   // Register saved screen cubit as a singleton
   getIt.registerLazySingleton<SavedCubit>(() => SavedCubit());
+  // Register details screen cubit as a singleton
+  getIt.registerLazySingleton<DetailsCubit>(() => DetailsCubit());
 }
