@@ -43,6 +43,6 @@ void setupDI() async {
 
   // Register saved screen cubit as a singleton
   getIt.registerLazySingleton<SavedCubit>(() => SavedCubit());
-  // Register details screen cubit as a singleton
-  getIt.registerLazySingleton<DetailsCubit>(() => DetailsCubit());
+  // Register details screen cubit as a factory
+  getIt.registerFactory<DetailsCubit>(() => DetailsCubit());
 }

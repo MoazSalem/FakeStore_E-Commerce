@@ -21,11 +21,11 @@ class DetailsScreen extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
+          // create a new instance of details cubit and get the product
           create: (context) => GetIt.I<DetailsCubit>()..getProduct(id: id),
         ),
-        BlocProvider(
-          create: (context) => GetIt.I<SavedCubit>()..getSavedProductsIds(),
-        ),
+        // use the saved cubit from the main screen
+        BlocProvider.value(value: GetIt.I<SavedCubit>()),
       ],
       child: BlocBuilder<DetailsCubit, DetailsState>(
         builder: (context, state) {
