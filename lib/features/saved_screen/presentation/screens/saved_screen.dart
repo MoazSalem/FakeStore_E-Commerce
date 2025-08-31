@@ -11,17 +11,17 @@ class SavedScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: BlocBuilder<SavedCubit, SavedState>(
-        builder: (context, state) {
-          if (state is SavedLoaded && state.savedProducts == null) {
-            // get saved products if not loaded
-            BlocProvider.of<SavedCubit>(
-              context,
-            ).getSavedProducts(state.savedProductsIds);
-          }
-          return state is SavedLoaded && state.savedProducts != null
-              ? Column(
+    return BlocBuilder<SavedCubit, SavedState>(
+      builder: (context, state) {
+        if (state is SavedLoaded && state.savedProducts == null) {
+          // get saved products if not loaded
+          BlocProvider.of<SavedCubit>(
+            context,
+          ).getSavedProducts(state.savedProductsIds);
+        }
+        return state is SavedLoaded && state.savedProducts != null
+            ? SingleChildScrollView(
+                child: Column(
                   spacing: SizesManager.padding10,
                   children: [
                     const CustomAppBar(title: 'Saved Products'),
@@ -54,10 +54,10 @@ class SavedScreen extends StatelessWidget {
                       ),
                     ),
                   ],
-                )
-              : LoadingWidget();
-        },
-      ),
+                ),
+              )
+            : LoadingWidget();
+      },
     );
   }
 }
