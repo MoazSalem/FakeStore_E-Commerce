@@ -34,9 +34,11 @@ class SaveButton extends StatelessWidget {
               if (state.savedProductsIds.contains(productId)) {
                 BlocProvider.of<SavedCubit>(
                   context,
-                ).saveId(productId, remove: true);
+                ).saveId(productId, state.savedProductsIds, remove: true);
               } else {
-                BlocProvider.of<SavedCubit>(context).saveId(productId);
+                BlocProvider.of<SavedCubit>(
+                  context,
+                ).saveId(productId, state.savedProductsIds);
               }
             }
           },
