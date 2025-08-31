@@ -1,6 +1,6 @@
 import 'package:ecommerce/core/utils/sizes_manager.dart';
 import 'package:ecommerce/core/widgets/online_image.dart';
-import 'package:ecommerce/features/details_screen/presentation/screens/details_screen.dart';
+import 'package:ecommerce/features/details_screen/presentation/screens/product_details_screen.dart';
 import 'package:ecommerce/features/home_screen/domain/entities/product.dart';
 import 'package:flutter/material.dart';
 
@@ -17,7 +17,8 @@ class HorizontalItemWidget extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => DetailsScreen(id: product.id),
+            builder: (context) =>
+                ProductDetailsScreen(id: product.id, product: product),
           ),
         );
       },

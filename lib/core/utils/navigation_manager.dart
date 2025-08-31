@@ -1,4 +1,4 @@
-import 'package:ecommerce/features/details_screen/presentation/screens/details_screen.dart';
+import 'package:ecommerce/features/details_screen/presentation/screens/product_details_screen.dart';
 import 'package:ecommerce/features/main_screen/presentation/screens/main_screen.dart';
 import 'package:ecommerce/features/saved_screen/presentation/controller/saved_cubit.dart';
 import 'package:flutter/material.dart';
@@ -28,7 +28,9 @@ class NavigationManager {
               ? int.parse(uri.pathSegments[1])
               : 0;
 
-          return MaterialPageRoute(builder: (context) => DetailsScreen(id: id));
+          return MaterialPageRoute(
+            builder: (context) => ProductDetailsScreen(id: id),
+          );
         }
 
         // Fallback

@@ -4,22 +4,25 @@ import 'package:ecommerce/core/widgets/image_container.dart';
 import 'package:ecommerce/core/widgets/online_image.dart';
 import 'package:ecommerce/core/widgets/save_button.dart';
 import 'package:ecommerce/core/widgets/svg_image.dart';
-import 'package:ecommerce/features/details_screen/presentation/screens/details_screen.dart';
+import 'package:ecommerce/features/details_screen/presentation/screens/product_details_screen.dart';
 import 'package:ecommerce/features/home_screen/domain/entities/product.dart';
 import 'package:flutter/material.dart';
 
-class DisplayItem extends StatelessWidget {
+class ProductItem extends StatelessWidget {
   final Product product;
   final bool isTall;
 
-  const DisplayItem({super.key, this.isTall = false, required this.product});
+  const ProductItem({super.key, this.isTall = false, required this.product});
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return GestureDetector(
       onTap: () => Navigator.of(context).push(
-        MaterialPageRoute(builder: (context) => DetailsScreen(id: product.id)),
+        MaterialPageRoute(
+          builder: (context) =>
+              ProductDetailsScreen(id: product.id, product: product),
+        ),
       ),
       child: Padding(
         padding: const EdgeInsets.only(bottom: SizesManager.padding20),

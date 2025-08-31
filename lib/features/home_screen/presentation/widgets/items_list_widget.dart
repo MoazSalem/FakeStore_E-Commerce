@@ -27,7 +27,7 @@ class ItemsListWidget extends StatelessWidget {
                       itemExtent: 344,
                       delegate: SliverChildBuilderDelegate((context, index) {
                         return Center(
-                          child: DisplayItem(product: state.firstList[index]),
+                          child: ProductItem(product: state.firstList[index]),
                         );
                       }, childCount: state.firstList.length),
                     ),
@@ -35,7 +35,7 @@ class ItemsListWidget extends StatelessWidget {
                       itemExtent: 364,
                       delegate: SliverChildBuilderDelegate((context, index) {
                         return Center(
-                          child: DisplayItem(
+                          child: ProductItem(
                             isTall: true,
                             product: state.secondList[index],
                           ),

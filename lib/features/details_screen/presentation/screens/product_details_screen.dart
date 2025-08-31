@@ -6,15 +6,17 @@ import 'package:ecommerce/features/details_screen/presentation/controller/detail
 import 'package:ecommerce/features/details_screen/presentation/widgets/amount_row.dart';
 import 'package:ecommerce/features/details_screen/presentation/widgets/controls_bar.dart';
 import 'package:ecommerce/features/details_screen/presentation/widgets/rating_widget.dart';
+import 'package:ecommerce/features/home_screen/domain/entities/product.dart';
 import 'package:ecommerce/features/saved_screen/presentation/controller/saved_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 
-class DetailsScreen extends StatelessWidget {
+class ProductDetailsScreen extends StatelessWidget {
   final int id;
+  final Product? product;
 
-  const DetailsScreen({super.key, required this.id});
+  const ProductDetailsScreen({super.key, required this.id, this.product});
 
   @override
   Widget build(BuildContext context) {
@@ -22,8 +24,8 @@ class DetailsScreen extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          // create a new instance of details cubit and get the product
-          create: (context) => GetIt.I<DetailsCubit>()..getProduct(id: id),
+          // create a new instance of details cubit and set the product
+          create: (context) => GetIt.I<DetailsCubit>()..setProduct(product, id),
         ),
         // use the saved cubit from the main screen
         BlocProvider.value(value: GetIt.I<SavedCubit>()),
