@@ -1,5 +1,6 @@
 class SizesManager {
   static const double appBarHeight = 140;
+  static const double tabBarHeight = 80;
   static const double navigationHeight = 70;
   static const double padding80 = 80;
   static const double padding32 = 32;
@@ -11,9 +12,10 @@ class SizesManager {
   static const double padding8 = 8;
   static const double padding5 = 5;
   static const double font18 = 18;
-  static const double font12 = 12;
-  static const double font14 = 14;
   static const double font16 = 16;
+  static const double font15 = 15;
+  static const double font14 = 14;
+  static const double font12 = 12;
   static const double roundedCorners = 10;
   static const double bigRoundedCorners = 30;
   static const double circularBorderRadius = 100;
@@ -29,4 +31,8 @@ class SizesManager {
   static const double displayItemWidth = 165;
   static const double displayItemHeight = 240;
   static const double tallDisplayItemHeight = 260;
+  static const double savedItemHeight = 90;
+  static const double savedItemContainerMinHeight = 85;
+  static const double savedItemSide = 80;
+  static const double dividerHeight = 1;
 }
