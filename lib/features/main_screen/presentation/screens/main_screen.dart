@@ -1,3 +1,4 @@
+import 'package:ecommerce/core/widgets/loading_widget.dart';
 import 'package:ecommerce/features/cart_screen/presentation/screens/cart_screen.dart';
 import 'package:ecommerce/features/home_screen/presentation/screens/home_screen.dart';
 import 'package:ecommerce/features/main_screen/presentation/controller/main_screen_cubit.dart';
@@ -31,7 +32,7 @@ class MainScreen extends StatelessWidget {
                 ),
                 bottomNavigationBar: CustomNavigationBar(index: state.index),
               )
-            : const Center(child: CircularProgressIndicator());
+            : const LoadingWidget();
       },
     );
   }

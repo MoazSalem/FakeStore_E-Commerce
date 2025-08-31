@@ -1,3 +1,4 @@
+import 'package:ecommerce/core/widgets/loading_widget.dart';
 import 'package:flutter/material.dart';
 
 class OnlineImage extends StatelessWidget {
@@ -14,7 +15,7 @@ class OnlineImage extends StatelessWidget {
           // Image has finished loading, return the image
           return child;
         } else {
-          return const Center(child: CircularProgressIndicator());
+          return LoadingWidget();
         }
       },
       errorBuilder: (context, error, stackTrace) {

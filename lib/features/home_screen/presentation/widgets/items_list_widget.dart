@@ -1,4 +1,5 @@
 import 'package:ecommerce/core/utils/sizes_manager.dart';
+import 'package:ecommerce/core/widgets/loading_widget.dart';
 import 'package:ecommerce/features/home_screen/presentation/controller/products_cubit.dart';
 import 'package:ecommerce/features/home_screen/presentation/widgets/product_item.dart';
 import 'package:flutter/material.dart';
@@ -43,9 +44,7 @@ class ItemsListWidget extends StatelessWidget {
                     ),
                   ],
                 )
-              : const SliverToBoxAdapter(
-                  child: Center(child: CircularProgressIndicator()),
-                );
+              : const SliverToBoxAdapter(child: LoadingWidget());
         },
       ),
     );
