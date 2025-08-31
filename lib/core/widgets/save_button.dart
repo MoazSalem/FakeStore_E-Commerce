@@ -32,9 +32,11 @@ class SaveButton extends StatelessWidget {
           onTap: () {
             if (state is SavedLoaded) {
               if (state.savedProductsIds.contains(productId)) {
-                context.read<SavedCubit>().saveId(productId, remove: true);
+                BlocProvider.of<SavedCubit>(
+                  context,
+                ).saveId(productId, remove: true);
               } else {
-                context.read<SavedCubit>().saveId(productId);
+                BlocProvider.of<SavedCubit>(context).saveId(productId);
               }
             }
           },
