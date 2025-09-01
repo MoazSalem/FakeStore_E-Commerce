@@ -11,34 +11,34 @@ import 'package:ecommerce/features/saved_screen/presentation/controller/saved_cu
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-final getIt = GetIt.instance;
+final _getIt = GetIt.instance;
 
 // Register dependencies
 Future<void> setupDI() async {
   // Register an instance of shared preferences as a singleton
   final prefs = await SharedPreferences.getInstance();
-  getIt.registerSingleton<SharedPreferences>(prefs);
+  _getIt.registerSingleton<SharedPreferences>(prefs);
   // Register dio as a singleton
-  getIt.registerLazySingleton<Dio>(() => Dio());
+  _getIt.registerLazySingleton<Dio>(() => Dio());
   // Add pretty dio logger to dio
   //getIt<Dio>().interceptors.add(PrettyDioLogger());
   // Register product repository as a singleton
-  getIt.registerLazySingleton<ProductRepository>(
-    () => ProductRepoImpl(dio: getIt<Dio>()),
+  _getIt.registerLazySingleton<ProductRepository>(
+    () => ProductRepoImpl(dio: _getIt<Dio>()),
   );
   // Register product use case as a singleton
-  getIt.registerLazySingleton<GetProducts>(
-    () => GetProductsImpl(getIt<ProductRepository>()),
+  _getIt.registerLazySingleton<GetProducts>(
+    () => GetProductsImpl(_getIt<ProductRepository>()),
   );
   // Register product use case as a singleton
-  getIt.registerFactoryParam<GetProduct, int, void>(
-    (id, _) => GetProductImpl(repository: getIt<ProductRepository>(), id: id),
+  _getIt.registerFactoryParam<GetProduct, int, void>(
+    (id, _) => GetProductImpl(repository: _getIt<ProductRepository>(), id: id),
   );
   // Register product cubit as a singleton
-  getIt.registerLazySingleton<ProductsCubit>(() => ProductsCubit());
+  _getIt.registerLazySingleton<ProductsCubit>(() => ProductsCubit());
 
   // Register saved screen cubit as a singleton
-  getIt.registerLazySingleton<SavedCubit>(() => SavedCubit());
+  _getIt.registerLazySingleton<SavedCubit>(() => SavedCubit());
   // Register details screen cubit as a factory
-  getIt.registerFactory<DetailsCubit>(() => DetailsCubit());
+  _getIt.registerFactory<DetailsCubit>(() => DetailsCubit());
 }
