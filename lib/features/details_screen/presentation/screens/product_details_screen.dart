@@ -14,7 +14,6 @@ import 'package:get_it/get_it.dart';
 class ProductDetailsScreen extends StatelessWidget {
   final int id;
   final Product? product;
-
   const ProductDetailsScreen({super.key, required this.id, this.product});
 
   @override
@@ -43,11 +42,14 @@ class ProductDetailsScreen extends StatelessWidget {
                             children: [
                               Stack(
                                 children: [
-                                  OnlineImageContainer(
-                                    height: 420,
-                                    width: double.infinity,
-                                    padding: SizesManager.padding20,
-                                    imageUrl: state.product.image,
+                                  Hero(
+                                    tag: state.product.id,
+                                    child: OnlineImageContainer(
+                                      height: 420,
+                                      width: double.infinity,
+                                      padding: SizesManager.padding20,
+                                      imageUrl: state.product.image,
+                                    ),
                                   ),
                                   ControlsBar(productId: state.product.id),
                                 ],

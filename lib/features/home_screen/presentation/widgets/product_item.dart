@@ -8,22 +8,62 @@ import 'package:ecommerce/features/home_screen/domain/entities/product.dart';
 import 'package:flutter/material.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
-class ProductItem extends StatelessWidget {
+class ProductItem extends StatefulWidget {
   final Product product;
   final bool isTall;
 
   const ProductItem({super.key, this.isTall = false, required this.product});
 
   @override
+  State<ProductItem> createState() => _ProductItemState();
+}
+
+class _ProductItemState extends State<ProductItem>
+    with SingleTickerProviderStateMixin {
+  late final AnimationController _animationController;
+  late final Animation<double> _fadeAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+    _animationController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 800),
+    );
+    _fadeAnimation = CurvedAnimation(
+      parent: _animationController,
+      curve: Curves.easeInOut,
+    );
+    _animationController.forward();
+  }
+
+  @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return GestureDetector(
-      onTap: () => Navigator.of(context).push(
-        MaterialPageRoute(
-          builder: (context) =>
-              ProductDetailsScreen(id: product.id, product: product),
-        ),
-      ),
+      onTap: () => {
+        Navigator.of(context)
+            .push(
+              MaterialPageRoute(
+                builder: (context) => ProductDetailsScreen(
+                  id: widget.product.id,
+                  product: widget.product,
+                ),
+              ),
+            )
+            .then(
+              (value) => {
+                _animationController.reset(),
+                _animationController.forward(),
+              },
+            ),
+      },
       child: Padding(
         padding: const EdgeInsets.only(bottom: SizesManager.padding20),
         child: Stack(
@@ -33,21 +73,27 @@ class ProductItem extends StatelessWidget {
               width: SizesManager.displayItemWidth,
               child: Column(
                 children: [
-                  OnlineImageContainer(
-                    height: isTall
-                        ? SizesManager.tallDisplayItemHeight
-                        : SizesManager.displayItemHeight,
-                    width: double.infinity,
-                    imageUrl: product.image,
+                  Hero(
+                    tag: widget.product.id,
+                    child: OnlineImageContainer(
+                      height: widget.isTall
+                          ? SizesManager.tallDisplayItemHeight
+                          : SizesManager.displayItemHeight,
+                      width: double.infinity,
+                      imageUrl: widget.product.image,
+                    ),
                   ),
-                  ProductDetails(product: product, theme: theme),
+                  ProductDetails(product: widget.product, theme: theme),
                 ],
               ),
             ),
             Skeleton.ignore(
               child: Padding(
                 padding: const EdgeInsets.all(SizesManager.padding),
-                child: SaveButton(productId: product.id),
+                child: FadeTransition(
+                  opacity: _fadeAnimation,
+                  child: SaveButton(productId: widget.product.id),
+                ),
               ),
             ),
           ],
