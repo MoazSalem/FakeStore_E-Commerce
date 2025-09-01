@@ -19,40 +19,43 @@ class _HomeScreenState extends State<HomeScreen>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return CustomScrollView(
-      slivers: [
-        CustomHomeAppBar(),
-        BlocBuilder<ProductsCubit, ProductsState>(
-          builder: (context, state) {
-            return state is ProductsLoaded
-                ? CustomCategoryScrollView(
-                    categories: state.categories,
-                    currentIndex: state.currentCategoryIndex,
-                  )
-                : Skeletonizer.sliver(
-                    child: CustomCategoryScrollView(
-                      categories: HelperFunctions.generateFakeCategories(5),
-                      currentIndex: 0,
-                    ),
-                  );
-          },
-        ),
-        BlocBuilder<ProductsCubit, ProductsState>(
-          builder: (context, state) {
-            return state is ProductsLoaded
-                ? ItemsListWidget(
-                    firstList: state.firstList,
-                    secondList: state.secondList,
-                  )
-                : Skeletonizer.sliver(
-                    child: ItemsListWidget(
-                      firstList: HelperFunctions.generateFakeProducts(4),
-                      secondList: HelperFunctions.generateFakeProducts(4),
-                    ),
-                  );
-          },
-        ),
-      ],
+    return RefreshIndicator(
+      onRefresh: () => BlocProvider.of<ProductsCubit>(context).getProducts(),
+      child: CustomScrollView(
+        slivers: [
+          CustomHomeAppBar(),
+          BlocBuilder<ProductsCubit, ProductsState>(
+            builder: (context, state) {
+              return state is ProductsLoaded
+                  ? CustomCategoryScrollView(
+                      categories: state.categories,
+                      currentIndex: state.currentCategoryIndex,
+                    )
+                  : Skeletonizer.sliver(
+                      child: CustomCategoryScrollView(
+                        categories: HelperFunctions.generateFakeCategories(5),
+                        currentIndex: 0,
+                      ),
+                    );
+            },
+          ),
+          BlocBuilder<ProductsCubit, ProductsState>(
+            builder: (context, state) {
+              return state is ProductsLoaded
+                  ? ItemsListWidget(
+                      firstList: state.firstList,
+                      secondList: state.secondList,
+                    )
+                  : Skeletonizer.sliver(
+                      child: ItemsListWidget(
+                        firstList: HelperFunctions.generateFakeProducts(4),
+                        secondList: HelperFunctions.generateFakeProducts(4),
+                      ),
+                    );
+            },
+          ),
+        ],
+      ),
     );
   }
 
