@@ -14,11 +14,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 final getIt = GetIt.instance;
 
 // Register dependencies
-void setupDI() async {
+Future<void> setupDI() async {
   // Register an instance of shared preferences as a singleton
-  getIt.registerSingletonAsync<SharedPreferences>(
-    () async => await SharedPreferences.getInstance(),
-  );
+  final prefs = await SharedPreferences.getInstance();
+  getIt.registerSingleton<SharedPreferences>(prefs);
   // Register dio as a singleton
   getIt.registerLazySingleton<Dio>(() => Dio());
   // Add pretty dio logger to dio

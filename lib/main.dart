@@ -2,8 +2,8 @@ import 'package:ecommerce/app.dart';
 import 'package:flutter/material.dart';
 import 'core/dependency_injection/dependency_injection.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  setupDI();
+  await setupDI();
   runApp(const App());
 }
