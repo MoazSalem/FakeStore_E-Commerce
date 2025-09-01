@@ -21,15 +21,24 @@ class DetailsCubit extends Cubit<DetailsState> {
 
   // while we want to keep the deep linking feature, we can skip the getProduct method and pass the product to the cubit if it's not null
   setProduct(final Product? product, final int id) {
-    // if product is null, get it from the api
-    if (product == null) {
-      getProduct(id: id);
-    } else {
-      emit(DetailsLoaded(product: product, productCount: 1));
+    try {
+      // if product is null, get it from the api
+      if (product == null) {
+        getProduct(id: id);
+      } else {
+        emit(DetailsLoaded(product: product, productCount: 1));
+      }
+    } catch (e) {
+      emit(DetailsError(message: e.toString()));
     }
   }
 
   void changeProductCount(final int count, final Product product) {
-    emit(DetailsLoaded(product: product, productCount: count));
+    try {
+      emit(DetailsLoaded(product: product, productCount: count));
+    } catch (e) {
+      print(e);
+      emit(DetailsError(message: e.toString()));
+    }
   }
 }

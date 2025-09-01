@@ -25,10 +25,11 @@ class AmountRow extends StatelessWidget {
                       width: 1,
                     ),
                     onTap: state.productCount > 0
-                        ? () => GetIt.I<DetailsCubit>().changeProductCount(
-                            state.productCount - 1,
-                            state.product,
-                          )
+                        ? () => BlocProvider.of<DetailsCubit>(context)
+                              .changeProductCount(
+                                state.productCount - 1,
+                                state.product,
+                              )
                         : null,
                     child: Icon(
                       fontWeight: FontWeight.bold,
@@ -54,10 +55,9 @@ class AmountRow extends StatelessWidget {
                       Icons.add,
                       size: SizesManager.iconSize16,
                     ),
-                    onTap: () => GetIt.I<DetailsCubit>().changeProductCount(
-                      state.productCount + 1,
-                      state.product,
-                    ),
+                    onTap: () => BlocProvider.of<DetailsCubit>(
+                      context,
+                    ).changeProductCount(state.productCount + 1, state.product),
                   ),
                 ],
               )
