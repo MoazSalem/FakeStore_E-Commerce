@@ -5,7 +5,6 @@ import 'package:ecommerce/features/home_screen/presentation/widgets/custom_home_
 import 'package:ecommerce/features/home_screen/presentation/widgets/items_list_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get_it/get_it.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 class HomeScreen extends StatefulWidget {

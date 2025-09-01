@@ -1,7 +1,6 @@
 import 'package:ecommerce/core/utils/sizes_manager.dart';
 import 'package:ecommerce/core/widgets/online_image_container.dart';
 import 'package:ecommerce/core/widgets/loading_widget.dart';
-import 'package:ecommerce/core/widgets/online_image.dart';
 import 'package:ecommerce/features/details_screen/presentation/controller/details_cubit.dart';
 import 'package:ecommerce/features/details_screen/presentation/widgets/amount_row.dart';
 import 'package:ecommerce/features/details_screen/presentation/widgets/controls_bar.dart';

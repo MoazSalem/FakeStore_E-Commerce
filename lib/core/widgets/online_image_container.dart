@@ -1,4 +1,5 @@
 import 'package:ecommerce/core/utils/sizes_manager.dart';
+import 'package:ecommerce/core/widgets/online_image.dart';
 import 'package:flutter/material.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
@@ -31,35 +32,9 @@ class OnlineImageContainer extends StatelessWidget {
             radius ?? SizesManager.bigRoundedCorners,
           ),
         ),
-        child: Image.network(
-          imageUrl,
-          fit: BoxFit.scaleDown,
-          loadingBuilder: (context, child, loadingProgress) {
-            if (loadingProgress == null) {
-              // Image has finished loading, return the image
-              return Padding(
-                padding: EdgeInsets.all(padding ?? SizesManager.padding14),
-                child: child,
-              );
-            } else {
-              return Skeletonizer.zone(
-                ignorePointers: false,
-                enabled: true,
-                switchAnimationConfig: SwitchAnimationConfig(
-                  duration: const Duration(seconds: 1),
-                ),
-                child: Bone.square(
-                  size: height,
-                  borderRadius: BorderRadius.circular(
-                    radius ?? SizesManager.bigRoundedCorners,
-                  ),
-                ),
-              );
-            }
-          },
-          errorBuilder: (context, error, stackTrace) {
-            return const Icon(Icons.error);
-          },
+        child: OnlineImage(
+          imageUrl: imageUrl,
+          padding: padding ?? SizesManager.padding14,
         ),
       ),
     );

@@ -1,33 +1,37 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ecommerce/core/utils/sizes_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 class OnlineImage extends StatelessWidget {
-  const OnlineImage({super.key, required this.imageUrl});
+  const OnlineImage({super.key, required this.imageUrl, this.padding = 0});
   final String imageUrl;
+  final double padding;
 
   @override
   Widget build(BuildContext context) {
-    return Image.network(
-      imageUrl,
+    return CachedNetworkImage(
+      fadeInDuration: const Duration(milliseconds: 200),
+      imageUrl: imageUrl,
+      imageBuilder: (context, imageProvider) => Container(
+        padding: EdgeInsets.all(padding),
+        child: Image(image: imageProvider, fit: BoxFit.scaleDown),
+      ),
       fit: BoxFit.scaleDown,
-      loadingBuilder: (context, child, loadingProgress) {
-        if (loadingProgress == null) {
-          // Image has finished loading, return the image
-          return child;
-        } else {
-          return Skeletonizer(
-            child: Bone.square(
+      placeholder: (context, url) => Skeletonizer(
+        enabled: true,
+        child: Skeleton.leaf(
+          child: Container(
+            decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.primaryContainer,
               borderRadius: BorderRadius.circular(
                 SizesManager.bigRoundedCorners,
               ),
             ),
-          );
-        }
-      },
-      errorBuilder: (context, error, stackTrace) {
-        return const Icon(Icons.error);
-      },
+          ),
+        ),
+      ),
+      errorWidget: (context, url, error) => Icon(Icons.error),
     );
   }
 }

@@ -1,7 +1,6 @@
 import 'package:ecommerce/core/utils/assets_manager.dart';
 import 'package:ecommerce/core/utils/sizes_manager.dart';
 import 'package:ecommerce/core/widgets/online_image_container.dart';
-import 'package:ecommerce/core/widgets/online_image.dart';
 import 'package:ecommerce/core/widgets/save_button.dart';
 import 'package:ecommerce/core/widgets/svg_image.dart';
 import 'package:ecommerce/features/details_screen/presentation/screens/product_details_screen.dart';
