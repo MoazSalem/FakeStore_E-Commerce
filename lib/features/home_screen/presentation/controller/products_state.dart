@@ -11,7 +11,13 @@ final class ProductsLoaded extends ProductsState {
   final List<Product> firstList;
   final List<Product> secondList;
   final Set<String> categories;
-  ProductsLoaded(this.firstList, this.secondList, this.categories);
+  final int currentCategoryIndex;
+  ProductsLoaded(
+    this.firstList,
+    this.secondList,
+    this.categories,
+    this.currentCategoryIndex,
+  );
 }
 
 final class ProductsError extends ProductsState {

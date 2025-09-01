@@ -5,8 +5,13 @@ import 'package:get_it/get_it.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 class CustomCategoryScrollView extends StatefulWidget {
-  const CustomCategoryScrollView({super.key, required this.categories});
+  const CustomCategoryScrollView({
+    super.key,
+    required this.categories,
+    required this.currentIndex,
+  });
   final Set<String> categories;
+  final int currentIndex;
 
   @override
   State<CustomCategoryScrollView> createState() =>
@@ -14,7 +19,6 @@ class CustomCategoryScrollView extends StatefulWidget {
 }
 
 class _CustomCategoryScrollViewState extends State<CustomCategoryScrollView> {
-  int _currentIndex = 0;
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
@@ -34,16 +38,11 @@ class _CustomCategoryScrollViewState extends State<CustomCategoryScrollView> {
               widget.categories.length + 1,
               (index) => GestureDetector(
                 onTap: () => {
-                  setState(() {
-                    _currentIndex = index;
-                  }),
-                  GetIt.I.get<ProductsCubit>().filterProducts(
-                    index == 0 ? 'All' : widget.categories.elementAt(index - 1),
-                  ),
+                  GetIt.I.get<ProductsCubit>().filterProducts(index),
                 },
                 child: Skeleton.leaf(
                   child: CategoryItem(
-                    isSelected: index == _currentIndex,
+                    isSelected: index == widget.currentIndex,
                     category: index == 0
                         ? 'All'
                         : widget.categories.elementAt(index - 1),

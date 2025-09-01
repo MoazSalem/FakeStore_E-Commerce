@@ -25,10 +25,14 @@ class _HomeScreenState extends State<HomeScreen>
         BlocBuilder<ProductsCubit, ProductsState>(
           builder: (context, state) {
             return state is ProductsLoaded
-                ? CustomCategoryScrollView(categories: state.categories)
+                ? CustomCategoryScrollView(
+                    categories: state.categories,
+                    currentIndex: state.currentCategoryIndex,
+                  )
                 : Skeletonizer.sliver(
                     child: CustomCategoryScrollView(
                       categories: HelperFunctions.generateFakeCategories(5),
+                      currentIndex: 0,
                     ),
                   );
           },

@@ -22,27 +22,29 @@ class ProductsCubit extends Cubit<ProductsState> {
       final secondList = [
         for (var i = 1; i < products.length; i += 2) products[i],
       ];
-      emit(ProductsLoaded(firstList, secondList, categories));
+      emit(ProductsLoaded(firstList, secondList, categories, 0));
     } catch (e) {
       emit(ProductsError(e.toString()));
     }
   }
 
   // filter products by category
-  Future<void> filterProducts(String category) async {
+  Future<void> filterProducts(int categoryIndex) async {
     emit(ProductsLoading());
     try {
-      if (category != 'All') {
+      if (categoryIndex != 0) {
         final products = await GetIt.I.get<GetProducts>().call();
         final Set<String> categories = products.map((e) => e.category).toSet();
-        products.removeWhere((e) => e.category != category);
+        products.removeWhere(
+          (e) => e.category != categories.elementAt(categoryIndex - 1),
+        );
         final firstList = [
           for (var i = 0; i < products.length; i += 2) products[i],
         ];
         final secondList = [
           for (var i = 1; i < products.length; i += 2) products[i],
         ];
-        emit(ProductsLoaded(firstList, secondList, categories));
+        emit(ProductsLoaded(firstList, secondList, categories, categoryIndex));
       } else {
         getProducts();
       }
