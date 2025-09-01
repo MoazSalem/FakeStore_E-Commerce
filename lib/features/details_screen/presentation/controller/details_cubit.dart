@@ -37,7 +37,6 @@ class DetailsCubit extends Cubit<DetailsState> {
     try {
       emit(DetailsLoaded(product: product, productCount: count));
     } catch (e) {
-      print(e);
       emit(DetailsError(message: e.toString()));
     }
   }

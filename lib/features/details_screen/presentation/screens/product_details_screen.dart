@@ -14,7 +14,13 @@ import 'package:get_it/get_it.dart';
 class ProductDetailsScreen extends StatelessWidget {
   final int id;
   final Product? product;
-  const ProductDetailsScreen({super.key, required this.id, this.product});
+  final String? uniqueTag;
+  const ProductDetailsScreen({
+    super.key,
+    required this.id,
+    this.product,
+    this.uniqueTag,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +49,7 @@ class ProductDetailsScreen extends StatelessWidget {
                               Stack(
                                 children: [
                                   Hero(
-                                    tag: state.product.id,
+                                    tag: uniqueTag ?? state.product.id,
                                     child: OnlineImageContainer(
                                       height: 420,
                                       width: double.infinity,

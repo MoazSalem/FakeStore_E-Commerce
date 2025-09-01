@@ -1,5 +1,5 @@
 import 'package:ecommerce/core/utils/sizes_manager.dart';
-import 'package:ecommerce/core/widgets/online_image.dart';
+import 'package:ecommerce/core/widgets/online_image_container.dart';
 import 'package:ecommerce/features/details_screen/presentation/screens/product_details_screen.dart';
 import 'package:ecommerce/features/home_screen/domain/entities/product.dart';
 import 'package:flutter/material.dart';
@@ -17,8 +17,11 @@ class HorizontalItemWidget extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) =>
-                ProductDetailsScreen(id: product.id, product: product),
+            builder: (context) => ProductDetailsScreen(
+              id: product.id,
+              product: product,
+              uniqueTag: '00${product.id}',
+            ),
           ),
         );
       },
@@ -38,7 +41,13 @@ class HorizontalItemWidget extends StatelessWidget {
               ),
               child: Padding(
                 padding: const EdgeInsets.all(SizesManager.padding8),
-                child: OnlineImage(imageUrl: product.image),
+                child: Hero(
+                  tag: '00${product.id}',
+                  child: OnlineImageContainer(
+                    imageUrl: product.image,
+                    padding: 0,
+                  ),
+                ),
               ),
             ),
             Flexible(
