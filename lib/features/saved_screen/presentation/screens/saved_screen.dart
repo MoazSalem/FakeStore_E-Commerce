@@ -19,9 +19,13 @@ class SavedScreen extends StatelessWidget {
             context,
           ).getSavedProducts(state.savedProductsIds);
         }
-        return state is SavedLoaded && state.savedProducts != null
-            ? SingleChildScrollView(
-                child: Column(
+        if (state is SavedLoading) return const LoadingWidget();
+        return SingleChildScrollView(
+          child:
+              state is SavedLoaded &&
+                  state.savedProducts != null &&
+                  state.savedProducts!.isNotEmpty
+              ? Column(
                   spacing: SizesManager.padding10,
                   children: [
                     const CustomAppBar(title: 'Saved Products'),
@@ -54,9 +58,17 @@ class SavedScreen extends StatelessWidget {
                       ),
                     ),
                   ],
+                )
+              : Column(
+                  children: [
+                    const CustomAppBar(title: 'Saved Products'),
+                    SizedBox(
+                      height: MediaQuery.sizeOf(context).height / 1.4,
+                      child: const Center(child: Text('No Saved Products Yet')),
+                    ),
+                  ],
                 ),
-              )
-            : LoadingWidget();
+        );
       },
     );
   }
