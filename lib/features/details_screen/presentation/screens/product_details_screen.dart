@@ -1,5 +1,5 @@
 import 'package:ecommerce/core/utils/sizes_manager.dart';
-import 'package:ecommerce/core/widgets/image_container.dart';
+import 'package:ecommerce/core/widgets/online_image_container.dart';
 import 'package:ecommerce/core/widgets/loading_widget.dart';
 import 'package:ecommerce/core/widgets/online_image.dart';
 import 'package:ecommerce/features/details_screen/presentation/controller/details_cubit.dart';
@@ -44,13 +44,11 @@ class ProductDetailsScreen extends StatelessWidget {
                             children: [
                               Stack(
                                 children: [
-                                  ImageContainer(
+                                  OnlineImageContainer(
                                     height: 420,
                                     width: double.infinity,
                                     padding: SizesManager.padding20,
-                                    child: OnlineImage(
-                                      imageUrl: state.product.image,
-                                    ),
+                                    imageUrl: state.product.image,
                                   ),
                                   ControlsBar(productId: state.product.id),
                                 ],

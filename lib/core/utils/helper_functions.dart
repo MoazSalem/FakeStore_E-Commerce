@@ -1,4 +1,6 @@
 import 'package:ecommerce/core/utils/assets_manager.dart';
+import 'package:ecommerce/features/home_screen/domain/entities/product.dart';
+import 'package:ecommerce/features/home_screen/domain/entities/rating.dart';
 
 class HelperFunctions {
   static String capitalizeWords(String sentence) {
@@ -26,5 +28,24 @@ class HelperFunctions {
       default:
         return '';
     }
+  }
+
+  static List<Product> generateFakeProducts(int count) {
+    return List.generate(
+      count,
+      (index) => Product(
+        id: index,
+        title: 'Product $index',
+        price: 000.00,
+        image: '',
+        rating: Rating(count: 000, rate: 0.0),
+        description: "Skeleton",
+        category: "Skeleton",
+      ),
+    );
+  }
+
+  static Set<String> generateFakeCategories(int count) {
+    return Set.from(List.generate(count, (index) => 'Category $index'));
   }
 }

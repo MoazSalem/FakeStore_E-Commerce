@@ -1,5 +1,6 @@
-import 'package:ecommerce/core/widgets/loading_widget.dart';
+import 'package:ecommerce/core/utils/sizes_manager.dart';
 import 'package:flutter/material.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 class OnlineImage extends StatelessWidget {
   const OnlineImage({super.key, required this.imageUrl});
@@ -15,7 +16,13 @@ class OnlineImage extends StatelessWidget {
           // Image has finished loading, return the image
           return child;
         } else {
-          return LoadingWidget();
+          return Skeletonizer(
+            child: Bone.square(
+              borderRadius: BorderRadius.circular(
+                SizesManager.bigRoundedCorners,
+              ),
+            ),
+          );
         }
       },
       errorBuilder: (context, error, stackTrace) {

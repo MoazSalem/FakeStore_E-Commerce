@@ -1,11 +1,12 @@
 import 'package:ecommerce/core/utils/sizes_manager.dart';
 import 'package:ecommerce/features/home_screen/presentation/controller/products_cubit.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 class CustomCategoryScrollView extends StatefulWidget {
-  const CustomCategoryScrollView({super.key});
+  const CustomCategoryScrollView({super.key, required this.categories});
+  final Set<String> categories;
 
   @override
   State<CustomCategoryScrollView> createState() =>
@@ -25,40 +26,32 @@ class _CustomCategoryScrollViewState extends State<CustomCategoryScrollView> {
       pinned: true,
       title: SizedBox(
         height: SizesManager.categoryHeight,
-        child: BlocBuilder<ProductsCubit, ProductsState>(
-          builder: (context, state) {
-            if (state is ProductsLoaded) {
-              return ListView(
-                key: const PageStorageKey('category_list'),
-                scrollDirection: Axis.horizontal,
-                children: [
-                  ...List.generate(
-                    state.categories.length + 1,
-                    (index) => GestureDetector(
-                      onTap: () => {
-                        setState(() {
-                          _currentIndex = index;
-                        }),
-                        GetIt.I.get<ProductsCubit>().filterProducts(
-                          index == 0
-                              ? 'All'
-                              : state.categories.elementAt(index - 1),
-                        ),
-                      },
-                      child: CategoryItem(
-                        isSelected: index == _currentIndex,
-                        category: index == 0
-                            ? 'All'
-                            : state.categories.elementAt(index - 1),
-                      ),
-                    ),
+        child: ListView(
+          key: const PageStorageKey('category_list'),
+          scrollDirection: Axis.horizontal,
+          children: [
+            ...List.generate(
+              widget.categories.length + 1,
+              (index) => GestureDetector(
+                onTap: () => {
+                  setState(() {
+                    _currentIndex = index;
+                  }),
+                  GetIt.I.get<ProductsCubit>().filterProducts(
+                    index == 0 ? 'All' : widget.categories.elementAt(index - 1),
                   ),
-                ],
-              );
-            } else {
-              return const SizedBox();
-            }
-          },
+                },
+                child: Skeleton.leaf(
+                  child: CategoryItem(
+                    isSelected: index == _currentIndex,
+                    category: index == 0
+                        ? 'All'
+                        : widget.categories.elementAt(index - 1),
+                  ),
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );

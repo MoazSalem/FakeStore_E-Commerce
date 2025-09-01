@@ -1,4 +1,5 @@
 import 'package:ecommerce/features/details_screen/presentation/screens/product_details_screen.dart';
+import 'package:ecommerce/features/home_screen/presentation/controller/products_cubit.dart';
 import 'package:ecommerce/features/main_screen/presentation/screens/main_screen.dart';
 import 'package:ecommerce/features/saved_screen/presentation/controller/saved_cubit.dart';
 import 'package:flutter/material.dart';
@@ -13,9 +14,17 @@ class NavigationManager {
     switch (settings.name) {
       case mainScreen:
         return MaterialPageRoute(
-          builder: (context) => BlocProvider(
-            create: (BuildContext context) =>
-                GetIt.I.get<SavedCubit>()..getSavedProductsIds(),
+          builder: (context) => MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create: (context) =>
+                    GetIt.I.get<ProductsCubit>()..getProducts(),
+              ),
+              BlocProvider(
+                create: (BuildContext context) =>
+                    GetIt.I.get<SavedCubit>()..getSavedProductsIds(),
+              ),
+            ],
             child: const MainScreen(),
           ),
         );

@@ -1,12 +1,16 @@
 import 'package:ecommerce/core/utils/sizes_manager.dart';
-import 'package:ecommerce/core/widgets/loading_widget.dart';
-import 'package:ecommerce/features/home_screen/presentation/controller/products_cubit.dart';
+import 'package:ecommerce/features/home_screen/domain/entities/product.dart';
 import 'package:ecommerce/features/home_screen/presentation/widgets/product_item.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ItemsListWidget extends StatelessWidget {
-  const ItemsListWidget({super.key});
+  final List<Product> firstList;
+  final List<Product> secondList;
+  const ItemsListWidget({
+    super.key,
+    required this.firstList,
+    required this.secondList,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -17,36 +21,29 @@ class ItemsListWidget extends StatelessWidget {
         left: SizesManager.padding,
         right: SizesManager.padding,
       ),
-      sliver: BlocBuilder<ProductsCubit, ProductsState>(
-        builder: (context, state) {
-          return state is ProductsLoaded
-              // the view is split into two lists one taller than the other
-              ? SliverCrossAxisGroup(
-                  slivers: [
-                    SliverFixedExtentList(
-                      itemExtent: 344,
-                      delegate: SliverChildBuilderDelegate((context, index) {
-                        return Center(
-                          child: ProductItem(product: state.firstList[index]),
-                        );
-                      }, childCount: state.firstList.length),
+      sliver:
+          // the view is split into two lists one taller than the other
+          SliverCrossAxisGroup(
+            slivers: [
+              SliverFixedExtentList(
+                itemExtent: 344,
+                delegate: SliverChildBuilderDelegate((context, index) {
+                  return Center(child: ProductItem(product: firstList[index]));
+                }, childCount: firstList.length),
+              ),
+              SliverFixedExtentList(
+                itemExtent: 364,
+                delegate: SliverChildBuilderDelegate((context, index) {
+                  return Center(
+                    child: ProductItem(
+                      isTall: true,
+                      product: secondList[index],
                     ),
-                    SliverFixedExtentList(
-                      itemExtent: 364,
-                      delegate: SliverChildBuilderDelegate((context, index) {
-                        return Center(
-                          child: ProductItem(
-                            isTall: true,
-                            product: state.secondList[index],
-                          ),
-                        );
-                      }, childCount: state.secondList.length),
-                    ),
-                  ],
-                )
-              : const SliverToBoxAdapter(child: LoadingWidget());
-        },
-      ),
+                  );
+                }, childCount: secondList.length),
+              ),
+            ],
+          ),
     );
   }
 }

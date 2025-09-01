@@ -1,12 +1,13 @@
 import 'package:ecommerce/core/utils/assets_manager.dart';
 import 'package:ecommerce/core/utils/sizes_manager.dart';
-import 'package:ecommerce/core/widgets/image_container.dart';
+import 'package:ecommerce/core/widgets/online_image_container.dart';
 import 'package:ecommerce/core/widgets/online_image.dart';
 import 'package:ecommerce/core/widgets/save_button.dart';
 import 'package:ecommerce/core/widgets/svg_image.dart';
 import 'package:ecommerce/features/details_screen/presentation/screens/product_details_screen.dart';
 import 'package:ecommerce/features/home_screen/domain/entities/product.dart';
 import 'package:flutter/material.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 class ProductItem extends StatelessWidget {
   final Product product;
@@ -33,20 +34,22 @@ class ProductItem extends StatelessWidget {
               width: SizesManager.displayItemWidth,
               child: Column(
                 children: [
-                  ImageContainer(
+                  OnlineImageContainer(
                     height: isTall
                         ? SizesManager.tallDisplayItemHeight
                         : SizesManager.displayItemHeight,
                     width: double.infinity,
-                    child: OnlineImage(imageUrl: product.image),
+                    imageUrl: product.image,
                   ),
                   ProductDetails(product: product, theme: theme),
                 ],
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(SizesManager.padding),
-              child: SaveButton(productId: product.id),
+            Skeleton.ignore(
+              child: Padding(
+                padding: const EdgeInsets.all(SizesManager.padding),
+                child: SaveButton(productId: product.id),
+              ),
             ),
           ],
         ),
