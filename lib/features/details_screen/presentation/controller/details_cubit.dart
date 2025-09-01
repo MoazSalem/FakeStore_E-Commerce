@@ -1,3 +1,4 @@
+import 'package:ecommerce/core/error_handling/result.dart';
 import 'package:ecommerce/features/details_screen/domain/usecases/get_product.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ecommerce/features/home_screen/domain/entities/product.dart';
@@ -11,11 +12,11 @@ class DetailsCubit extends Cubit<DetailsState> {
 
   getProduct({required int id}) async {
     emit(DetailsLoading());
-    try {
-      final product = await GetIt.I.get<GetProduct>(param1: id).call();
-      emit(DetailsLoaded(product: product, productCount: 1));
-    } catch (e) {
-      emit(DetailsError(message: e.toString()));
+    final result = await GetIt.I.get<GetProduct>(param1: id).call();
+    if (result is Success<Product>) {
+      emit(DetailsLoaded(product: result.data, productCount: 1));
+    } else if (result is Failure<Product>) {
+      emit(DetailsError(message: result.error.toString()));
     }
   }
 
