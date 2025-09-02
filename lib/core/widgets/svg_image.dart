@@ -10,11 +10,13 @@ class SvgImage extends StatelessWidget {
     this.height,
     this.color,
     this.width,
+    this.fit,
   });
   final String asset;
   final double? height;
   final double? width;
   final Color? color;
+  final BoxFit? fit;
 
   @override
   Widget build(BuildContext context) {
@@ -28,6 +30,7 @@ class SvgImage extends StatelessWidget {
           : null,
       height: height ?? SizesManager.iconSize,
       width: width,
+      fit: fit ?? BoxFit.contain,
     );
   }
 }

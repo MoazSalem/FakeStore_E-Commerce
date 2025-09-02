@@ -12,4 +12,5 @@ class AssetsManager {
   static const String setting = 'assets/images/svgs/setting.svg.vec';
   static const String search = 'assets/images/svgs/search.svg.vec';
   static const String star = 'assets/images/svgs/star.svg.vec';
+  static const String brush = 'assets/images/svgs/brush.svg.vec';
 }

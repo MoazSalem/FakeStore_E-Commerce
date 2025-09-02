@@ -2,8 +2,9 @@ import 'package:ecommerce/core/utils/sizes_manager.dart';
 import 'package:flutter/material.dart';
 
 class CustomAppBar extends StatelessWidget {
-  const CustomAppBar({super.key, required this.title});
+  const CustomAppBar({super.key, required this.title, this.action});
   final String title;
+  final Widget? action;
 
   @override
   Widget build(BuildContext context) {
@@ -18,6 +19,10 @@ class CustomAppBar extends StatelessWidget {
       ),
       centerTitle: true,
       automaticallyImplyLeading: false,
+      actions: [?action],
+      actionsPadding: const EdgeInsets.symmetric(
+        horizontal: SizesManager.padding26,
+      ),
     );
   }
 }
