@@ -49,6 +49,8 @@ class SavedScreen extends StatelessWidget {
                                   alignment: Alignment.bottomRight,
                                   children: [
                                     HorizontalItemWidget(
+                                      uniqueTag:
+                                          '00${state.savedProducts![index].id}',
                                       product: state.savedProducts![index],
                                     ),
                                     Padding(

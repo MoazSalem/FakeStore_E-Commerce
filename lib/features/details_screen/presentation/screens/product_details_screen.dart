@@ -2,7 +2,7 @@ import 'package:ecommerce/core/utils/sizes_manager.dart';
 import 'package:ecommerce/core/widgets/online_image_container.dart';
 import 'package:ecommerce/core/widgets/loading_widget.dart';
 import 'package:ecommerce/features/details_screen/presentation/controller/details_cubit.dart';
-import 'package:ecommerce/features/details_screen/presentation/widgets/amount_row.dart';
+import 'package:ecommerce/features/details_screen/presentation/widgets/details_amount_row.dart';
 import 'package:ecommerce/features/details_screen/presentation/widgets/controls_bar.dart';
 import 'package:ecommerce/features/details_screen/presentation/widgets/rating_widget.dart';
 import 'package:ecommerce/features/home_screen/domain/entities/product.dart';
@@ -83,7 +83,7 @@ class ProductDetailsScreen extends StatelessWidget {
                                         padding: const EdgeInsets.symmetric(
                                           horizontal: SizesManager.padding,
                                         ),
-                                        child: AmountRow(),
+                                        child: DetailsAmountRow(),
                                       ),
                                     ],
                                   ),

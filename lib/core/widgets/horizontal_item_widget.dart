@@ -6,7 +6,12 @@ import 'package:flutter/material.dart';
 
 class HorizontalItemWidget extends StatelessWidget {
   final Product product;
-  const HorizontalItemWidget({super.key, required this.product});
+  final String uniqueTag;
+  const HorizontalItemWidget({
+    super.key,
+    required this.product,
+    required this.uniqueTag,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +25,7 @@ class HorizontalItemWidget extends StatelessWidget {
             builder: (context) => ProductDetailsScreen(
               id: product.id,
               product: product,
-              uniqueTag: '00${product.id}',
+              uniqueTag: uniqueTag,
             ),
           ),
         );
@@ -41,7 +46,7 @@ class HorizontalItemWidget extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.all(SizesManager.padding8),
                 child: Hero(
-                  tag: '00${product.id}',
+                  tag: uniqueTag,
                   child: OnlineImageContainer(
                     height: SizesManager.savedItemSide,
                     imageUrl: product.image,
