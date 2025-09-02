@@ -27,25 +27,19 @@ class _HomeScreenState extends State<HomeScreen>
           CustomHomeAppBar(),
           BlocBuilder<ProductsCubit, ProductsState>(
             builder: (context, state) {
-              return state is ProductsLoaded
-                  ? CustomCategoryScrollView(
+              if (state is ProductsLoaded) {
+                // Main widget group
+                return SliverMainAxisGroup(
+                  slivers: [
+                    CustomCategoryScrollView(
                       categories: state.categories,
                       currentIndex: state.currentCategoryIndex,
-                    )
-                  : Skeletonizer.sliver(
-                      child: CustomCategoryScrollView(
-                        categories: HelperFunctions.generateFakeCategories(5),
-                        currentIndex: 0,
-                      ),
-                    );
-            },
-          ),
-          BlocBuilder<ProductsCubit, ProductsState>(
-            builder: (context, state) {
-              if (state is ProductsLoaded) {
-                return ItemsListWidget(
-                  firstList: state.firstList,
-                  secondList: state.secondList,
+                    ),
+                    ItemsListWidget(
+                      firstList: state.firstList,
+                      secondList: state.secondList,
+                    ),
+                  ],
                 );
               } else if (state is ProductsError) {
                 return SliverToBoxAdapter(
@@ -55,11 +49,22 @@ class _HomeScreenState extends State<HomeScreen>
                   ),
                 );
               } else {
-                return Skeletonizer.sliver(
-                  child: ItemsListWidget(
-                    firstList: HelperFunctions.generateFakeProducts(4),
-                    secondList: HelperFunctions.generateFakeProducts(4),
-                  ),
+                // Shimmer Loading Group
+                return SliverMainAxisGroup(
+                  slivers: [
+                    Skeletonizer.sliver(
+                      child: CustomCategoryScrollView(
+                        categories: HelperFunctions.generateFakeCategories(5),
+                        currentIndex: 0,
+                      ),
+                    ),
+                    Skeletonizer.sliver(
+                      child: ItemsListWidget(
+                        firstList: HelperFunctions.generateFakeProducts(4),
+                        secondList: HelperFunctions.generateFakeProducts(4),
+                      ),
+                    ),
+                  ],
                 );
               }
             },
