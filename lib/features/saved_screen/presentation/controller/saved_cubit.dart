@@ -47,6 +47,11 @@ class SavedCubit extends Cubit<SavedState> {
     emit(SavedLoading());
     // Get saved products from api
     final List<Product> savedProducts = [];
+    // if saved products ids is empty, return empty list
+    if (savedProductsIds.isEmpty) {
+      emit(SavedLoaded(savedProducts, savedProductsIds));
+      return;
+    }
     for (int i = 0; i < savedProductsIds.length; i++) {
       final result = await GetIt.I
           .get<GetProduct>(param1: savedProductsIds.elementAt(i))
