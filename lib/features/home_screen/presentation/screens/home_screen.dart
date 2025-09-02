@@ -1,4 +1,5 @@
 import 'package:ecommerce/core/utils/helper_functions.dart';
+import 'package:ecommerce/core/widgets/custom_error_widget.dart';
 import 'package:ecommerce/features/home_screen/presentation/controller/products_cubit.dart';
 import 'package:ecommerce/features/home_screen/presentation/widgets/custom_category_scroll_view.dart';
 import 'package:ecommerce/features/home_screen/presentation/widgets/custom_home_app_bar.dart';
@@ -41,17 +42,26 @@ class _HomeScreenState extends State<HomeScreen>
           ),
           BlocBuilder<ProductsCubit, ProductsState>(
             builder: (context, state) {
-              return state is ProductsLoaded
-                  ? ItemsListWidget(
-                      firstList: state.firstList,
-                      secondList: state.secondList,
-                    )
-                  : Skeletonizer.sliver(
-                      child: ItemsListWidget(
-                        firstList: HelperFunctions.generateFakeProducts(4),
-                        secondList: HelperFunctions.generateFakeProducts(4),
-                      ),
-                    );
+              if (state is ProductsLoaded) {
+                return ItemsListWidget(
+                  firstList: state.firstList,
+                  secondList: state.secondList,
+                );
+              } else if (state is ProductsError) {
+                return SliverToBoxAdapter(
+                  child: CustomErrorWidget(
+                    message: state.message,
+                    statusCode: state.statusCode,
+                  ),
+                );
+              } else {
+                return Skeletonizer.sliver(
+                  child: ItemsListWidget(
+                    firstList: HelperFunctions.generateFakeProducts(4),
+                    secondList: HelperFunctions.generateFakeProducts(4),
+                  ),
+                );
+              }
             },
           ),
         ],

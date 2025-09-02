@@ -26,7 +26,7 @@ class ProductsCubit extends Cubit<ProductsState> {
       ];
       emit(ProductsLoaded(firstList, secondList, categories, 0));
     } else if (result is Failure<List<Product>>) {
-      emit(ProductsError(result.error.toString()));
+      emit(ProductsError(result.error.toString(), result.error.statusCode));
     }
   }
 
@@ -50,7 +50,7 @@ class ProductsCubit extends Cubit<ProductsState> {
         ];
         emit(ProductsLoaded(firstList, secondList, categories, categoryIndex));
       } else if (result is Failure<List<Product>>) {
-        emit(ProductsError(result.error.toString()));
+        emit(ProductsError(result.error.toString(), result.error.statusCode));
       }
     } else {
       getProducts();

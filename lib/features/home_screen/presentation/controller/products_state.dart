@@ -22,5 +22,6 @@ final class ProductsLoaded extends ProductsState {
 
 final class ProductsError extends ProductsState {
   final String message;
-  ProductsError(this.message);
+  final int? statusCode;
+  ProductsError(this.message, this.statusCode);
 }
