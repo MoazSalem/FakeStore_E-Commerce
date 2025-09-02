@@ -3,9 +3,9 @@ import 'package:ecommerce/core/widgets/custom_app_bar.dart';
 import 'package:ecommerce/core/widgets/custom_divider.dart';
 import 'package:ecommerce/core/widgets/custom_error_widget.dart';
 import 'package:ecommerce/core/widgets/horizontal_item_widget.dart';
-import 'package:ecommerce/core/widgets/amount_row.dart';
 import 'package:ecommerce/core/widgets/loading_widget.dart';
 import 'package:ecommerce/features/cart_screen/presentation/controller/cart_cubit.dart';
+import 'package:ecommerce/features/cart_screen/presentation/widgets/cart_amount_row.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -34,7 +34,7 @@ class CartScreen extends StatelessWidget {
                               child: OutlinedButton(
                                 onPressed: () {},
                                 child: Text(
-                                  "Checkout | \$${state.totalAmount} ",
+                                  "Checkout | \$${state.totalAmount.toStringAsFixed(2)} ",
                                   style: TextStyle(
                                     fontSize: SizesManager.font16,
                                     fontWeight: FontWeight.bold,
@@ -70,20 +70,9 @@ class CartScreen extends StatelessWidget {
                                               padding: const EdgeInsets.all(
                                                 8.0,
                                               ),
-                                              child: AmountRow(
-                                                amount: state
-                                                    .cart
-                                                    .productsDetails[index]
-                                                    .quantity,
-                                                onAdd: () {},
-                                                onRemove: () {},
-                                                amountTextSize:
-                                                    SizesManager.font14,
-                                                iconSize:
-                                                    SizesManager.iconSize14,
-                                                buttonsPadding:
-                                                    SizesManager.padding5,
-                                                spacing: SizesManager.padding10,
+                                              child: CartAmountRow(
+                                                state: state,
+                                                index: index,
                                               ),
                                             ),
                                           ],

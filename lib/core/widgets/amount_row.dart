@@ -17,8 +17,8 @@ class AmountRow extends StatelessWidget {
   final double? iconSize;
   final double? amountTextSize;
   final double? spacing;
-  final Function() onRemove;
-  final Function() onAdd;
+  final Function()? onRemove;
+  final Function()? onAdd;
   final int amount;
 
   @override

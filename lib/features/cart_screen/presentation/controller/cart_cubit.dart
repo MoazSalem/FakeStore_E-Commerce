@@ -54,4 +54,40 @@ class CartCubit extends Cubit<CartState> {
       );
     }
   }
+
+  changeQuantity({
+    required int productId,
+    required CartLoaded state,
+    bool isIncrement = true,
+  }) {
+    // getting the data from the old state is not the best practice, but it is the easiest way to do it for now
+    final Cart newCart = state.cart.copyWith(
+      productsDetails: state.cart.productsDetails.map((product) {
+        if (product.productId == productId) {
+          return product.copyWith(
+            quantity: isIncrement ? product.quantity + 1 : product.quantity - 1,
+          );
+        }
+        return product;
+      }).toList(),
+    );
+    final double newTotalAmount =
+        state.totalAmount +
+        (isIncrement
+            ? state.products
+                  .firstWhere((element) => element.id == productId)
+                  .price
+            : -state.products
+                  .firstWhere((element) => element.id == productId)
+                  .price);
+    final int newCount = state.count + (isIncrement ? 1 : -1);
+    emit(
+      CartLoaded(
+        cart: newCart,
+        products: state.products,
+        totalAmount: newTotalAmount,
+        count: newCount,
+      ),
+    );
+  }
 }

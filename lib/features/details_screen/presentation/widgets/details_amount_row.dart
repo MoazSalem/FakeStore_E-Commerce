@@ -15,11 +15,12 @@ class DetailsAmountRow extends StatelessWidget {
             ? AmountRow(
                 spacing: SizesManager.padding10,
                 amount: state.productCount,
-                onRemove: () => state.productCount > 1
-                    ? BlocProvider.of<DetailsCubit>(context).changeProductCount(
-                        state.productCount - 1,
-                        state.product,
-                      )
+                onRemove: state.productCount > 1
+                    ? () => BlocProvider.of<DetailsCubit>(context)
+                          .changeProductCount(
+                            state.productCount - 1,
+                            state.product,
+                          )
                     : null,
                 onAdd: () => BlocProvider.of<DetailsCubit>(
                   context,
