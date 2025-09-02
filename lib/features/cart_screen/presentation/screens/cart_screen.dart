@@ -108,7 +108,7 @@ class CartScreen extends StatelessWidget {
             } else if (state is CartError) {
               return CustomErrorWidget(message: state.message);
             } else {
-              return const LoadingWidget();
+              return Expanded(child: const LoadingWidget());
             }
           },
         ),

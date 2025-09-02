@@ -11,7 +11,7 @@ part 'saved_state.dart';
 class SavedCubit extends Cubit<SavedState> {
   SavedCubit() : super(SavedInitial());
 
-  void getSavedProductsIds() {
+  void getSavedProducts() async {
     emit(SavedLoading());
     try {
       // Get saved products ids from shared preferences
@@ -22,7 +22,22 @@ class SavedCubit extends Cubit<SavedState> {
       final Set<int> savedProductsIds = listOfIds
           .map((e) => int.parse(e))
           .toSet();
-      emit(SavedLoaded(null, savedProductsIds));
+      // Get saved products from api
+      final List<Product> savedProducts = [];
+      // if saved products ids is empty, return empty list
+      if (savedProductsIds.isEmpty) {
+        emit(SavedLoaded(savedProducts, savedProductsIds));
+        return;
+      }
+      for (int i = 0; i < savedProductsIds.length; i++) {
+        final result = await GetIt.I
+            .get<GetProduct>(param1: savedProductsIds.elementAt(i))
+            .call();
+        if (result is Success<Product>) {
+          savedProducts.add(result.data);
+          emit(SavedLoaded(savedProducts, savedProductsIds));
+        }
+      }
     } catch (e) {
       emit(SavedError(e.toString()));
     }
@@ -37,31 +52,9 @@ class SavedCubit extends Cubit<SavedState> {
         'savedProductsIds',
         savedProductsIds.map((e) => e.toString()).toList(),
       );
-      emit(SavedLoaded(null, savedProductsIds));
+      getSavedProducts();
     } catch (e) {
       emit(SavedError(e.toString()));
-    }
-  }
-
-  void getSavedProducts(Set<int> savedProductsIds) async {
-    emit(SavedLoading());
-    // Get saved products from api
-    final List<Product> savedProducts = [];
-    // if saved products ids is empty, return empty list
-    if (savedProductsIds.isEmpty) {
-      emit(SavedLoaded(savedProducts, savedProductsIds));
-      return;
-    }
-    for (int i = 0; i < savedProductsIds.length; i++) {
-      final result = await GetIt.I
-          .get<GetProduct>(param1: savedProductsIds.elementAt(i))
-          .call();
-      if (result is Success<Product>) {
-        savedProducts.add(result.data);
-        emit(SavedLoaded(savedProducts, savedProductsIds));
-      } else if (result is Failure<Product>) {
-        emit(SavedError(result.error.toString()));
-      }
     }
   }
 }

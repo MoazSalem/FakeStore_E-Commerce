@@ -8,7 +8,7 @@ final class SavedInitial extends SavedState {}
 final class SavedLoading extends SavedState {}
 
 final class SavedLoaded extends SavedState {
-  final List<Product>? savedProducts;
+  final List<Product> savedProducts;
   final Set<int> savedProductsIds;
   SavedLoaded(this.savedProducts, this.savedProductsIds);
 }

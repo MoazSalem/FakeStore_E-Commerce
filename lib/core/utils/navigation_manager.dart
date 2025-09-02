@@ -23,7 +23,7 @@ class NavigationManager {
               ),
               BlocProvider(
                 create: (BuildContext context) =>
-                    GetIt.I.get<SavedCubit>()..getSavedProductsIds(),
+                    GetIt.I.get<SavedCubit>()..getSavedProducts(),
               ),
               BlocProvider(
                 create: (BuildContext context) =>

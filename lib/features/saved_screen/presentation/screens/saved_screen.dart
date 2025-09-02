@@ -17,91 +17,90 @@ class SavedScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<SavedCubit, SavedState>(
       builder: (context, state) {
-        if (state is SavedLoaded && state.savedProducts == null) {
-          // get saved products if not loaded
-          BlocProvider.of<SavedCubit>(
-            context,
-          ).getSavedProducts(state.savedProductsIds);
-        }
-        return Column(
-          mainAxisSize: MainAxisSize.min,
-          spacing: SizesManager.padding10,
-          children: [
-            const CustomAppBar(title: 'Saved Products'),
-            state is SavedLoaded &&
-                    state.savedProducts != null &&
-                    state.savedProducts!.isNotEmpty
-                ? Expanded(
-                    child: ListView.builder(
-                      itemCount: state.savedProducts!.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        return Padding(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: SizesManager.padding10,
-                          ),
-                          child: Column(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.symmetric(
-                                  vertical: SizesManager.padding10,
-                                ),
-                                child: Stack(
-                                  alignment: Alignment.bottomRight,
-                                  children: [
-                                    HorizontalItemWidget(
-                                      uniqueTag:
-                                          '00${state.savedProducts![index].id}',
-                                      product: state.savedProducts![index],
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.all(
-                                        SizesManager.padding14,
+        if (state is SavedLoaded) {
+          return state.savedProducts.isNotEmpty
+              ? Column(
+                  mainAxisSize: MainAxisSize.min,
+                  spacing: SizesManager.padding10,
+                  children: [
+                    const CustomAppBar(title: 'Saved Products'),
+                    Expanded(
+                      child: ListView.builder(
+                        itemCount: state.savedProducts.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          return Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: SizesManager.padding10,
+                            ),
+                            child: Column(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                    vertical: SizesManager.padding10,
+                                  ),
+                                  child: Stack(
+                                    alignment: Alignment.bottomRight,
+                                    children: [
+                                      HorizontalItemWidget(
+                                        uniqueTag:
+                                            '00${state.savedProducts[index].id}',
+                                        product: state.savedProducts[index],
                                       ),
-                                      child: CircularButton(
-                                        elevation: 0,
-                                        side: BorderSide(
-                                          color: Theme.of(
-                                            context,
-                                          ).colorScheme.outline,
+                                      Padding(
+                                        padding: const EdgeInsets.all(
+                                          SizesManager.padding14,
                                         ),
-                                        onTap: () {
-                                          BlocProvider.of<SavedCubit>(
-                                            context,
-                                          ).saveId(
-                                            state.savedProducts![index].id,
-                                            state.savedProductsIds,
-                                            remove: true,
-                                          );
-                                        },
-                                        child: SvgImage(
-                                          asset: AssetsManager.unsave,
-                                          height: SizesManager.iconSize16,
+                                        child: CircularButton(
+                                          elevation: 0,
+                                          side: BorderSide(
+                                            color: Theme.of(
+                                              context,
+                                            ).colorScheme.outline,
+                                          ),
+                                          onTap: () {
+                                            BlocProvider.of<SavedCubit>(
+                                              context,
+                                            ).saveId(
+                                              state.savedProducts[index].id,
+                                              state.savedProductsIds,
+                                              remove: true,
+                                            );
+                                          },
+                                          child: SvgImage(
+                                            asset: AssetsManager.unsave,
+                                            height: SizesManager.iconSize16,
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
-                              ),
-                              // divider
-                              Padding(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: SizesManager.padding10,
+                                // divider
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: SizesManager.padding10,
+                                  ),
+                                  child: CustomDivider(),
                                 ),
-                                child: CustomDivider(),
-                              ),
-                            ],
-                          ),
-                        );
-                      },
+                              ],
+                            ),
+                          );
+                        },
+                      ),
                     ),
-                  )
-                : state is SavedLoading
-                ? Expanded(child: const LoadingWidget())
-                : Expanded(
-                    child: const Center(child: Text('No Saved Products')),
-                  ),
-          ],
-        );
+                  ],
+                )
+              : Column(
+                  children: [
+                    const CustomAppBar(title: 'Saved Products'),
+                    Expanded(
+                      child: const Center(child: Text('No Saved Products')),
+                    ),
+                  ],
+                );
+        } else {
+          return Expanded(child: const LoadingWidget());
+        }
       },
     );
   }

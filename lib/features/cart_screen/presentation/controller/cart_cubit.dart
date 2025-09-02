@@ -17,7 +17,6 @@ class CartCubit extends Cubit<CartState> {
     final result = await GetIt.instance<GetCartUseCase>().call(cartId);
     if (result is Success<Cart>) {
       final Cart cart = result.data;
-      print(cart);
       List<Product> products = [];
       double totalAmount = 0;
       int totalQuantity = 0;
