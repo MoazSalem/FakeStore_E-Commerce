@@ -1,3 +1,4 @@
+import 'package:ecommerce/features/cart_screen/presentation/controller/cart_cubit.dart';
 import 'package:ecommerce/features/details_screen/presentation/screens/product_details_screen.dart';
 import 'package:ecommerce/features/home_screen/presentation/controller/products_cubit.dart';
 import 'package:ecommerce/features/main_screen/presentation/screens/main_screen.dart';
@@ -23,6 +24,10 @@ class NavigationManager {
               BlocProvider(
                 create: (BuildContext context) =>
                     GetIt.I.get<SavedCubit>()..getSavedProductsIds(),
+              ),
+              BlocProvider(
+                create: (BuildContext context) =>
+                    GetIt.I.get<CartCubit>()..getCart(1),
               ),
             ],
             child: const MainScreen(),

@@ -1,4 +1,12 @@
 import 'package:dio/dio.dart';
+import 'package:get_it/get_it.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:pretty_dio_logger/pretty_dio_logger.dart';
+import 'package:ecommerce/features/cart_screen/data/repositories/cart_repository_impl.dart';
+import 'package:ecommerce/features/cart_screen/data/usecases/get_cart_impl.dart';
+import 'package:ecommerce/features/cart_screen/domain/repositories/cart_repository.dart';
+import 'package:ecommerce/features/cart_screen/domain/usecases/get_cart.dart';
+import 'package:ecommerce/features/cart_screen/presentation/controller/cart_cubit.dart';
 import 'package:ecommerce/features/details_screen/data/usecases/get_product.dart';
 import 'package:ecommerce/features/details_screen/domain/usecases/get_product.dart';
 import 'package:ecommerce/features/details_screen/presentation/controller/details_cubit.dart';
@@ -8,8 +16,6 @@ import 'package:ecommerce/features/home_screen/domain/repositories/product_repos
 import 'package:ecommerce/features/home_screen/domain/usecases/get_products.dart';
 import 'package:ecommerce/features/home_screen/presentation/controller/products_cubit.dart';
 import 'package:ecommerce/features/saved_screen/presentation/controller/saved_cubit.dart';
-import 'package:get_it/get_it.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 final _getIt = GetIt.instance;
 
@@ -21,7 +27,7 @@ Future<void> setupDI() async {
   // Register dio as a singleton
   _getIt.registerLazySingleton<Dio>(() => Dio());
   // Add pretty dio logger to dio
-  //getIt<Dio>().interceptors.add(PrettyDioLogger());
+  _getIt<Dio>().interceptors.add(PrettyDioLogger());
   // Register product repository as a singleton
   _getIt.registerLazySingleton<ProductRepository>(
     () => ProductRepoImpl(dio: _getIt<Dio>()),
@@ -41,4 +47,14 @@ Future<void> setupDI() async {
   _getIt.registerLazySingleton<SavedCubit>(() => SavedCubit());
   // Register details screen cubit as a factory
   _getIt.registerFactory<DetailsCubit>(() => DetailsCubit());
+  // Register cart screen cubit as a singleton
+  _getIt.registerLazySingleton<CartCubit>(() => CartCubit());
+  // Register cart repository as a singleton
+  _getIt.registerLazySingleton<CartRepository>(
+    () => CartRepositoryImpl(dio: _getIt<Dio>()),
+  );
+  // Register cart use case as a singleton
+  _getIt.registerLazySingleton<GetCartUseCase>(
+    () => GetCartImpl(repository: _getIt<CartRepository>()),
+  );
 }
