@@ -32,7 +32,6 @@ class HorizontalItemWidget extends StatelessWidget {
           children: [
             Container(
               width: SizesManager.savedItemSide,
-              height: SizesManager.savedItemSide,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(
                   SizesManager.roundedCorners,
@@ -44,6 +43,7 @@ class HorizontalItemWidget extends StatelessWidget {
                 child: Hero(
                   tag: '00${product.id}',
                   child: OnlineImageContainer(
+                    height: SizesManager.savedItemSide,
                     imageUrl: product.image,
                     padding: 0,
                   ),
