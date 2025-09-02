@@ -10,7 +10,7 @@ _CartModel _$CartModelFromJson(Map<String, dynamic> json) => _CartModel(
   id: (json['id'] as num).toInt(),
   userId: (json['userId'] as num).toInt(),
   products: (json['products'] as List<dynamic>)
-      .map((e) => ProductModel.fromJson(e as Map<String, dynamic>))
+      .map((e) => ProductDetailsModel.fromJson(e as Map<String, dynamic>))
       .toList(),
 );
 

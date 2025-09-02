@@ -9,10 +9,12 @@ final class CartLoading extends CartState {}
 
 final class CartLoaded extends CartState {
   final Cart cart;
+  final List<Product> products;
   final double totalAmount;
   final int count;
   CartLoaded({
     required this.cart,
+    required this.products,
     required this.totalAmount,
     required this.count,
   });

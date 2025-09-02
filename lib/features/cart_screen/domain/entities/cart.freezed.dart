@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$Cart implements DiagnosticableTreeMixin {
 
- int get id; int get userId; List<Product> get products;
+ int get id; int get userId; List<ProductDetails> get productsDetails;
 /// Create a copy of Cart
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -26,21 +26,21 @@ $CartCopyWith<Cart> get copyWith => _$CartCopyWithImpl<Cart>(this as Cart, _$ide
 void debugFillProperties(DiagnosticPropertiesBuilder properties) {
   properties
     ..add(DiagnosticsProperty('type', 'Cart'))
-    ..add(DiagnosticsProperty('id', id))..add(DiagnosticsProperty('userId', userId))..add(DiagnosticsProperty('products', products));
+    ..add(DiagnosticsProperty('id', id))..add(DiagnosticsProperty('userId', userId))..add(DiagnosticsProperty('productsDetails', productsDetails));
 }
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Cart&&(identical(other.id, id) || other.id == id)&&(identical(other.userId, userId) || other.userId == userId)&&const DeepCollectionEquality().equals(other.products, products));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Cart&&(identical(other.id, id) || other.id == id)&&(identical(other.userId, userId) || other.userId == userId)&&const DeepCollectionEquality().equals(other.productsDetails, productsDetails));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,id,userId,const DeepCollectionEquality().hash(products));
+int get hashCode => Object.hash(runtimeType,id,userId,const DeepCollectionEquality().hash(productsDetails));
 
 @override
 String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
-  return 'Cart(id: $id, userId: $userId, products: $products)';
+  return 'Cart(id: $id, userId: $userId, productsDetails: $productsDetails)';
 }
 
 
@@ -51,7 +51,7 @@ abstract mixin class $CartCopyWith<$Res>  {
   factory $CartCopyWith(Cart value, $Res Function(Cart) _then) = _$CartCopyWithImpl;
 @useResult
 $Res call({
- int id, int userId, List<Product> products
+ int id, int userId, List<ProductDetails> productsDetails
 });
 
 
@@ -68,12 +68,12 @@ class _$CartCopyWithImpl<$Res>
 
 /// Create a copy of Cart
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? userId = null,Object? products = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? userId = null,Object? productsDetails = null,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int,userId: null == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
-as int,products: null == products ? _self.products : products // ignore: cast_nullable_to_non_nullable
-as List<Product>,
+as int,productsDetails: null == productsDetails ? _self.productsDetails : productsDetails // ignore: cast_nullable_to_non_nullable
+as List<ProductDetails>,
   ));
 }
 
@@ -158,10 +158,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id,  int userId,  List<Product> products)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id,  int userId,  List<ProductDetails> productsDetails)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Cart() when $default != null:
-return $default(_that.id,_that.userId,_that.products);case _:
+return $default(_that.id,_that.userId,_that.productsDetails);case _:
   return orElse();
 
 }
@@ -179,10 +179,10 @@ return $default(_that.id,_that.userId,_that.products);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id,  int userId,  List<Product> products)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id,  int userId,  List<ProductDetails> productsDetails)  $default,) {final _that = this;
 switch (_that) {
 case _Cart():
-return $default(_that.id,_that.userId,_that.products);case _:
+return $default(_that.id,_that.userId,_that.productsDetails);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -199,10 +199,10 @@ return $default(_that.id,_that.userId,_that.products);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id,  int userId,  List<Product> products)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id,  int userId,  List<ProductDetails> productsDetails)?  $default,) {final _that = this;
 switch (_that) {
 case _Cart() when $default != null:
-return $default(_that.id,_that.userId,_that.products);case _:
+return $default(_that.id,_that.userId,_that.productsDetails);case _:
   return null;
 
 }
@@ -214,16 +214,16 @@ return $default(_that.id,_that.userId,_that.products);case _:
 
 
 class _Cart with DiagnosticableTreeMixin implements Cart {
-  const _Cart({required this.id, required this.userId, required final  List<Product> products}): _products = products;
+  const _Cart({required this.id, required this.userId, required final  List<ProductDetails> productsDetails}): _productsDetails = productsDetails;
   
 
 @override final  int id;
 @override final  int userId;
- final  List<Product> _products;
-@override List<Product> get products {
-  if (_products is EqualUnmodifiableListView) return _products;
+ final  List<ProductDetails> _productsDetails;
+@override List<ProductDetails> get productsDetails {
+  if (_productsDetails is EqualUnmodifiableListView) return _productsDetails;
   // ignore: implicit_dynamic_type
-  return EqualUnmodifiableListView(_products);
+  return EqualUnmodifiableListView(_productsDetails);
 }
 
 
@@ -238,21 +238,21 @@ _$CartCopyWith<_Cart> get copyWith => __$CartCopyWithImpl<_Cart>(this, _$identit
 void debugFillProperties(DiagnosticPropertiesBuilder properties) {
   properties
     ..add(DiagnosticsProperty('type', 'Cart'))
-    ..add(DiagnosticsProperty('id', id))..add(DiagnosticsProperty('userId', userId))..add(DiagnosticsProperty('products', products));
+    ..add(DiagnosticsProperty('id', id))..add(DiagnosticsProperty('userId', userId))..add(DiagnosticsProperty('productsDetails', productsDetails));
 }
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Cart&&(identical(other.id, id) || other.id == id)&&(identical(other.userId, userId) || other.userId == userId)&&const DeepCollectionEquality().equals(other._products, _products));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Cart&&(identical(other.id, id) || other.id == id)&&(identical(other.userId, userId) || other.userId == userId)&&const DeepCollectionEquality().equals(other._productsDetails, _productsDetails));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,id,userId,const DeepCollectionEquality().hash(_products));
+int get hashCode => Object.hash(runtimeType,id,userId,const DeepCollectionEquality().hash(_productsDetails));
 
 @override
 String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
-  return 'Cart(id: $id, userId: $userId, products: $products)';
+  return 'Cart(id: $id, userId: $userId, productsDetails: $productsDetails)';
 }
 
 
@@ -263,7 +263,7 @@ abstract mixin class _$CartCopyWith<$Res> implements $CartCopyWith<$Res> {
   factory _$CartCopyWith(_Cart value, $Res Function(_Cart) _then) = __$CartCopyWithImpl;
 @override @useResult
 $Res call({
- int id, int userId, List<Product> products
+ int id, int userId, List<ProductDetails> productsDetails
 });
 
 
@@ -280,12 +280,12 @@ class __$CartCopyWithImpl<$Res>
 
 /// Create a copy of Cart
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? userId = null,Object? products = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? userId = null,Object? productsDetails = null,}) {
   return _then(_Cart(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int,userId: null == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
-as int,products: null == products ? _self._products : products // ignore: cast_nullable_to_non_nullable
-as List<Product>,
+as int,productsDetails: null == productsDetails ? _self._productsDetails : productsDetails // ignore: cast_nullable_to_non_nullable
+as List<ProductDetails>,
   ));
 }
 

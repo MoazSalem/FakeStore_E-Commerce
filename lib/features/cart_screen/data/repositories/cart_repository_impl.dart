@@ -16,6 +16,7 @@ class CartRepositoryImpl implements CartRepository {
     try {
       final response = await dio.get('${ConstsManager.baseUrl}/carts/$cartId');
       final CartModel cartModel = CartModel.fromJson(response.data);
+
       return Success(cartModel.toEntity());
     } catch (error) {
       return Failure(DioErrorHandler.handleError(error));

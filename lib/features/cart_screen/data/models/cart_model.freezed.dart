@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$CartModel implements DiagnosticableTreeMixin {
 
- int get id; int get userId; List<ProductModel> get products;
+ int get id; int get userId; List<ProductDetailsModel> get products;
 /// Create a copy of CartModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -54,7 +54,7 @@ abstract mixin class $CartModelCopyWith<$Res>  {
   factory $CartModelCopyWith(CartModel value, $Res Function(CartModel) _then) = _$CartModelCopyWithImpl;
 @useResult
 $Res call({
- int id, int userId, List<ProductModel> products
+ int id, int userId, List<ProductDetailsModel> products
 });
 
 
@@ -76,7 +76,7 @@ class _$CartModelCopyWithImpl<$Res>
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int,userId: null == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
 as int,products: null == products ? _self.products : products // ignore: cast_nullable_to_non_nullable
-as List<ProductModel>,
+as List<ProductDetailsModel>,
   ));
 }
 
@@ -161,7 +161,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id,  int userId,  List<ProductModel> products)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id,  int userId,  List<ProductDetailsModel> products)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _CartModel() when $default != null:
 return $default(_that.id,_that.userId,_that.products);case _:
@@ -182,7 +182,7 @@ return $default(_that.id,_that.userId,_that.products);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id,  int userId,  List<ProductModel> products)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id,  int userId,  List<ProductDetailsModel> products)  $default,) {final _that = this;
 switch (_that) {
 case _CartModel():
 return $default(_that.id,_that.userId,_that.products);case _:
@@ -202,7 +202,7 @@ return $default(_that.id,_that.userId,_that.products);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id,  int userId,  List<ProductModel> products)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id,  int userId,  List<ProductDetailsModel> products)?  $default,) {final _that = this;
 switch (_that) {
 case _CartModel() when $default != null:
 return $default(_that.id,_that.userId,_that.products);case _:
@@ -217,13 +217,13 @@ return $default(_that.id,_that.userId,_that.products);case _:
 @JsonSerializable()
 
 class _CartModel with DiagnosticableTreeMixin implements CartModel {
-  const _CartModel({required this.id, required this.userId, required final  List<ProductModel> products}): _products = products;
+  const _CartModel({required this.id, required this.userId, required final  List<ProductDetailsModel> products}): _products = products;
   factory _CartModel.fromJson(Map<String, dynamic> json) => _$CartModelFromJson(json);
 
 @override final  int id;
 @override final  int userId;
- final  List<ProductModel> _products;
-@override List<ProductModel> get products {
+ final  List<ProductDetailsModel> _products;
+@override List<ProductDetailsModel> get products {
   if (_products is EqualUnmodifiableListView) return _products;
   // ignore: implicit_dynamic_type
   return EqualUnmodifiableListView(_products);
@@ -269,7 +269,7 @@ abstract mixin class _$CartModelCopyWith<$Res> implements $CartModelCopyWith<$Re
   factory _$CartModelCopyWith(_CartModel value, $Res Function(_CartModel) _then) = __$CartModelCopyWithImpl;
 @override @useResult
 $Res call({
- int id, int userId, List<ProductModel> products
+ int id, int userId, List<ProductDetailsModel> products
 });
 
 
@@ -291,7 +291,7 @@ class __$CartModelCopyWithImpl<$Res>
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int,userId: null == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
 as int,products: null == products ? _self._products : products // ignore: cast_nullable_to_non_nullable
-as List<ProductModel>,
+as List<ProductDetailsModel>,
   ));
 }
 

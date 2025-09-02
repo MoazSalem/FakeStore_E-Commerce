@@ -40,14 +40,14 @@ class CartScreen extends StatelessWidget {
         BlocBuilder<CartCubit, CartState>(
           builder: (context, state) {
             if (state is CartLoaded) {
-              return state.cart.products.isNotEmpty
+              return state.products.isNotEmpty
                   ? Expanded(
                       child: Padding(
                         padding: const EdgeInsets.symmetric(
                           horizontal: SizesManager.padding10,
                         ),
                         child: ListView.builder(
-                          itemCount: state.cart.products.length,
+                          itemCount: state.products.length,
                           itemBuilder: (context, index) {
                             return Column(
                               children: [
@@ -60,13 +60,16 @@ class CartScreen extends StatelessWidget {
                                     children: [
                                       HorizontalItemWidget(
                                         uniqueTag:
-                                            '01${state.cart.products[index].id}',
-                                        product: state.cart.products[index],
+                                            '01${state.products[index].id}',
+                                        product: state.products[index],
                                       ),
                                       Padding(
                                         padding: const EdgeInsets.all(8.0),
                                         child: AmountRow(
-                                          amount: 1,
+                                          amount: state
+                                              .cart
+                                              .productsDetails[index]
+                                              .quantity,
                                           onAdd: () {},
                                           onRemove: () {},
                                           amountTextSize: SizesManager.font14,
