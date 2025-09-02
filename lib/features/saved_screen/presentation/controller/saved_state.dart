@@ -15,6 +15,7 @@ final class SavedLoaded extends SavedState {
 
 final class SavedError extends SavedState {
   final String message;
+  final int? statusCode;
 
-  SavedError(this.message);
+  SavedError({required this.message, this.statusCode});
 }

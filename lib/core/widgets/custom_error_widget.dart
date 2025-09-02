@@ -9,29 +9,26 @@ class CustomErrorWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: SizedBox(
-        height: MediaQuery.sizeOf(context).height * 0.5,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          spacing: SizesManager.padding,
-          children: [
-            Icon(
-              Icons.error,
-              color: Theme.of(context).colorScheme.error,
-              size: 50,
-            ),
-            if (statusCode != null)
-              Text(
-                "Error Code: $statusCode",
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-              ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        spacing: SizesManager.padding,
+        children: [
+          Icon(
+            Icons.error,
+            color: Theme.of(context).colorScheme.error,
+            size: 50,
+          ),
+          if (statusCode != null)
             Text(
-              message,
+              "Error Code: $statusCode",
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
-          ],
-        ),
+          Text(
+            message,
+            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+          ),
+        ],
       ),
     );
   }

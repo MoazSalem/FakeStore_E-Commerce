@@ -106,7 +106,12 @@ class CartScreen extends StatelessWidget {
                     )
                   : const Expanded(child: Center(child: Text('No Products')));
             } else if (state is CartError) {
-              return CustomErrorWidget(message: state.message);
+              return Expanded(
+                child: CustomErrorWidget(
+                  message: state.message,
+                  statusCode: state.statusCode,
+                ),
+              );
             } else {
               return Expanded(child: const LoadingWidget());
             }

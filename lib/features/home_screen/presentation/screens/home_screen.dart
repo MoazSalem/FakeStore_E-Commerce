@@ -42,10 +42,12 @@ class _HomeScreenState extends State<HomeScreen>
                   ],
                 );
               } else if (state is ProductsError) {
-                return SliverToBoxAdapter(
-                  child: CustomErrorWidget(
-                    message: state.message,
-                    statusCode: state.statusCode,
+                return SliverFillRemaining(
+                  child: Expanded(
+                    child: CustomErrorWidget(
+                      message: state.message,
+                      statusCode: state.statusCode,
+                    ),
                   ),
                 );
               } else {

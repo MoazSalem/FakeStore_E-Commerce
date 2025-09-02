@@ -36,10 +36,17 @@ class SavedCubit extends Cubit<SavedState> {
         if (result is Success<Product>) {
           savedProducts.add(result.data);
           emit(SavedLoaded(savedProducts, savedProductsIds));
+        } else if (result is Failure<Product>) {
+          emit(
+            SavedError(
+              message: result.error.toString(),
+              statusCode: result.error.statusCode,
+            ),
+          );
         }
       }
-    } catch (e) {
-      emit(SavedError(e.toString()));
+    } catch (error) {
+      emit(SavedError(message: error.toString()));
     }
   }
 
@@ -54,7 +61,7 @@ class SavedCubit extends Cubit<SavedState> {
       );
       getSavedProducts();
     } catch (e) {
-      emit(SavedError(e.toString()));
+      emit(SavedError(message: e.toString()));
     }
   }
 }

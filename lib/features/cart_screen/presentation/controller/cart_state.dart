@@ -22,5 +22,6 @@ final class CartLoaded extends CartState {
 
 final class CartError extends CartState {
   final String message;
-  CartError({required this.message});
+  final int? statusCode;
+  CartError({required this.message, this.statusCode});
 }

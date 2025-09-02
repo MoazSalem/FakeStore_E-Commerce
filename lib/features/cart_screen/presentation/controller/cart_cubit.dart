@@ -28,7 +28,12 @@ class CartCubit extends Cubit<CartState> {
           products.add(result.data);
           totalAmount += product.quantity * result.data.price;
         } else if (result is Failure<Product>) {
-          emit(CartError(message: result.error.toString()));
+          emit(
+            CartError(
+              message: result.error.toString(),
+              statusCode: result.error.statusCode,
+            ),
+          );
         }
         totalQuantity += product.quantity;
       }
@@ -41,7 +46,12 @@ class CartCubit extends Cubit<CartState> {
         ),
       );
     } else if (result is Failure<Cart>) {
-      emit(CartError(message: result.error.toString()));
+      emit(
+        CartError(
+          message: result.error.toString(),
+          statusCode: result.error.statusCode,
+        ),
+      );
     }
   }
 }

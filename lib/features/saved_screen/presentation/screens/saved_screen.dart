@@ -2,6 +2,7 @@ import 'package:ecommerce/core/utils/assets_manager.dart';
 import 'package:ecommerce/core/utils/sizes_manager.dart';
 import 'package:ecommerce/core/widgets/circular_button.dart';
 import 'package:ecommerce/core/widgets/custom_divider.dart';
+import 'package:ecommerce/core/widgets/custom_error_widget.dart';
 import 'package:ecommerce/core/widgets/loading_widget.dart';
 import 'package:ecommerce/core/widgets/svg_image.dart';
 import 'package:ecommerce/features/saved_screen/presentation/controller/saved_cubit.dart';
@@ -98,6 +99,18 @@ class SavedScreen extends StatelessWidget {
                     ),
                   ],
                 );
+        } else if (state is SavedError) {
+          return Column(
+            children: [
+              const CustomAppBar(title: 'Saved Products'),
+              Expanded(
+                child: CustomErrorWidget(
+                  message: state.message,
+                  statusCode: state.statusCode,
+                ),
+              ),
+            ],
+          );
         } else {
           return Expanded(child: const LoadingWidget());
         }
