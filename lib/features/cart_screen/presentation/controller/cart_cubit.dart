@@ -63,10 +63,25 @@ class CartCubit extends Cubit<CartState> {
     emit(CartLoaded(cart: updatedCart, products: current.products));
   }
 
-  void removeProduct(int productId) {
+  void removeProduct(int productId, {int? quantity}) {
     if (state is! CartLoaded) return;
     final current = state as CartLoaded;
 
+    // if quantity is not null, remove only the quantity of the product
+    if (quantity != null) {
+      final updatedCart = current.cart.copyWith(
+        productsDetails: current.cart.productsDetails.map((item) {
+          if (item.productId == productId) {
+            return item.copyWith(quantity: item.quantity - quantity);
+          }
+          return item;
+        }).toList(),
+      );
+      emit(CartLoaded(cart: updatedCart, products: current.products));
+      return;
+    }
+
+    // if quantity is null, remove the product from the cart
     final updatedItems = current.cart.productsDetails
         .where((item) => item.productId != productId)
         .toList();

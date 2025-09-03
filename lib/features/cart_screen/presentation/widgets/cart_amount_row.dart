@@ -26,7 +26,7 @@ class CartAmountRow extends StatelessWidget {
           onRemove: state.cart.productsDetails[index].quantity > 1
               ? () => BlocProvider.of<CartCubit>(context).updateItemCount(
                   productId: state.products[index].id,
-                  isIncrement: true,
+                  isIncrement: false,
                 )
               : null,
           amountTextSize: SizesManager.font14,

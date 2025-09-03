@@ -1,12 +1,9 @@
-import 'package:ecommerce/core/utils/assets_manager.dart';
 import 'package:ecommerce/core/utils/sizes_manager.dart';
-import 'package:ecommerce/core/widgets/custom_button.dart';
 import 'package:ecommerce/core/widgets/custom_divider.dart';
 import 'package:ecommerce/core/widgets/online_image_container.dart';
 import 'package:ecommerce/core/widgets/loading_widget.dart';
-import 'package:ecommerce/core/widgets/svg_image.dart';
-import 'package:ecommerce/features/cart_screen/presentation/controller/cart_cubit.dart';
 import 'package:ecommerce/features/details_screen/presentation/controller/details_cubit.dart';
+import 'package:ecommerce/features/details_screen/presentation/widgets/cart_button.dart';
 import 'package:ecommerce/features/details_screen/presentation/widgets/details_amount_row.dart';
 import 'package:ecommerce/features/details_screen/presentation/widgets/controls_bar.dart';
 import 'package:ecommerce/features/details_screen/presentation/widgets/rating_widget.dart';
@@ -103,45 +100,9 @@ class ProductDetailsScreen extends StatelessWidget {
                                 ),
                               ),
                               CustomDivider(),
-                              CustomButton(
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  spacing: SizesManager.padding,
-                                  children: [
-                                    SvgImage(asset: AssetsManager.cart),
-                                    Text(
-                                      'Add to Cart | \$${state.product.price}',
-                                      style: TextStyle(
-                                        fontSize: SizesManager.font16,
-                                        fontWeight: FontWeight.bold,
-                                        color: theme.colorScheme.onPrimary,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                onPressed: () {
-                                  try {
-                                    GetIt.I<CartCubit>().addProductToCart(
-                                      state.product,
-                                      state.productCount,
-                                    );
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(
-                                        content: Text("Item Added to Cart"),
-                                        duration: const Duration(seconds: 5),
-                                      ),
-                                    );
-                                  } catch (e) {
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(
-                                        content: Text(
-                                          "Something went wrong, item not added",
-                                        ),
-                                        duration: const Duration(seconds: 5),
-                                      ),
-                                    );
-                                  }
-                                },
+                              CartButton(
+                                product: state.product,
+                                productCount: state.productCount,
                               ),
                               SizedBox(height: SizesManager.padding10),
                             ],
