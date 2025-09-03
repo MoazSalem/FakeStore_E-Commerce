@@ -80,16 +80,33 @@ class CartCubit extends Cubit<CartState> {
     emit(CartLoaded(cart: updatedCart, products: updatedProducts));
   }
 
-  Future<void> addProductToCart(Product product) async {
+  Future<void> addProductToCart(Product product, int quantity) async {
     if (state is! CartLoaded) return;
     final current = state as CartLoaded;
-    final List<Product> updatedProducts = [...current.products, product];
-    final updatedCart = current.cart.copyWith(
-      productsDetails: [
-        ...current.cart.productsDetails,
-        ProductDetails(productId: product.id, quantity: 1),
-      ],
+    // check if the product is already in the cart
+    bool isProductInCart = current.cart.productsDetails.any(
+      (item) => item.productId == product.id,
     );
+    // if the product is already in the cart, don't add it again
+    final List<Product> updatedProducts = isProductInCart
+        ? current.products
+        : [...current.products, product];
+    // and just increment the quantity
+    final updatedCart = isProductInCart
+        ? current.cart.copyWith(
+            productsDetails: current.cart.productsDetails.map((item) {
+              if (item.productId == product.id) {
+                return item.copyWith(quantity: item.quantity + quantity);
+              }
+              return item;
+            }).toList(),
+          )
+        : current.cart.copyWith(
+            productsDetails: [
+              ...current.cart.productsDetails,
+              ProductDetails(productId: product.id, quantity: quantity),
+            ],
+          );
     emit(CartLoaded(cart: updatedCart, products: updatedProducts));
   }
 }

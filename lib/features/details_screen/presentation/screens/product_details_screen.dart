@@ -119,9 +119,31 @@ class ProductDetailsScreen extends StatelessWidget {
                                     ),
                                   ],
                                 ),
-                                onPressed: () => GetIt.I<CartCubit>()
-                                    .addProductToCart(state.product),
+                                onPressed: () {
+                                  try {
+                                    GetIt.I<CartCubit>().addProductToCart(
+                                      state.product,
+                                      state.productCount,
+                                    );
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text("Item Added to Cart"),
+                                        duration: const Duration(seconds: 5),
+                                      ),
+                                    );
+                                  } catch (e) {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text(
+                                          "Something went wrong, item not added",
+                                        ),
+                                        duration: const Duration(seconds: 5),
+                                      ),
+                                    );
+                                  }
+                                },
                               ),
+                              SizedBox(height: SizesManager.padding10),
                             ],
                           ),
                         ),
