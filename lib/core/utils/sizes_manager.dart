@@ -17,6 +17,7 @@ class SizesManager {
   static const double font15 = 15;
   static const double font14 = 14;
   static const double font12 = 12;
+  static const double font10 = 10;
   static const double roundedCorners = 10;
   static const double bigRoundedCorners = 30;
   static const double circularBorderRadius = 100;
