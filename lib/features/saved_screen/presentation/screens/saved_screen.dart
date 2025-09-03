@@ -63,7 +63,6 @@ class SavedScreen extends StatelessWidget {
                                               context,
                                             ).saveId(
                                               state.savedProducts[index].id,
-                                              state.savedProductsIds,
                                               remove: true,
                                             );
                                           },

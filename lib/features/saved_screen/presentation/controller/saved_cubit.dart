@@ -50,7 +50,9 @@ class SavedCubit extends Cubit<SavedState> {
     }
   }
 
-  void saveId(int id, Set<int> savedProductsIds, {bool remove = false}) {
+  void saveId(int id, {bool remove = false}) {
+    if (state is! SavedLoaded) return;
+    final savedProductsIds = (state as SavedLoaded).savedProductsIds;
     try {
       // Remove/add id from/to set of ids
       remove ? savedProductsIds.remove(id) : savedProductsIds.add(id);
@@ -59,7 +61,40 @@ class SavedCubit extends Cubit<SavedState> {
         'savedProductsIds',
         savedProductsIds.map((e) => e.toString()).toList(),
       );
-      getSavedProducts();
+      // Add/remove product to/from saved products
+      addProduct(id, remove: remove);
+    } catch (e) {
+      emit(SavedError(message: e.toString()));
+    }
+  }
+
+  void addProduct(int productId, {bool remove = false}) async {
+    if (state is! SavedLoaded) return;
+    try {
+      final savedProducts = (state as SavedLoaded).savedProducts;
+      // Remove product from saved products if remove is true
+      if (remove) {
+        savedProducts.removeWhere((e) => e.id == productId);
+        emit(
+          SavedLoaded(savedProducts, (state as SavedLoaded).savedProductsIds),
+        );
+        return;
+      }
+      // Get product from api
+      final result = await GetIt.I.get<GetProduct>(param1: productId).call();
+      if (result is Success<Product>) {
+        savedProducts.add(result.data);
+        emit(
+          SavedLoaded(savedProducts, (state as SavedLoaded).savedProductsIds),
+        );
+      } else if (result is Failure<Product>) {
+        emit(
+          SavedError(
+            message: result.error.toString(),
+            statusCode: result.error.statusCode,
+          ),
+        );
+      }
     } catch (e) {
       emit(SavedError(message: e.toString()));
     }
