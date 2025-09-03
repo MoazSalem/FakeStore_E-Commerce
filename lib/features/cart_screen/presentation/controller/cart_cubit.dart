@@ -18,15 +18,12 @@ class CartCubit extends Cubit<CartState> {
     if (result is Success<Cart>) {
       final Cart cart = result.data;
       List<Product> products = [];
-      double totalAmount = 0;
-      int totalQuantity = 0;
       for (var product in cart.productsDetails) {
         final result = await GetIt.instance<GetProduct>(
           param1: product.productId,
         ).call();
         if (result is Success<Product>) {
           products.add(result.data);
-          totalAmount += product.quantity * result.data.price;
         } else if (result is Failure<Product>) {
           emit(
             CartError(
@@ -35,16 +32,8 @@ class CartCubit extends Cubit<CartState> {
             ),
           );
         }
-        totalQuantity += product.quantity;
       }
-      emit(
-        CartLoaded(
-          cart: cart,
-          products: products,
-          totalAmount: totalAmount,
-          count: totalQuantity,
-        ),
-      );
+      emit(CartLoaded(cart: cart, products: products));
     } else if (result is Failure<Cart>) {
       emit(
         CartError(
@@ -55,39 +44,21 @@ class CartCubit extends Cubit<CartState> {
     }
   }
 
-  changeQuantity({
-    required int productId,
-    required CartLoaded state,
-    bool isIncrement = true,
-  }) {
-    // getting the data from the old state is not the best practice, but it is the easiest way to do it for now
-    final Cart newCart = state.cart.copyWith(
-      productsDetails: state.cart.productsDetails.map((product) {
-        if (product.productId == productId) {
-          return product.copyWith(
-            quantity: isIncrement ? product.quantity + 1 : product.quantity - 1,
-          );
-        }
-        return product;
-      }).toList(),
-    );
-    final double newTotalAmount =
-        state.totalAmount +
-        (isIncrement
-            ? state.products
-                  .firstWhere((element) => element.id == productId)
-                  .price
-            : -state.products
-                  .firstWhere((element) => element.id == productId)
-                  .price);
-    final int newCount = state.count + (isIncrement ? 1 : -1);
-    emit(
-      CartLoaded(
-        cart: newCart,
-        products: state.products,
-        totalAmount: newTotalAmount,
-        count: newCount,
-      ),
-    );
+  void updateItemCount({required int productId, required bool isIncrement}) {
+    if (state is! CartLoaded) return;
+    final current = state as CartLoaded;
+
+    final updatedItems = current.cart.productsDetails.map((item) {
+      if (item.productId == productId) {
+        return item.copyWith(
+          quantity: isIncrement ? item.quantity + 1 : item.quantity - 1,
+        );
+      }
+      return item;
+    }).toList();
+
+    final updatedCart = current.cart.copyWith(productsDetails: updatedItems);
+
+    emit(CartLoaded(cart: updatedCart, products: current.products));
   }
 }

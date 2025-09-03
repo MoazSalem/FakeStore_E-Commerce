@@ -13,16 +13,13 @@ class CartAmountRow extends StatelessWidget {
   Widget build(BuildContext context) {
     return AmountRow(
       amount: state.cart.productsDetails[index].quantity,
-      onAdd: () => BlocProvider.of<CartCubit>(context).changeQuantity(
-        productId: state.products[index].id,
-        state: state,
-        isIncrement: true,
-      ),
+      onAdd: () => BlocProvider.of<CartCubit>(
+        context,
+      ).updateItemCount(productId: state.products[index].id, isIncrement: true),
       onRemove: state.cart.productsDetails[index].quantity > 1
-          ? () => BlocProvider.of<CartCubit>(context).changeQuantity(
+          ? () => BlocProvider.of<CartCubit>(context).updateItemCount(
               productId: state.products[index].id,
-              state: state,
-              isIncrement: false,
+              isIncrement: true,
             )
           : null,
       amountTextSize: SizesManager.font14,
