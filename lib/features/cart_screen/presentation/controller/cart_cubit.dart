@@ -61,4 +61,21 @@ class CartCubit extends Cubit<CartState> {
 
     emit(CartLoaded(cart: updatedCart, products: current.products));
   }
+
+  void removeProduct(int productId) {
+    if (state is! CartLoaded) return;
+    final current = state as CartLoaded;
+
+    final updatedItems = current.cart.productsDetails
+        .where((item) => item.productId != productId)
+        .toList();
+
+    final updatedCart = current.cart.copyWith(productsDetails: updatedItems);
+
+    final updatedProducts = current.products
+        .where((product) => product.id != productId)
+        .toList();
+
+    emit(CartLoaded(cart: updatedCart, products: updatedProducts));
+  }
 }
