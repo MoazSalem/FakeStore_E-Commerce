@@ -1,6 +1,7 @@
 import 'package:ecommerce/core/utils/assets_manager.dart';
 import 'package:ecommerce/core/utils/sizes_manager.dart';
 import 'package:ecommerce/core/widgets/custom_button.dart';
+import 'package:ecommerce/core/widgets/snack_bar.dart';
 import 'package:ecommerce/core/widgets/svg_image.dart';
 import 'package:ecommerce/features/cart_screen/presentation/controller/cart_cubit.dart';
 import 'package:ecommerce/features/home_screen/domain/entities/product.dart';
@@ -37,16 +38,14 @@ class _CartButtonState extends State<CartButton> {
                 setState(() {
                   isAdded = false;
                 });
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text("Item Removed from Cart"),
-                    duration: const Duration(seconds: 2),
-                  ),
-                );
+                ScaffoldMessenger.of(
+                  context,
+                ).showSnackBar(customSnackBar("Item Removed from Cart"));
               } catch (e) {
-                SnackBar(
-                  content: Text("Something went wrong, item is not removed"),
-                  duration: const Duration(seconds: 2),
+                ScaffoldMessenger.of(context).showSnackBar(
+                  customSnackBar(
+                    "Something went wrong, item is not removed from cart",
+                  ),
                 );
               }
             }
@@ -56,20 +55,16 @@ class _CartButtonState extends State<CartButton> {
                   widget.product,
                   widget.productCount,
                 );
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text("Item Added to Cart"),
-                    duration: const Duration(seconds: 2),
-                  ),
-                );
+                ScaffoldMessenger.of(
+                  context,
+                ).showSnackBar(customSnackBar("Item Added to Cart"));
                 setState(() {
                   isAdded = true;
                 });
               } catch (e) {
                 ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text("Something went wrong, item is not added"),
-                    duration: const Duration(seconds: 2),
+                  customSnackBar(
+                    "Something went wrong, item is not added to cart",
                   ),
                 );
               }
