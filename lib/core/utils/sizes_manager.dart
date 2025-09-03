@@ -39,4 +39,6 @@ class SizesManager {
   static const double savedItemContainerMinHeight = 85;
   static const double savedItemSide = 80;
   static const double dividerHeight = 1;
+  static const double buttonHeight = 60;
+  static const double buttonHeight52 = 52;
 }

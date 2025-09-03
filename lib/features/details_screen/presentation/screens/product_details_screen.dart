@@ -1,6 +1,11 @@
+import 'package:ecommerce/core/utils/assets_manager.dart';
 import 'package:ecommerce/core/utils/sizes_manager.dart';
+import 'package:ecommerce/core/widgets/custom_button.dart';
+import 'package:ecommerce/core/widgets/custom_divider.dart';
 import 'package:ecommerce/core/widgets/online_image_container.dart';
 import 'package:ecommerce/core/widgets/loading_widget.dart';
+import 'package:ecommerce/core/widgets/svg_image.dart';
+import 'package:ecommerce/features/cart_screen/presentation/controller/cart_cubit.dart';
 import 'package:ecommerce/features/details_screen/presentation/controller/details_cubit.dart';
 import 'package:ecommerce/features/details_screen/presentation/widgets/details_amount_row.dart';
 import 'package:ecommerce/features/details_screen/presentation/widgets/controls_bar.dart';
@@ -97,9 +102,25 @@ class ProductDetailsScreen extends StatelessWidget {
                                   color: theme.colorScheme.secondary,
                                 ),
                               ),
-                              Container(
-                                color: theme.colorScheme.outline.withAlpha(60),
-                                height: 1,
+                              CustomDivider(),
+                              CustomButton(
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  spacing: SizesManager.padding,
+                                  children: [
+                                    SvgImage(asset: AssetsManager.cart),
+                                    Text(
+                                      'Add to Cart | \$${state.product.price}',
+                                      style: TextStyle(
+                                        fontSize: SizesManager.font16,
+                                        fontWeight: FontWeight.bold,
+                                        color: theme.colorScheme.onPrimary,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                onPressed: () => GetIt.I<CartCubit>()
+                                    .addProductToCart(state.product),
                               ),
                             ],
                           ),

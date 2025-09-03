@@ -1,4 +1,5 @@
 import 'package:ecommerce/core/error_handling/result.dart';
+import 'package:ecommerce/features/cart_screen/domain/entities/product_details.dart';
 import 'package:ecommerce/features/cart_screen/domain/usecases/get_cart.dart';
 import 'package:ecommerce/features/details_screen/domain/usecases/get_product.dart';
 import 'package:ecommerce/features/home_screen/domain/entities/product.dart';
@@ -76,6 +77,19 @@ class CartCubit extends Cubit<CartState> {
         .where((product) => product.id != productId)
         .toList();
 
+    emit(CartLoaded(cart: updatedCart, products: updatedProducts));
+  }
+
+  Future<void> addProductToCart(Product product) async {
+    if (state is! CartLoaded) return;
+    final current = state as CartLoaded;
+    final List<Product> updatedProducts = [...current.products, product];
+    final updatedCart = current.cart.copyWith(
+      productsDetails: [
+        ...current.cart.productsDetails,
+        ProductDetails(productId: product.id, quantity: 1),
+      ],
+    );
     emit(CartLoaded(cart: updatedCart, products: updatedProducts));
   }
 }
