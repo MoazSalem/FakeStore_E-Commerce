@@ -6,6 +6,7 @@ import 'package:ecommerce/features/details_screen/presentation/controller/detail
 import 'package:ecommerce/features/details_screen/presentation/widgets/cart_button.dart';
 import 'package:ecommerce/features/details_screen/presentation/widgets/details_amount_row.dart';
 import 'package:ecommerce/features/details_screen/presentation/widgets/controls_bar.dart';
+import 'package:ecommerce/features/details_screen/presentation/widgets/interactive_viewer.dart';
 import 'package:ecommerce/features/details_screen/presentation/widgets/rating_widget.dart';
 import 'package:ecommerce/features/home_screen/domain/entities/product.dart';
 import 'package:ecommerce/features/saved_screen/presentation/controller/saved_cubit.dart';
@@ -50,13 +51,21 @@ class ProductDetailsScreen extends StatelessWidget {
                             children: [
                               Stack(
                                 children: [
-                                  Hero(
-                                    tag: uniqueTag ?? state.product.id,
-                                    child: OnlineImageContainer(
-                                      height: 420,
-                                      width: double.infinity,
-                                      padding: SizesManager.padding20,
-                                      imageUrl: state.product.image,
+                                  GestureDetector(
+                                    onTap: () {
+                                      interactiveViewerBuilder(
+                                        context: context,
+                                        imageUrl: state.product.image,
+                                      );
+                                    },
+                                    child: Hero(
+                                      tag: uniqueTag ?? state.product.id,
+                                      child: OnlineImageContainer(
+                                        height: 420,
+                                        width: double.infinity,
+                                        padding: SizesManager.padding20,
+                                        imageUrl: state.product.image,
+                                      ),
                                     ),
                                   ),
                                   ControlsBar(productId: state.product.id),
