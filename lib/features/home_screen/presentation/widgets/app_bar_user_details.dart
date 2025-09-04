@@ -1,7 +1,9 @@
 import 'package:ecommerce/core/utils/assets_manager.dart';
 import 'package:ecommerce/core/utils/sizes_manager.dart';
 import 'package:ecommerce/core/widgets/svg_image.dart';
+import 'package:ecommerce/features/profile_screen/presentation/controller/user_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AppBarUserDetails extends StatelessWidget {
   const AppBarUserDetails({super.key});
@@ -12,27 +14,31 @@ class AppBarUserDetails extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          spacing: SizesManager.padding5,
-          children: [
-            Text(
-              'Hello, Welcome 👋',
-              style: TextStyle(
-                fontSize: SizesManager.font12,
-                color: theme.colorScheme.secondary,
-                fontWeight: FontWeight.w400,
-              ),
-            ),
-            Text(
-              'John Doe',
-              style: TextStyle(
-                fontSize: SizesManager.font18,
-                fontWeight: FontWeight.w800,
-                color: theme.colorScheme.onSurface,
-              ),
-            ),
-          ],
+        BlocBuilder<UserCubit, UserState>(
+          builder: (context, state) {
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              spacing: SizesManager.padding5,
+              children: [
+                Text(
+                  'Hello, Welcome 👋',
+                  style: TextStyle(
+                    fontSize: SizesManager.font12,
+                    color: theme.colorScheme.secondary,
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+                Text(
+                  state is UserIsGuest ? 'Guest' : 'John Doe',
+                  style: TextStyle(
+                    fontSize: SizesManager.font18,
+                    fontWeight: FontWeight.w800,
+                    color: theme.colorScheme.onSurface,
+                  ),
+                ),
+              ],
+            );
+          },
         ),
         Padding(
           padding: const EdgeInsets.symmetric(

@@ -2,6 +2,7 @@ import 'package:ecommerce/features/cart_screen/presentation/controller/cart_cubi
 import 'package:ecommerce/features/details_screen/presentation/screens/product_details_screen.dart';
 import 'package:ecommerce/features/home_screen/presentation/controller/products_cubit.dart';
 import 'package:ecommerce/features/main_screen/presentation/screens/main_screen.dart';
+import 'package:ecommerce/features/profile_screen/presentation/controller/user_cubit.dart';
 import 'package:ecommerce/features/saved_screen/presentation/controller/saved_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -23,11 +24,15 @@ class NavigationManager {
               ),
               BlocProvider(
                 create: (BuildContext context) =>
+                    GetIt.I.get<CartCubit>()..getCart(1),
+              ),
+              BlocProvider(
+                create: (BuildContext context) =>
                     GetIt.I.get<SavedCubit>()..getSavedProducts(),
               ),
               BlocProvider(
                 create: (BuildContext context) =>
-                    GetIt.I.get<CartCubit>()..getCart(1),
+                    GetIt.I.get<UserCubit>()..getUser(),
               ),
             ],
             child: const MainScreen(),

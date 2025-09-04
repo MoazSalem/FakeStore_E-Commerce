@@ -3,7 +3,9 @@ import 'package:ecommerce/core/utils/sizes_manager.dart';
 import 'package:ecommerce/core/widgets/circular_button.dart';
 import 'package:ecommerce/core/widgets/custom_app_bar.dart';
 import 'package:ecommerce/core/widgets/svg_image.dart';
+import 'package:ecommerce/features/profile_screen/presentation/controller/user_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -39,12 +41,16 @@ class ProfileScreen extends StatelessWidget {
             ),
           ),
           const SizedBox(height: SizesManager.padding26),
-          Text(
-            "John Doe",
-            style: TextStyle(
-              fontSize: SizesManager.font24,
-              fontWeight: FontWeight.w600,
-            ),
+          BlocBuilder<UserCubit, UserState>(
+            builder: (context, state) {
+              return Text(
+                state is UserIsGuest ? "Guest" : "John Doe",
+                style: TextStyle(
+                  fontSize: SizesManager.font24,
+                  fontWeight: FontWeight.w600,
+                ),
+              );
+            },
           ),
         ],
       ),

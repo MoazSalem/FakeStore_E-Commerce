@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:ecommerce/features/profile_screen/presentation/controller/user_cubit.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
@@ -57,4 +58,6 @@ Future<void> setupDI() async {
   _getIt.registerLazySingleton<GetCartUseCase>(
     () => GetCartImpl(repository: _getIt<CartRepository>()),
   );
+  // Register user cubit as a singleton
+  _getIt.registerLazySingleton<UserCubit>(() => UserCubit());
 }
