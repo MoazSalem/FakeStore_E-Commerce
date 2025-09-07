@@ -26,11 +26,11 @@ class SaveButton extends StatelessWidget {
     final theme = Theme.of(context);
     return BlocBuilder<SavedCubit, SavedState>(
       builder: (context, state) {
-        return CircularButton(
-          padding: padding ?? SizesManager.padding5,
-          backgroundColor: backgroundColor ?? theme.colorScheme.primary,
-          onTap: () {
-            if (state is SavedLoaded) {
+        if (state is SavedLoaded) {
+          return CircularButton(
+            padding: padding ?? SizesManager.padding5,
+            backgroundColor: backgroundColor ?? theme.colorScheme.primary,
+            onTap: () {
               if (state.savedProductsIds.contains(productId)) {
                 BlocProvider.of<SavedCubit>(
                   context,
@@ -38,18 +38,18 @@ class SaveButton extends StatelessWidget {
               } else {
                 BlocProvider.of<SavedCubit>(context).saveId(productId);
               }
-            }
-          },
-          child: SvgImage(
-            asset:
-                state is SavedLoaded &&
-                    state.savedProductsIds.contains(productId)
-                ? AssetsManager.heartFilled
-                : AssetsManager.heart,
-            color: foregroundColor ?? theme.colorScheme.onPrimary,
-            height: size ?? SizesManager.iconSize20,
-          ),
-        );
+            },
+            child: SvgImage(
+              asset: state.savedProductsIds.contains(productId)
+                  ? AssetsManager.heartFilled
+                  : AssetsManager.heart,
+              color: foregroundColor ?? theme.colorScheme.onPrimary,
+              height: size ?? SizesManager.iconSize20,
+            ),
+          );
+        } else {
+          return const SizedBox.shrink();
+        }
       },
     );
   }

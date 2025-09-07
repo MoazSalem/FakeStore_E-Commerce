@@ -2,6 +2,7 @@ import 'package:ecommerce/core/utils/sizes_manager.dart';
 import 'package:ecommerce/core/widgets/custom_divider.dart';
 import 'package:ecommerce/core/widgets/online_image_container.dart';
 import 'package:ecommerce/core/widgets/loading_widget.dart';
+import 'package:ecommerce/features/cart_screen/presentation/controller/cart_cubit.dart';
 import 'package:ecommerce/features/details_screen/presentation/controller/details_cubit.dart';
 import 'package:ecommerce/features/details_screen/presentation/widgets/cart_button.dart';
 import 'package:ecommerce/features/details_screen/presentation/widgets/details_amount_row.dart';
@@ -36,6 +37,8 @@ class ProductDetailsScreen extends StatelessWidget {
         ),
         // use the saved cubit from the main screen
         BlocProvider.value(value: GetIt.I<SavedCubit>()),
+        // use the cart cubit from the main screen
+        BlocProvider.value(value: GetIt.I<CartCubit>()),
       ],
       child: BlocBuilder<DetailsCubit, DetailsState>(
         builder: (context, state) {
