@@ -29,7 +29,7 @@ class AppBarUserDetails extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  state is UserIsGuest ? 'Guest' : 'John Doe',
+                  state is UserLoggedOut ? 'Guest' : 'John Doe',
                   style: TextStyle(
                     fontSize: SizesManager.font18,
                     fontWeight: FontWeight.w800,

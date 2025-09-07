@@ -1,4 +1,6 @@
 import 'package:dio/dio.dart';
+import 'package:ecommerce/features/profile_screen/data/repositories/user_repo_impl.dart';
+import 'package:ecommerce/features/profile_screen/domain/repositories/user_repository.dart';
 import 'package:ecommerce/features/profile_screen/presentation/controller/user_cubit.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -57,4 +59,6 @@ Future<void> setupDI() async {
   );
   // Register user cubit as a singleton
   _getIt.registerLazySingleton<UserCubit>(() => UserCubit());
+  // Register user repository as a singleton
+  _getIt.registerLazySingleton<UserRepository>(() => UserRepoImpl());
 }

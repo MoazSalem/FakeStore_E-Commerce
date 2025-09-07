@@ -44,7 +44,7 @@ class ProfileScreen extends StatelessWidget {
           BlocBuilder<UserCubit, UserState>(
             builder: (context, state) {
               return Text(
-                state is UserIsGuest ? "Guest" : "John Doe",
+                state is UserLoggedOut ? "Guest" : "John Doe",
                 style: TextStyle(
                   fontSize: SizesManager.font24,
                   fontWeight: FontWeight.w600,

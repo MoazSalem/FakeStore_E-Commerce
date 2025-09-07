@@ -32,7 +32,7 @@ class NavigationManager {
               ),
               BlocProvider(
                 create: (BuildContext context) =>
-                    GetIt.I.get<UserCubit>()..getUser(),
+                    GetIt.I.get<UserCubit>()..signIn(),
               ),
             ],
             child: const MainScreen(),

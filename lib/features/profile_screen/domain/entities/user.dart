@@ -8,8 +8,6 @@ abstract class User with _$User {
   factory User({
     required int id,
     required String name,
-    required String email,
-    required String phone,
-    required String avatarUrl,
+    required String? avatarUrl,
   }) = _User;
 }
