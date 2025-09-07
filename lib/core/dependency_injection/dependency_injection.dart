@@ -2,7 +2,6 @@ import 'package:dio/dio.dart';
 import 'package:ecommerce/features/profile_screen/presentation/controller/user_cubit.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:ecommerce/features/cart_screen/data/repositories/cart_repository_impl.dart';
 import 'package:ecommerce/features/cart_screen/data/usecases/get_cart_impl.dart';
 import 'package:ecommerce/features/cart_screen/domain/repositories/cart_repository.dart';
@@ -27,8 +26,6 @@ Future<void> setupDI() async {
   _getIt.registerSingleton<SharedPreferences>(prefs);
   // Register dio as a singleton
   _getIt.registerLazySingleton<Dio>(() => Dio());
-  // Add pretty dio logger to dio
-  _getIt<Dio>().interceptors.add(PrettyDioLogger());
   // Register product repository as a singleton
   _getIt.registerLazySingleton<ProductRepository>(
     () => ProductRepoImpl(dio: _getIt<Dio>()),
