@@ -30,16 +30,16 @@ class UserCubit extends Cubit<UserState> {
 
   void signOut() async {
     final result = await GetIt.I<UserRepository>().logout();
-    if (result is Success<User>) {
+    if (result is Success) {
       emit(UserLoggedOut(message: "Successfully logged out"));
-    } else if (result is Failure<User>) {
+    } else if (result is Failure) {
       emit(UserLoggedOut(message: result.error.message));
     }
   }
 
-  void signIn() async {
+  void signIn(String name) async {
     // get user from repository
-    final result = await GetIt.I<UserRepository>().login();
+    final result = await GetIt.I<UserRepository>().login(name);
     if (result is Success<User>) {
       emit(UserLoaded(user: result.data));
     } else if (result is Failure<User>) {

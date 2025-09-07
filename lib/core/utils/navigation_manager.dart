@@ -3,14 +3,18 @@ import 'package:ecommerce/features/details_screen/presentation/screens/product_d
 import 'package:ecommerce/features/home_screen/presentation/controller/products_cubit.dart';
 import 'package:ecommerce/features/main_screen/presentation/screens/main_screen.dart';
 import 'package:ecommerce/features/profile_screen/presentation/controller/user_cubit.dart';
+import 'package:ecommerce/features/profile_screen/presentation/screens/create_account_screen.dart';
+import 'package:ecommerce/features/profile_screen/presentation/screens/login_screen.dart';
 import 'package:ecommerce/features/saved_screen/presentation/controller/saved_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 
 class NavigationManager {
-  static const String mainScreen = '/mainScreen';
-  static const String detailsScreen = '/detailsScreen';
+  static const String mainScreen = '/main';
+  static const String createAccountScreen = '/createAccount';
+  static const String detailsScreen = '/details';
+  static const String loginScreen = '/login';
 
   static Route<dynamic> onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -32,10 +36,24 @@ class NavigationManager {
               ),
               BlocProvider(
                 create: (BuildContext context) =>
-                    GetIt.I.get<UserCubit>()..signIn(),
+                    GetIt.I.get<UserCubit>()..checkUser(),
               ),
             ],
             child: const MainScreen(),
+          ),
+        );
+      case createAccountScreen:
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider.value(
+            value: GetIt.I.get<UserCubit>(),
+            child: const CreateAccountScreen(),
+          ),
+        );
+      case loginScreen:
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider.value(
+            value: GetIt.I.get<UserCubit>(),
+            child: const LoginScreen(),
           ),
         );
 

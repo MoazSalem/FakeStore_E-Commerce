@@ -4,9 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 class OnlineImage extends StatelessWidget {
-  const OnlineImage({super.key, required this.imageUrl, this.padding = 0});
+  const OnlineImage({
+    super.key,
+    required this.imageUrl,
+    this.padding = 0,
+    this.fit,
+  });
   final String imageUrl;
   final double padding;
+  final BoxFit? fit;
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +23,7 @@ class OnlineImage extends StatelessWidget {
         padding: EdgeInsets.all(padding),
         child: Image(image: imageProvider, fit: BoxFit.scaleDown),
       ),
-      fit: BoxFit.scaleDown,
+      fit: fit ?? BoxFit.scaleDown,
       placeholder: (context, url) => Skeletonizer(
         enabled: true,
         child: Skeleton.leaf(
