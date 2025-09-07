@@ -7,6 +7,7 @@ class OfflineBanner extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
+      pinned: true,
       automaticallyImplyLeading: false,
       backgroundColor: Theme.of(context).colorScheme.error,
       title: const Text(

@@ -44,7 +44,13 @@ class _HomeScreenState extends State<HomeScreen>
                 );
               } else if (state is ProductsOffline) {
                 return SliverMainAxisGroup(
-                  slivers: [OfflineBanner(), SliverFillRemaining()],
+                  slivers: [
+                    OfflineBanner(),
+                    ItemsListWidget(
+                      firstList: state.firstList,
+                      secondList: state.secondList,
+                    ),
+                  ],
                 );
               } else if (state is ProductsError) {
                 return SliverFillRemaining(

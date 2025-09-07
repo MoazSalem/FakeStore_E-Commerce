@@ -26,4 +26,8 @@ final class ProductsError extends ProductsState {
   ProductsError(this.message, this.statusCode);
 }
 
-final class ProductsOffline extends ProductsState {}
+final class ProductsOffline extends ProductsState {
+  final List<Product> firstList;
+  final List<Product> secondList;
+  ProductsOffline(this.firstList, this.secondList);
+}
