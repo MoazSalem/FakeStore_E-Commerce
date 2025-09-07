@@ -26,7 +26,9 @@ class ProductsCubit extends Cubit<ProductsState> {
       ];
       emit(ProductsLoaded(firstList, secondList, categories, 0));
     } else if (result is Failure<List<Product>>) {
-      emit(ProductsError(result.error.toString(), result.error.statusCode));
+      result.error.message == "No Internet Connection"
+          ? emit(ProductsOffline())
+          : emit(ProductsError(result.error.message, result.error.statusCode));
     }
   }
 
