@@ -1,13 +1,11 @@
-import 'dart:convert';
-
 import 'package:ecommerce/core/error_handling/result.dart';
+import 'package:ecommerce/features/products/data/datasources/product_local_datasource_impl.dart';
 import 'package:ecommerce/features/products/data/models/product_model.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ecommerce/features/products/domain/entities/product.dart';
 import 'package:ecommerce/features/products/domain/usecases/get_products.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 part 'products_state.dart';
 
@@ -38,23 +36,23 @@ class ProductsCubit extends Cubit<ProductsState> {
 
   Future<void> getProductsFromCache() async {
     emit(ProductsLoading());
-    // get the json list from shared preferences
-    final jsonList = jsonDecode(
-      GetIt.I.get<SharedPreferences>().getString('lastFetchedProducts') ?? "",
-    );
-    // if json list is empty, return error
-    emit(ProductsError("No Internet Connection", null));
-    // convert the json list to a list of products
-    final List<Product> products = jsonList
-        .map<Product>((e) => ProductModel.fromJson(e).toEntity())
-        .toList();
-    final firstList = [
-      for (var i = 0; i < products.length; i += 2) products[i],
-    ];
-    final secondList = [
-      for (var i = 1; i < products.length; i += 2) products[i],
-    ];
-    emit(ProductsOffline(firstList, secondList));
+    // get the cached products list from shared preferences
+    final cached = GetIt.I.get<ProductLocalDataSource>().getCachedProducts();
+    if (cached != null) {
+      // convert the cached products list to a list of products
+      final List<Product> products = cached.map((e) => e.toEntity()).toList();
+      // split the products into two lists for the alternating items lists
+      final firstList = [
+        for (var i = 0; i < products.length; i += 2) products[i],
+      ];
+      final secondList = [
+        for (var i = 1; i < products.length; i += 2) products[i],
+      ];
+      emit(ProductsOffline(firstList, secondList));
+    } else {
+      // if json list is empty, return error
+      emit(ProductsError("No Internet Connection", null));
+    }
   }
 
   // filter products by category
