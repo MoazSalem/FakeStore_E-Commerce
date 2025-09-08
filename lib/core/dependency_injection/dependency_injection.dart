@@ -1,9 +1,11 @@
 import 'package:dio/dio.dart';
+import 'package:get_it/get_it.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:ecommerce/features/cart_screen/data/api/cart_api_client.dart';
+import 'package:ecommerce/features/home_screen/data/api/product_api_client.dart';
 import 'package:ecommerce/features/profile_screen/data/repositories/user_repo_impl.dart';
 import 'package:ecommerce/features/profile_screen/domain/repositories/user_repository.dart';
 import 'package:ecommerce/features/profile_screen/presentation/controller/user_cubit.dart';
-import 'package:get_it/get_it.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:ecommerce/features/cart_screen/data/repositories/cart_repository_impl.dart';
 import 'package:ecommerce/features/cart_screen/data/usecases/get_cart_impl.dart';
 import 'package:ecommerce/features/cart_screen/domain/repositories/cart_repository.dart';
@@ -61,4 +63,12 @@ Future<void> setupDI() async {
   _getIt.registerLazySingleton<UserCubit>(() => UserCubit());
   // Register user repository as a singleton
   _getIt.registerLazySingleton<UserRepository>(() => UserRepoImpl());
+  // Register product api client as a singleton
+  _getIt.registerLazySingleton<ProductApiClient>(
+    () => ProductApiClient(_getIt<Dio>()),
+  );
+  // Register cart api client as a singleton
+  _getIt.registerLazySingleton<CartApiClient>(
+    () => CartApiClient(_getIt<Dio>()),
+  );
 }
