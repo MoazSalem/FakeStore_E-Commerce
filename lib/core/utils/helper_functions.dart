@@ -1,6 +1,6 @@
 import 'package:ecommerce/core/utils/assets_manager.dart';
-import 'package:ecommerce/features/home_screen/domain/entities/product.dart';
-import 'package:ecommerce/features/home_screen/domain/entities/rating.dart';
+import 'package:ecommerce/features/products/domain/entities/product.dart';
+import 'package:ecommerce/features/products/domain/entities/rating.dart';
 
 class HelperFunctions {
   static String capitalizeWords(String sentence) {

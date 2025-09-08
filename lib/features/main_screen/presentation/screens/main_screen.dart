@@ -1,8 +1,8 @@
-import 'package:ecommerce/features/cart_screen/presentation/screens/cart_screen.dart';
-import 'package:ecommerce/features/home_screen/presentation/screens/home_screen.dart';
+import 'package:ecommerce/features/cart/presentation/screens/cart_screen.dart';
 import 'package:ecommerce/features/main_screen/presentation/widgets/custom_navigation_bar.dart';
-import 'package:ecommerce/features/profile_screen/presentation/screens/profile_screen.dart';
-import 'package:ecommerce/features/saved_screen/presentation/screens/saved_screen.dart';
+import 'package:ecommerce/features/products/presentation/screens/home_screen.dart';
+import 'package:ecommerce/features/saved/presentation/screens/saved_screen.dart';
+import 'package:ecommerce/features/user/presentation/screens/profile_screen.dart';
 import 'package:flutter/material.dart';
 
 class MainScreen extends StatefulWidget {

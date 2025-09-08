@@ -2,7 +2,7 @@ import 'package:ecommerce/core/utils/assets_manager.dart';
 import 'package:ecommerce/core/utils/sizes_manager.dart';
 import 'package:ecommerce/core/widgets/circular_button.dart';
 import 'package:ecommerce/core/widgets/svg_image.dart';
-import 'package:ecommerce/features/saved_screen/presentation/controller/saved_cubit.dart';
+import 'package:ecommerce/features/saved/presentation/controller/saved_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -15,6 +15,7 @@ class SaveButton extends StatelessWidget {
     this.foregroundColor,
     this.size,
   });
+
   final int productId;
   final double? padding;
   final Color? backgroundColor;

@@ -2,12 +2,13 @@ import 'package:ecommerce/core/utils/helper_functions.dart';
 import 'package:ecommerce/core/utils/sizes_manager.dart';
 import 'package:ecommerce/core/widgets/circular_button.dart';
 import 'package:ecommerce/core/widgets/svg_image.dart';
-import 'package:ecommerce/features/cart_screen/presentation/controller/cart_cubit.dart';
+import 'package:ecommerce/features/cart/presentation/controller/cart_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CustomNavigationBar extends StatefulWidget {
   final PageController pageController;
+
   const CustomNavigationBar({super.key, required this.pageController});
 
   @override
@@ -16,6 +17,7 @@ class CustomNavigationBar extends StatefulWidget {
 
 class _CustomNavigationBarState extends State<CustomNavigationBar> {
   int currentPage = 0;
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);

@@ -1,7 +1,7 @@
 import 'package:ecommerce/core/utils/sizes_manager.dart';
 import 'package:ecommerce/core/widgets/online_image_container.dart';
-import 'package:ecommerce/features/details_screen/presentation/screens/product_details_screen.dart';
-import 'package:ecommerce/features/home_screen/domain/entities/product.dart';
+import 'package:ecommerce/features/products/domain/entities/product.dart';
+import 'package:ecommerce/features/products/presentation/screens/product_details_screen.dart';
 import 'package:flutter/material.dart';
 
 class HorizontalItemWidget extends StatelessWidget {
