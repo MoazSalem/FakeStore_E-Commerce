@@ -19,28 +19,54 @@ jobs:
           channel: stable
 
       - run: flutter pub get
-      - run: mkdir -p artifacts
       - run: |
+          # build release apks
+
+          ## environment setup
+
+          app_ver=$(grep 'version:' pubspec.yaml)
+          app_ver=$(echo "${app_ver/'version:'/}" | xargs)
+          app_ver="${app_ver%%+*}"
+          echo "v$app_ver"
+          echo "app_ver=$app_ver" >> $GITHUB_ENV
+
+          mkdir artifacts && {
+            ARTIFACTS_PATH="$GITHUB_WORKSPACE/artifacts"
+            echo "ARTIFACTS_PATH=$ARTIFACTS_PATH" >> $GITHUB_ENV
+          }
+
+          echo "$JAVA_KEYSTORE" | base64 -d > android/app/New_Keystore.jks
+          echo "$JAVA_KEYSTORE_PROPERTIES" | base64 -d > android/keystore.properties
+
+          ## build
+
+          flutter pub get
 
           flutter build apk --release --split-per-abi
           (cd ./build/app/outputs/flutter-apk/ && {
-            mv ./app-arm64-v8a-release.apk "artifacts/$APP_NAME-$app_ver-arm64-v8a.apk"
-            mv ./app-armeabi-v7a-release.apk "artifacts/$APP_NAME-$app_ver-armeabi-v7a.apk"
-            mv ./app-x86_64-release.apk "artifacts/$APP_NAME-$app_ver-x86_64.apk"
+            mv ./app-arm64-v8a-release.apk "$ARTIFACTS_PATH/$APP_NAME-$app_ver-arm64-v8a.apk"
+            mv ./app-armeabi-v7a-release.apk "$ARTIFACTS_PATH/$APP_NAME-$app_ver-armeabi-v7a.apk"
+            mv ./app-x86_64-release.apk "$ARTIFACTS_PATH/$APP_NAME-$app_ver-x86_64.apk"
           })
 
           flutter build apk --release
           (cd ./build/app/outputs/flutter-apk/ &&
-            mv ./app-release.apk "artifacts/$APP_NAME-$app_ver-universal.apk"
+            mv ./app-release.apk "$ARTIFACTS_PATH/$APP_NAME-$app_ver-universal.apk"
           )
+
+          rm -rf ./build/app/outputs/apk # remove dupe apk dir
+        shell: bash
+        env:
+          JAVA_KEYSTORE: ${{ secrets.JAVA_KEYSTORE }}
+          JAVA_KEYSTORE_PROPERTIES: ${{ secrets.JAVA_KEYSTORE_PROPERTIES }}
+          APP_NAME: ${{ github.event.repository.name }}
 
       - name: Upload Android Artifacts to Release
         uses: softprops/action-gh-release@v1
         with:
           tag_name: ${{ github.ref_name }}
-          files: artifacts/*
+          files: ${{ env.ARTIFACTS_PATH }}/*
         env:
-          APP_NAME: ${{ github.event.repository.name }}
           GITHUB_TOKEN: ${{ secrets.TOKEN }}
 
   # ========== IOS ==========
