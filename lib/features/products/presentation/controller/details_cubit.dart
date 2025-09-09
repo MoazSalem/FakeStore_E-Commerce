@@ -3,16 +3,17 @@ import 'package:ecommerce/features/products/domain/entities/product.dart';
 import 'package:ecommerce/features/products/domain/usecases/get_product.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get_it/get_it.dart';
 
 part 'details_state.dart';
 
 class DetailsCubit extends Cubit<DetailsState> {
-  DetailsCubit() : super(DetailsInitial());
+  final GetProduct getProductUseCase;
+
+  DetailsCubit({required this.getProductUseCase}) : super(DetailsInitial());
 
   getProduct({required int id}) async {
     emit(DetailsLoading());
-    final result = await GetIt.I.get<GetProduct>(param1: id).call();
+    final result = await getProductUseCase.call(id);
     if (result is Success<Product>) {
       emit(DetailsLoaded(product: result.data, productCount: 1));
     } else if (result is Failure<Product>) {

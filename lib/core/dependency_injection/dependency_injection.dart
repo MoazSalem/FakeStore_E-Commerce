@@ -51,19 +51,36 @@ Future<void> setupDI() async {
   _getIt.registerLazySingleton<GetProducts>(
     () => GetProductsImpl(_getIt<ProductRepository>()),
   );
-  // Register product use case as a singleton
-  _getIt.registerFactoryParam<GetProduct, int, void>(
-    (id, _) => GetProductImpl(repository: _getIt<ProductRepository>(), id: id),
+  // Register product use case as a factory
+  _getIt.registerFactory<GetProduct>(
+    () => GetProductImpl(repository: _getIt<ProductRepository>()),
   );
   // Register product cubit as a singleton
-  _getIt.registerLazySingleton<ProductsCubit>(() => ProductsCubit());
+  _getIt.registerLazySingleton<ProductsCubit>(
+    () => ProductsCubit(
+      localDataSource: _getIt<ProductLocalDataSource>(),
+      getProductsUseCase: _getIt<GetProducts>(),
+    ),
+  );
 
   // Register saved screen cubit as a singleton
-  _getIt.registerLazySingleton<SavedCubit>(() => SavedCubit());
+  _getIt.registerLazySingleton<SavedCubit>(
+    () => SavedCubit(
+      getProductUseCase: _getIt<GetProduct>(),
+      sharedPreferences: _getIt<SharedPreferences>(),
+    ),
+  );
   // Register details screen cubit as a factory
-  _getIt.registerFactory<DetailsCubit>(() => DetailsCubit());
+  _getIt.registerFactory<DetailsCubit>(
+    () => DetailsCubit(getProductUseCase: _getIt<GetProduct>()),
+  );
   // Register cart screen cubit as a singleton
-  _getIt.registerLazySingleton<CartCubit>(() => CartCubit());
+  _getIt.registerLazySingleton<CartCubit>(
+    () => CartCubit(
+      getCartUseCase: _getIt<GetCartUseCase>(),
+      getProductUseCase: _getIt<GetProduct>(),
+    ),
+  );
   // Register cart repository as a singleton
   _getIt.registerLazySingleton<CartRepository>(
     () => CartRepositoryImpl(dio: _getIt<Dio>()),
@@ -73,7 +90,9 @@ Future<void> setupDI() async {
     () => GetCartImpl(repository: _getIt<CartRepository>()),
   );
   // Register user cubit as a singleton
-  _getIt.registerLazySingleton<UserCubit>(() => UserCubit());
+  _getIt.registerLazySingleton<UserCubit>(
+    () => UserCubit(userRepository: _getIt<UserRepository>()),
+  );
   // Register user repository as a singleton
   _getIt.registerLazySingleton<UserRepository>(() => UserRepoImpl());
   // Register product api client as a singleton

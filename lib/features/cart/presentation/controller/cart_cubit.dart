@@ -6,23 +6,24 @@ import 'package:ecommerce/features/products/domain/entities/product.dart';
 import 'package:ecommerce/features/products/domain/usecases/get_product.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get_it/get_it.dart';
 
 part 'cart_state.dart';
 
 class CartCubit extends Cubit<CartState> {
-  CartCubit() : super(CartInitial());
+  final GetCartUseCase getCartUseCase;
+  final GetProduct getProductUseCase;
+
+  CartCubit({required this.getCartUseCase, required this.getProductUseCase})
+    : super(CartInitial());
 
   void getCart(int cartId) async {
     emit(CartLoading());
-    final result = await GetIt.instance<GetCartUseCase>().call(cartId);
+    final result = await getCartUseCase.call(cartId);
     if (result is Success<Cart>) {
       final Cart cart = result.data;
       List<Product> products = [];
       for (var product in cart.productsDetails) {
-        final result = await GetIt.instance<GetProduct>(
-          param1: product.productId,
-        ).call();
+        final result = await getProductUseCase.call(product.productId);
         if (result is Success<Product>) {
           products.add(result.data);
         } else if (result is Failure<Product>) {

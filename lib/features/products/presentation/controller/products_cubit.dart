@@ -6,16 +6,21 @@ import 'package:ecommerce/features/products/domain/entities/product.dart';
 import 'package:ecommerce/features/products/domain/usecases/get_products.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get_it/get_it.dart';
 
 part 'products_state.dart';
 
 class ProductsCubit extends Cubit<ProductsState> {
-  ProductsCubit() : super(ProductsInitial());
+  final ProductLocalDataSource localDataSource;
+  final GetProducts getProductsUseCase;
+
+  ProductsCubit({
+    required this.localDataSource,
+    required this.getProductsUseCase,
+  }) : super(ProductsInitial());
 
   Future<void> getProducts() async {
     emit(ProductsLoading());
-    final result = await GetIt.I.get<GetProducts>().call();
+    final result = await getProductsUseCase.call();
     // extract set of categories from the products
     if (result is Success<List<Product>>) {
       final products = result.data;
@@ -35,7 +40,7 @@ class ProductsCubit extends Cubit<ProductsState> {
   Future<void> getProductsFromCache() async {
     emit(ProductsLoading());
     // get the cached products list from shared preferences
-    final cached = GetIt.I.get<ProductLocalDataSource>().getCachedProducts();
+    final cached = localDataSource.getCachedProducts();
     if (cached != null) {
       // convert the cached products list to a list of products
       final List<Product> products = cached.map((e) => e.toEntity()).toList();
@@ -55,7 +60,7 @@ class ProductsCubit extends Cubit<ProductsState> {
     emit(ProductsLoading());
 
     if (categoryIndex != 0) {
-      final result = await GetIt.I.get<GetProducts>().call();
+      final result = await getProductsUseCase.call();
       if (result is Success<List<Product>>) {
         final products = result.data;
         final Set<String> categories = products.map((e) => e.category).toSet();

@@ -3,21 +3,23 @@ import 'package:ecommerce/features/products/domain/entities/product.dart';
 import 'package:ecommerce/features/products/domain/usecases/get_product.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 part 'saved_state.dart';
 
 class SavedCubit extends Cubit<SavedState> {
-  SavedCubit() : super(SavedInitial());
+  final GetProduct getProductUseCase;
+  final SharedPreferences sharedPreferences;
+
+  SavedCubit({required this.sharedPreferences, required this.getProductUseCase})
+    : super(SavedInitial());
 
   void getSavedProducts() async {
     emit(SavedLoading());
     try {
       // Get saved products ids from shared preferences
       final List<String> listOfIds =
-          GetIt.I.get<SharedPreferences>().getStringList('savedProductsIds') ??
-          [];
+          sharedPreferences.getStringList('savedProductsIds') ?? [];
       // Convert list of ids to set of ids
       final Set<int> savedProductsIds = listOfIds
           .map((e) => int.parse(e))
@@ -30,9 +32,9 @@ class SavedCubit extends Cubit<SavedState> {
         return;
       }
       for (int i = 0; i < savedProductsIds.length; i++) {
-        final result = await GetIt.I
-            .get<GetProduct>(param1: savedProductsIds.elementAt(i))
-            .call();
+        final result = await getProductUseCase.call(
+          savedProductsIds.elementAt(i),
+        );
         if (result is Success<Product>) {
           savedProducts.add(result.data);
           emit(SavedLoaded(savedProducts, savedProductsIds));
@@ -57,7 +59,7 @@ class SavedCubit extends Cubit<SavedState> {
       // Remove/add id from/to set of ids
       remove ? savedProductsIds.remove(id) : savedProductsIds.add(id);
       // Save set of ids to shared preferences
-      GetIt.I.get<SharedPreferences>().setStringList(
+      sharedPreferences.setStringList(
         'savedProductsIds',
         savedProductsIds.map((e) => e.toString()).toList(),
       );
@@ -81,7 +83,7 @@ class SavedCubit extends Cubit<SavedState> {
         return;
       }
       // Get product from api
-      final result = await GetIt.I.get<GetProduct>(param1: productId).call();
+      final result = await getProductUseCase.call(productId);
       if (result is Success<Product>) {
         savedProducts.add(result.data);
         emit(
