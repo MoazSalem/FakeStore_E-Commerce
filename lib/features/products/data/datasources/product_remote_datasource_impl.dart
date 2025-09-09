@@ -1,12 +1,15 @@
 import 'package:ecommerce/features/products/data/api/product_api_client.dart';
 import 'package:ecommerce/features/products/data/models/product_model.dart';
+import 'package:ecommerce/features/products/domain/datasources/product_remote_datasource.dart';
 
-class ProductRemoteDataSource {
+class ProductRemoteDataSourceImpl implements ProductRemoteDataSource {
   final ProductApiClient apiClient;
 
-  ProductRemoteDataSource(this.apiClient);
+  ProductRemoteDataSourceImpl(this.apiClient);
 
+  @override
   Future<List<ProductModel>> getProducts() => apiClient.getProducts();
 
+  @override
   Future<ProductModel> getProduct(int id) => apiClient.getProduct(id);
 }

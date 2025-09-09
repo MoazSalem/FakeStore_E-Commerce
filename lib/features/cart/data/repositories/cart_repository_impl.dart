@@ -1,23 +1,20 @@
-import 'package:dio/dio.dart';
 import 'package:ecommerce/core/error_handling/error_handling.dart';
 import 'package:ecommerce/core/error_handling/result.dart';
-import 'package:ecommerce/core/utils/consts_manager.dart';
 import 'package:ecommerce/features/cart/data/models/cart_model.dart';
+import 'package:ecommerce/features/cart/domain/datasources/cart_remote_datasource.dart';
 import 'package:ecommerce/features/cart/domain/entities/cart.dart';
 import 'package:ecommerce/features/cart/domain/repositories/cart_repository.dart';
 import 'package:ecommerce/features/products/domain/entities/product.dart';
 
 class CartRepositoryImpl implements CartRepository {
-  final Dio dio;
+  final CartRemoteDataSource cartRemoteDataSource;
 
-  CartRepositoryImpl({required this.dio});
+  CartRepositoryImpl({required this.cartRemoteDataSource});
 
   @override
   Future<Result<Cart>> getCart(int cartId) async {
     try {
-      final response = await dio.get('${ConstsManager.baseUrl}/carts/$cartId');
-      final CartModel cartModel = CartModel.fromJson(response.data);
-
+      final cartModel = await cartRemoteDataSource.getCart(cartId);
       return Success(cartModel.toEntity());
     } catch (error) {
       return Failure(DioErrorHandler.handleError(error));
@@ -51,14 +48,15 @@ class CartRepositoryImpl implements CartRepository {
   @override
   Future<Result<void>> deleteCart(int cartId) async {
     try {
-      final response = await dio.delete(
-        '${ConstsManager.baseUrl}/carts/$cartId',
-      );
-      if (response.statusCode == 200) {
-        return Success(null);
-      } else {
-        return Failure(DioErrorHandler.handleError(response));
-      }
+      return Success(null);
+      // final response = await dio.delete(
+      //   '${ConstsManager.baseUrl}/carts/$cartId',
+      // );
+      // if (response.statusCode == 200) {
+      //   return Success(null);
+      // } else {
+      //   return Failure(DioErrorHandler.handleError(response));
+      // }
     } catch (error) {
       return Failure(DioErrorHandler.handleError(error));
     }

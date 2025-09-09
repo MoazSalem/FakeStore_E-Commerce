@@ -1,8 +1,8 @@
 import 'package:ecommerce/core/error_handling/error_handling.dart';
 import 'package:ecommerce/core/error_handling/result.dart';
-import 'package:ecommerce/features/products/data/datasources/product_local_datasource_impl.dart';
-import 'package:ecommerce/features/products/data/datasources/product_remote_datasource_impl.dart';
 import 'package:ecommerce/features/products/data/models/product_model.dart';
+import 'package:ecommerce/features/products/domain/datasources/product_local_datasource.dart';
+import 'package:ecommerce/features/products/domain/datasources/product_remote_datasource.dart';
 import 'package:ecommerce/features/products/domain/entities/product.dart';
 import 'package:ecommerce/features/products/domain/repositories/product_repository.dart';
 

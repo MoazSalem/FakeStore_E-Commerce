@@ -1,7 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:ecommerce/features/cart/data/api/cart_api_client.dart';
+import 'package:ecommerce/features/cart/data/datasources/cart_remote_datasource_impl.dart';
 import 'package:ecommerce/features/cart/data/repositories/cart_repository_impl.dart';
 import 'package:ecommerce/features/cart/data/usecases/get_cart_impl.dart';
+import 'package:ecommerce/features/cart/domain/datasources/cart_remote_datasource.dart';
 import 'package:ecommerce/features/cart/domain/repositories/cart_repository.dart';
 import 'package:ecommerce/features/cart/domain/usecases/get_cart.dart';
 import 'package:ecommerce/features/cart/presentation/controller/cart_cubit.dart';
@@ -11,6 +13,8 @@ import 'package:ecommerce/features/products/data/datasources/product_remote_data
 import 'package:ecommerce/features/products/data/repositories/product_repo_impl.dart';
 import 'package:ecommerce/features/products/data/usecases/get_product.dart';
 import 'package:ecommerce/features/products/data/usecases/get_products_impl.dart';
+import 'package:ecommerce/features/products/domain/datasources/product_local_datasource.dart';
+import 'package:ecommerce/features/products/domain/datasources/product_remote_datasource.dart';
 import 'package:ecommerce/features/products/domain/repositories/product_repository.dart';
 import 'package:ecommerce/features/products/domain/usecases/get_product.dart';
 import 'package:ecommerce/features/products/domain/usecases/get_products.dart';
@@ -34,11 +38,11 @@ Future<void> setupDI() async {
   _getIt.registerLazySingleton<Dio>(() => Dio());
   // Register product remote data source as a singleton
   _getIt.registerLazySingleton<ProductRemoteDataSource>(
-    () => ProductRemoteDataSource(_getIt<ProductApiClient>()),
+    () => ProductRemoteDataSourceImpl(_getIt<ProductApiClient>()),
   );
   // Register product local data source as a singleton
   _getIt.registerLazySingleton<ProductLocalDataSource>(
-    () => ProductLocalDataSource(_getIt<SharedPreferences>()),
+    () => ProductLocalDataSourceImpl(_getIt<SharedPreferences>()),
   );
   // Register product repository as a singleton
   _getIt.registerLazySingleton<ProductRepository>(
@@ -81,9 +85,15 @@ Future<void> setupDI() async {
       getProductUseCase: _getIt<GetProduct>(),
     ),
   );
+  // Register cart remote data source as a singleton
+  _getIt.registerLazySingleton<CartRemoteDataSource>(
+    () => CartRemoteDataSourceImpl(_getIt<CartApiClient>()),
+  );
   // Register cart repository as a singleton
   _getIt.registerLazySingleton<CartRepository>(
-    () => CartRepositoryImpl(dio: _getIt<Dio>()),
+    () => CartRepositoryImpl(
+      cartRemoteDataSource: _getIt<CartRemoteDataSource>(),
+    ),
   );
   // Register cart use case as a singleton
   _getIt.registerLazySingleton<GetCartUseCase>(

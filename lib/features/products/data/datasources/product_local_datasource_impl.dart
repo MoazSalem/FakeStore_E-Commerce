@@ -1,13 +1,15 @@
 import 'dart:convert';
 
 import 'package:ecommerce/features/products/data/models/product_model.dart';
+import 'package:ecommerce/features/products/domain/datasources/product_local_datasource.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class ProductLocalDataSource {
+class ProductLocalDataSourceImpl implements ProductLocalDataSource {
   final SharedPreferences prefs;
 
-  ProductLocalDataSource(this.prefs);
+  ProductLocalDataSourceImpl(this.prefs);
 
+  @override
   Future<void> cacheProducts(List<ProductModel> products) async {
     await prefs.setString(
       'lastFetchedProducts',
@@ -15,6 +17,7 @@ class ProductLocalDataSource {
     );
   }
 
+  @override
   List<ProductModel>? getCachedProducts() {
     final data = prefs.getString('lastFetchedProducts');
     if (data == null) return null;

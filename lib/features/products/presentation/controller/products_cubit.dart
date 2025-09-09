@@ -1,7 +1,7 @@
 import 'package:ecommerce/core/error_handling/result.dart';
 import 'package:ecommerce/core/helpers/products_helper.dart';
-import 'package:ecommerce/features/products/data/datasources/product_local_datasource_impl.dart';
 import 'package:ecommerce/features/products/data/models/product_model.dart';
+import 'package:ecommerce/features/products/domain/datasources/product_local_datasource.dart';
 import 'package:ecommerce/features/products/domain/entities/product.dart';
 import 'package:ecommerce/features/products/domain/usecases/get_products.dart';
 import 'package:flutter/foundation.dart';
