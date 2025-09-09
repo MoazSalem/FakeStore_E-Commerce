@@ -4,9 +4,11 @@ import 'package:ecommerce/features/user/domain/entities/user.dart';
 import 'package:ecommerce/features/user/domain/repositories/user_repository.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:injectable/injectable.dart';
 
 part 'user_state.dart';
 
+@lazySingleton
 class UserCubit extends Cubit<UserState> {
   final UserRepository userRepository;
 

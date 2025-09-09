@@ -6,8 +6,10 @@ import 'package:ecommerce/features/user/data/models/user_model.dart';
 import 'package:ecommerce/features/user/domain/entities/user.dart';
 import 'package:ecommerce/features/user/domain/repositories/user_repository.dart';
 import 'package:get_it/get_it.dart';
+import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+@LazySingleton(as: UserRepository)
 class UserRepoImpl implements UserRepository {
   @override
   Future<Result<User>> getUser(String name) async {

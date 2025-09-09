@@ -5,7 +5,9 @@ import 'package:ecommerce/features/cart/domain/datasources/cart_remote_datasourc
 import 'package:ecommerce/features/cart/domain/entities/cart.dart';
 import 'package:ecommerce/features/cart/domain/repositories/cart_repository.dart';
 import 'package:ecommerce/features/products/domain/entities/product.dart';
+import 'package:injectable/injectable.dart';
 
+@LazySingleton(as: CartRepository)
 class CartRepositoryImpl implements CartRepository {
   final CartRemoteDataSource cartRemoteDataSource;
 

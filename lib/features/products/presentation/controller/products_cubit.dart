@@ -6,9 +6,11 @@ import 'package:ecommerce/features/products/domain/entities/product.dart';
 import 'package:ecommerce/features/products/domain/usecases/get_products.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:injectable/injectable.dart';
 
 part 'products_state.dart';
 
+@lazySingleton
 class ProductsCubit extends Cubit<ProductsState> {
   final ProductLocalDataSource localDataSource;
   final GetProducts getProductsUseCase;

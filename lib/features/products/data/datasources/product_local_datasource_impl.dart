@@ -2,8 +2,10 @@ import 'dart:convert';
 
 import 'package:ecommerce/features/products/data/models/product_model.dart';
 import 'package:ecommerce/features/products/domain/datasources/product_local_datasource.dart';
+import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+@LazySingleton(as: ProductLocalDataSource)
 class ProductLocalDataSourceImpl implements ProductLocalDataSource {
   final SharedPreferences prefs;
 

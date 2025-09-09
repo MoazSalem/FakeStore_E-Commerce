@@ -6,9 +6,11 @@ import 'package:ecommerce/features/products/domain/entities/product.dart';
 import 'package:ecommerce/features/products/domain/usecases/get_product.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:injectable/injectable.dart';
 
 part 'cart_state.dart';
 
+@lazySingleton
 class CartCubit extends Cubit<CartState> {
   final GetCartUseCase getCartUseCase;
   final GetProduct getProductUseCase;

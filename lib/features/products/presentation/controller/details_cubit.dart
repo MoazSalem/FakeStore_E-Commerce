@@ -3,9 +3,11 @@ import 'package:ecommerce/features/products/domain/entities/product.dart';
 import 'package:ecommerce/features/products/domain/usecases/get_product.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:injectable/injectable.dart';
 
 part 'details_state.dart';
 
+@injectable
 class DetailsCubit extends Cubit<DetailsState> {
   final GetProduct getProductUseCase;
 

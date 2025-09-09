@@ -5,7 +5,9 @@ import 'package:ecommerce/features/products/domain/datasources/product_local_dat
 import 'package:ecommerce/features/products/domain/datasources/product_remote_datasource.dart';
 import 'package:ecommerce/features/products/domain/entities/product.dart';
 import 'package:ecommerce/features/products/domain/repositories/product_repository.dart';
+import 'package:injectable/injectable.dart';
 
+@LazySingleton(as: ProductRepository)
 class ProductRepoImpl implements ProductRepository {
   final ProductRemoteDataSource remote;
   final ProductLocalDataSource local;
