@@ -27,13 +27,13 @@ class ItemsListWidget extends StatelessWidget {
           SliverCrossAxisGroup(
             slivers: [
               SliverFixedExtentList(
-                itemExtent: 344,
+                itemExtent: 355,
                 delegate: SliverChildBuilderDelegate((context, index) {
                   return Center(child: ProductItem(product: firstList[index]));
                 }, childCount: firstList.length),
               ),
               SliverFixedExtentList(
-                itemExtent: 364,
+                itemExtent: 375,
                 delegate: SliverChildBuilderDelegate((context, index) {
                   return Center(
                     child: ProductItem(

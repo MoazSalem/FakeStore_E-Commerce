@@ -9,7 +9,7 @@ void main() async {
   await configureDependencies();
   runApp(
     DevicePreview(
-      defaultDevice: Devices.ios.iPhone13,
+      defaultDevice: Devices.ios.iPhone12,
       enabled: kIsWeb,
       builder: (context) => const App(),
     ),

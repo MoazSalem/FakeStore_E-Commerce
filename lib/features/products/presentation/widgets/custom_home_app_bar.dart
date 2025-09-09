@@ -25,7 +25,9 @@ class CustomHomeAppBar extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Flexible(flex: 5, child: CustomSearchBar()),
-              Flexible(
+              SizedBox(width: SizesManager.padding),
+              SizedBox(
+                height: SizesManager.buttonHeight48,
                 child: ElevatedButton(
                   onPressed: () {},
                   style: ElevatedButton.styleFrom(

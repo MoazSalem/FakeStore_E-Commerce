@@ -41,4 +41,5 @@ class SizesManager {
   static const double dividerHeight = 1;
   static const double buttonHeight = 60;
   static const double buttonHeight52 = 52;
+  static const double buttonHeight48 = 48;
 }

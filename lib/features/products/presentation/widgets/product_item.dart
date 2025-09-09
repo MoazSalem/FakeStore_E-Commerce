@@ -69,22 +69,26 @@ class _ProductItemState extends State<ProductItem>
         child: Stack(
           alignment: Alignment.topRight,
           children: [
-            SizedBox(
-              width: SizesManager.displayItemWidth,
-              child: Column(
-                children: [
-                  Hero(
-                    tag: widget.product.id,
-                    child: OnlineImageContainer(
-                      height: widget.isTall
-                          ? SizesManager.tallDisplayItemHeight
-                          : SizesManager.displayItemHeight,
-                      width: double.infinity,
-                      imageUrl: widget.product.image,
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: SizesManager.padding5,
+              ),
+              child: SizedBox(
+                child: Column(
+                  children: [
+                    Hero(
+                      tag: widget.product.id,
+                      child: OnlineImageContainer(
+                        height: widget.isTall
+                            ? SizesManager.tallDisplayItemHeight
+                            : SizesManager.displayItemHeight,
+                        width: double.infinity,
+                        imageUrl: widget.product.image,
+                      ),
                     ),
-                  ),
-                  ProductDetails(product: widget.product, theme: theme),
-                ],
+                    ProductDetails(product: widget.product, theme: theme),
+                  ],
+                ),
               ),
             ),
             Skeleton.ignore(
