@@ -21,6 +21,7 @@ The app consumes data from the [Fake Store API](https://fakestoreapi.com/) to si
 * 🎨 **SVGs optimized as vector graphics** — sharp, scalable icons and illustrations.
 * ✨ **Skeletonizer (Shimmer)** — skeleton loading animations for a smoother UX.
 * 📱 **Responsive UI** — works across multiple screen sizes.
+* 🚀 **Deployed [Web Preview](https://moazsalem.github.io/FakeStore_E-Commerce/) & Precompiled APKs** in [Releases](https://github.com/MoazSalem/FakeStore_E-Commerce/releases) for quick access
 
 ---
 
@@ -57,6 +58,16 @@ lib/
 <img width="300" alt="Cart" src="https://github.com/user-attachments/assets/e0e06231-139e-488d-acd1-f7c6aec3612e" />
 <img width="300" alt="Saved" src="https://github.com/user-attachments/assets/0bce4977-9c3e-4422-b073-9543977d0689" />
 </div>
+
+---
+
+## 📦 Previews
+
+Try the [Web Preview Version with Device Preview](https://moazsalem.github.io/FakeStore_E-Commerce/) 
+
+Or you can download [The Latest APK builds from Releases](https://github.com/MoazSalem/FakeStore_E-Commerce/releases) section.
+
+Also there is an unsigned ipa included in the releases for ios testing.
 
 ---
 
