@@ -42,6 +42,7 @@ dependencies:
   skeletonizer: ^2.1.0+1
   cached_network_image: ^3.4.1
   retrofit: ^4.7.2
+  device_preview_plus: ^2.5.0
 
 dev_dependencies:
   flutter_test:

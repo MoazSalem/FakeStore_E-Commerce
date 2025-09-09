@@ -17,6 +17,7 @@ class _MainScreenState extends State<MainScreen> {
     initialPage: 0,
     keepPage: true,
   );
+
   @override
   void dispose() {
     super.dispose();
@@ -31,6 +32,7 @@ class _MainScreenState extends State<MainScreen> {
         bottom: false,
         child: PageView(
           scrollBehavior: const ScrollBehavior().copyWith(
+            scrollbars: false,
             physics: NeverScrollableScrollPhysics(),
           ),
           controller: pageController,
