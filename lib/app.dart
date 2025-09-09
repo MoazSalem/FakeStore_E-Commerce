@@ -11,7 +11,7 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
+      title: 'FakeStore E-Commerce',
       theme: ThemeManager.lightTheme,
       initialRoute: NavigationManager.mainScreen,
       onGenerateRoute: NavigationManager.onGenerateRoute,
