@@ -7,10 +7,13 @@ import 'package:flutter/material.dart';
 class HorizontalItemWidget extends StatelessWidget {
   final Product product;
   final String uniqueTag;
+  final bool pressable;
+
   const HorizontalItemWidget({
     super.key,
     required this.product,
-    required this.uniqueTag,
+    this.uniqueTag = '0',
+    this.pressable = false,
   });
 
   @override
@@ -30,71 +33,64 @@ class HorizontalItemWidget extends StatelessWidget {
           ),
         );
       },
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: SizesManager.padding10),
-        child: Row(
-          spacing: SizesManager.padding10,
-          children: [
-            Container(
-              width: SizesManager.savedItemSide,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(
-                  SizesManager.roundedCorners,
-                ),
-                color: theme.colorScheme.primaryContainer,
+      child: Row(
+        spacing: SizesManager.padding10,
+        children: [
+          Container(
+            width: SizesManager.savedItemSide,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(SizesManager.roundedCorners),
+              color: theme.colorScheme.primaryContainer,
+            ),
+            child: Hero(
+              tag: uniqueTag,
+              child: OnlineImageContainer(
+                height: SizesManager.savedItemSide,
+                imageUrl: product.image,
+                padding: 10,
               ),
-              child: Padding(
-                padding: const EdgeInsets.all(SizesManager.padding8),
-                child: Hero(
-                  tag: uniqueTag,
-                  child: OnlineImageContainer(
-                    height: SizesManager.savedItemSide,
-                    imageUrl: product.image,
-                    padding: 0,
-                  ),
+            ),
+          ),
+          Flexible(
+            child: Padding(
+              padding: const EdgeInsets.all(SizesManager.padding8),
+              child: ConstrainedBox(
+                constraints: BoxConstraints(
+                  minHeight: SizesManager.savedItemContainerMinHeight,
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      product.title,
+                      style: TextStyle(
+                        fontSize: SizesManager.font15,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    Text(
+                      product.category,
+                      style: TextStyle(
+                        fontSize: SizesManager.font10,
+                        fontWeight: FontWeight.w500,
+                        color: theme.colorScheme.secondary,
+                      ),
+                    ),
+                    SizedBox(height: SizesManager.padding5),
+                    Text(
+                      "\$${product.price}",
+                      style: TextStyle(
+                        fontSize: SizesManager.font15,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),
-            Flexible(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: ConstrainedBox(
-                  constraints: BoxConstraints(
-                    minHeight: SizesManager.savedItemContainerMinHeight,
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        product.title,
-                        style: TextStyle(
-                          fontSize: SizesManager.font15,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                      Text(
-                        product.category,
-                        style: TextStyle(
-                          fontSize: SizesManager.font12,
-                          color: theme.colorScheme.secondary,
-                        ),
-                      ),
-                      SizedBox(height: SizesManager.padding5),
-                      Text(
-                        "\$${product.price}",
-                        style: TextStyle(
-                          fontSize: SizesManager.font15,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

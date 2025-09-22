@@ -13,6 +13,7 @@ class AmountRow extends StatelessWidget {
     required this.onAdd,
     required this.amount,
   });
+
   final double? buttonsPadding;
   final double? iconSize;
   final double? amountTextSize;
@@ -43,7 +44,7 @@ class AmountRow extends StatelessWidget {
           amount.toString(),
           style: TextStyle(
             fontSize: amountTextSize ?? SizesManager.font16,
-            fontWeight: FontWeight.w900,
+            fontWeight: FontWeight.w600,
           ),
         ),
         CircularButton(

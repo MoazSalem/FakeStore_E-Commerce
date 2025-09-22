@@ -1,3 +1,4 @@
+import 'package:ecommerce/core/utils/navigation_manager.dart';
 import 'package:ecommerce/core/utils/sizes_manager.dart';
 import 'package:ecommerce/core/widgets/custom_app_bar.dart';
 import 'package:ecommerce/core/widgets/custom_divider.dart';
@@ -32,7 +33,10 @@ class CartScreen extends StatelessWidget {
                               width: double.infinity,
                               height: 50,
                               child: OutlinedButton(
-                                onPressed: () {},
+                                onPressed: () => Navigator.pushNamed(
+                                  context,
+                                  NavigationManager.checkoutScreen,
+                                ),
                                 child: Text(
                                   "Checkout | \$${state.totalAmount.toStringAsFixed(2)} ",
                                   style: TextStyle(
@@ -47,7 +51,7 @@ class CartScreen extends StatelessWidget {
                           Expanded(
                             child: Padding(
                               padding: const EdgeInsets.symmetric(
-                                horizontal: SizesManager.padding10,
+                                horizontal: SizesManager.padding20,
                               ),
                               child: ListView.builder(
                                 itemCount: state.products.length,

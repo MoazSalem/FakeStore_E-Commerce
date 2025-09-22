@@ -8,6 +8,7 @@ class CustomAppBar extends StatelessWidget {
     this.action,
     this.leading,
   });
+
   final String title;
   final Widget? action;
   final Widget? leading;
@@ -25,6 +26,7 @@ class CustomAppBar extends StatelessWidget {
       ),
       centerTitle: true,
       automaticallyImplyLeading: false,
+      surfaceTintColor: Colors.transparent,
       leading: leading,
       actions: [?action],
       actionsPadding: const EdgeInsets.symmetric(

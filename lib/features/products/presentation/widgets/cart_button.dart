@@ -84,7 +84,7 @@ class _CartButtonState extends State<CartButton> {
                       ? 'Remove from Cart'
                       : 'Add to Cart | \$${widget.product.price}',
                   style: TextStyle(
-                    fontSize: SizesManager.font16,
+                    fontSize: SizesManager.font15,
                     fontWeight: FontWeight.bold,
                     color: theme.colorScheme.onPrimary,
                   ),

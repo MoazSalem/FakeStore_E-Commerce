@@ -140,6 +140,7 @@ class ProductDetails extends StatelessWidget {
         ),
         const SizedBox(height: SizesManager.padding10),
         Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           spacing: SizesManager.padding5,
           children: [
             Text(
@@ -147,15 +148,25 @@ class ProductDetails extends StatelessWidget {
               style: TextStyle(fontWeight: FontWeight.w600),
             ),
             const SizedBox(width: SizesManager.padding10),
-            SvgImage(
-              asset: AssetsManager.star,
-              height: SizesManager.iconSize18,
-            ),
-            Text(
-              product.rating.rate.toString(),
-              style: TextStyle(
-                fontWeight: FontWeight.w300,
-                fontSize: SizesManager.font12,
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: SizesManager.padding20,
+              ),
+              child: Row(
+                spacing: SizesManager.padding5,
+                children: [
+                  SvgImage(
+                    asset: AssetsManager.star,
+                    height: SizesManager.iconSize18,
+                  ),
+                  Text(
+                    product.rating.rate.toString(),
+                    style: TextStyle(
+                      fontWeight: FontWeight.w400,
+                      fontSize: SizesManager.font12,
+                    ),
+                  ),
+                ],
               ),
             ),
           ],

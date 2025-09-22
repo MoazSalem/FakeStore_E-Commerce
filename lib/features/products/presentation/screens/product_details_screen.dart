@@ -83,7 +83,7 @@ class ProductDetailsScreen extends StatelessWidget {
                                     state.product.title,
                                     style: const TextStyle(
                                       fontSize: 24,
-                                      fontWeight: FontWeight.bold,
+                                      fontWeight: FontWeight.w600,
                                     ),
                                   ),
                                   Row(

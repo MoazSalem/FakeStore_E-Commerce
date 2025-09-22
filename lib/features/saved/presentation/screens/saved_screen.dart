@@ -31,7 +31,7 @@ class SavedScreen extends StatelessWidget {
                         itemBuilder: (BuildContext context, int index) {
                           return Padding(
                             padding: const EdgeInsets.symmetric(
-                              horizontal: SizesManager.padding10,
+                              horizontal: SizesManager.padding20,
                             ),
                             child: Column(
                               children: [

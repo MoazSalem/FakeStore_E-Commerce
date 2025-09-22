@@ -13,9 +13,10 @@ class RatingRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         SvgImage(asset: AssetsManager.star, width: SizesManager.iconSize18),
-        const SizedBox(width: SizesManager.padding10),
+        const SizedBox(width: SizesManager.padding5),
         Text(
           rating.rate.toString(),
           style: TextStyle(fontSize: 14, color: theme.colorScheme.secondary),
@@ -23,7 +24,7 @@ class RatingRow extends StatelessWidget {
         const SizedBox(width: SizesManager.padding5),
         Text(
           "(${rating.count} reviews)",
-          style: const TextStyle(fontSize: 12, color: Colors.blueAccent),
+          style: const TextStyle(fontSize: 14, color: Colors.blueAccent),
         ),
       ],
     );
