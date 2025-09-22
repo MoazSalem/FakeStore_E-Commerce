@@ -1,10 +1,10 @@
 import 'package:ecommerce/core/utils/assets_manager.dart';
+import 'package:ecommerce/core/utils/navigation_manager.dart';
 import 'package:ecommerce/core/utils/sizes_manager.dart';
 import 'package:ecommerce/core/widgets/online_image_container.dart';
 import 'package:ecommerce/core/widgets/save_button.dart';
 import 'package:ecommerce/core/widgets/svg_image.dart';
 import 'package:ecommerce/features/products/domain/entities/product.dart';
-import 'package:ecommerce/features/products/presentation/screens/product_details_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
@@ -48,21 +48,16 @@ class _ProductItemState extends State<ProductItem>
     final theme = Theme.of(context);
     return GestureDetector(
       onTap: () => {
-        Navigator.of(context)
-            .push(
-              MaterialPageRoute(
-                builder: (context) => ProductDetailsScreen(
-                  id: widget.product.id,
-                  product: widget.product,
-                ),
-              ),
-            )
-            .then(
-              (value) => {
-                _animationController.reset(),
-                _animationController.forward(),
-              },
-            ),
+        Navigator.pushNamed(
+          context,
+          NavigationManager.detailsScreen,
+          arguments: [widget.product],
+        ).then(
+          (value) => {
+            _animationController.reset(),
+            _animationController.forward(),
+          },
+        ),
       },
       child: Padding(
         padding: const EdgeInsets.only(bottom: SizesManager.padding20),

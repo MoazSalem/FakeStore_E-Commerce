@@ -1,7 +1,7 @@
+import 'package:ecommerce/core/utils/navigation_manager.dart';
 import 'package:ecommerce/core/utils/sizes_manager.dart';
 import 'package:ecommerce/core/widgets/online_image_container.dart';
 import 'package:ecommerce/features/products/domain/entities/product.dart';
-import 'package:ecommerce/features/products/presentation/screens/product_details_screen.dart';
 import 'package:flutter/material.dart';
 
 class HorizontalItemWidget extends StatelessWidget {
@@ -22,15 +22,10 @@ class HorizontalItemWidget extends StatelessWidget {
     return InkWell(
       borderRadius: BorderRadius.circular(SizesManager.roundedCorners),
       onTap: () {
-        Navigator.push(
+        Navigator.pushNamed(
           context,
-          MaterialPageRoute(
-            builder: (context) => ProductDetailsScreen(
-              id: product.id,
-              product: product,
-              uniqueTag: uniqueTag,
-            ),
-          ),
+          NavigationManager.detailsScreen,
+          arguments: [product, uniqueTag],
         );
       },
       child: Row(
@@ -72,7 +67,7 @@ class HorizontalItemWidget extends StatelessWidget {
                     Text(
                       product.category,
                       style: TextStyle(
-                        fontSize: SizesManager.font10,
+                        fontSize: SizesManager.font12,
                         fontWeight: FontWeight.w500,
                         color: theme.colorScheme.secondary,
                       ),
