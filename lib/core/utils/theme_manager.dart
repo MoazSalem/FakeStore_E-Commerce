@@ -14,5 +14,6 @@ class ThemeManager {
       secondary: ColorsManager.subtitleColor,
       outline: ColorsManager.disabledColor,
     ),
+    fontFamily: 'Encoded Sans',
   );
 }
