@@ -13,7 +13,7 @@ class HorizontalItemWidget extends StatelessWidget {
     super.key,
     required this.product,
     this.uniqueTag = '0',
-    this.pressable = false,
+    this.pressable = true,
   });
 
   @override
@@ -21,13 +21,15 @@ class HorizontalItemWidget extends StatelessWidget {
     final theme = Theme.of(context);
     return InkWell(
       borderRadius: BorderRadius.circular(SizesManager.roundedCorners),
-      onTap: () {
-        Navigator.pushNamed(
-          context,
-          NavigationManager.detailsScreen,
-          arguments: [product, uniqueTag],
-        );
-      },
+      onTap: pressable
+          ? () {
+              Navigator.pushNamed(
+                context,
+                NavigationManager.detailsScreen,
+                arguments: [product, uniqueTag],
+              );
+            }
+          : null,
       child: Row(
         spacing: SizesManager.padding10,
         children: [
