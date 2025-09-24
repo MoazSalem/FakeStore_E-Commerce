@@ -12,7 +12,7 @@ class HorizontalItemWidget extends StatelessWidget {
   const HorizontalItemWidget({
     super.key,
     required this.product,
-    this.uniqueTag = '0',
+    this.uniqueTag = "",
     this.pressable = true,
   });
 
@@ -39,14 +39,20 @@ class HorizontalItemWidget extends StatelessWidget {
               borderRadius: BorderRadius.circular(SizesManager.roundedCorners),
               color: theme.colorScheme.primaryContainer,
             ),
-            child: Hero(
-              tag: uniqueTag,
-              child: OnlineImageContainer(
-                height: SizesManager.savedItemSide,
-                imageUrl: product.image,
-                padding: 10,
-              ),
-            ),
+            child: pressable
+                ? Hero(
+                    tag: uniqueTag,
+                    child: OnlineImageContainer(
+                      height: SizesManager.savedItemSide,
+                      imageUrl: product.image,
+                      padding: 10,
+                    ),
+                  )
+                : OnlineImageContainer(
+                    height: SizesManager.savedItemSide,
+                    imageUrl: product.image,
+                    padding: 10,
+                  ),
           ),
           Flexible(
             child: Padding(
