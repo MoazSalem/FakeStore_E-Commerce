@@ -93,8 +93,8 @@ jobs:
           cd build/ios/iphonesimulator
           mkdir -p Payload
           cp -r Runner.app Payload/
-          zip -r app-unsigned.ipa Payload
-          mv app-unsigned.ipa ../../../artifacts/
+          zip -r ios-app-simulator-unsigned.ipa Payload
+          mv ios-app-simulator-unsigned.ipa ../../../artifacts/
 
       - name: Upload iOS Artifacts to Release
         uses: softprops/action-gh-release@v1
@@ -116,9 +116,10 @@ jobs:
         with:
           channel: stable
           cache: true
-      - run: echo "$PAYMOB_KEYS" | base64 -d >keys.json
-      - run: flutter pub get
-      - run: flutter build web --release --dart-define-from-file=keys.json
+      - run: |
+          echo "$PAYMOB_KEYS" | base64 -d >keys.json
+          flutter pub get
+          flutter build web --release --dart-define-from-file=keys.json
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
