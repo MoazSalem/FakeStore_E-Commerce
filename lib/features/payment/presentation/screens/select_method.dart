@@ -9,7 +9,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SelectMethodScreen extends StatefulWidget {
-  const SelectMethodScreen({super.key});
+  final double amount;
+
+  const SelectMethodScreen({super.key, required this.amount});
 
   @override
   State<SelectMethodScreen> createState() => _SelectMethodScreenState();
@@ -101,6 +103,7 @@ class _SelectMethodScreenState extends State<SelectMethodScreen> {
                         ).initWalletPayment(
                           _walletNumberController.text,
                           context,
+                          widget.amount,
                         );
                       }
                     },
@@ -132,15 +135,18 @@ class _SelectMethodScreenState extends State<SelectMethodScreen> {
                       leading: SvgImage(asset: AssetsManager.cards),
                       onTap: () => BlocProvider.of<PaymentCubit>(
                         context,
-                      ).initPayment(PaymentMethod.card, context),
+                      ).initPayment(PaymentMethod.card, context, widget.amount),
                     ),
                     SizedBox(height: SizesManager.padding8),
                     TileCard(
                       title: 'Mobile Wallet',
                       leading: SvgImage(asset: AssetsManager.wallet),
-                      onTap: () => BlocProvider.of<PaymentCubit>(
-                        context,
-                      ).initPayment(PaymentMethod.wallet, context),
+                      onTap: () =>
+                          BlocProvider.of<PaymentCubit>(context).initPayment(
+                            PaymentMethod.wallet,
+                            context,
+                            widget.amount,
+                          ),
                     ),
                     SizedBox(height: SizesManager.padding),
                   ],

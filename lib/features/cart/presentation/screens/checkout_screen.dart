@@ -99,21 +99,29 @@ class CheckoutScreen extends StatelessWidget {
               ),
               const SizedBox(height: 20),
               // Pay Button
-              CustomButton(
-                child: Text(
-                  'Pay',
-                  style: TextStyle(
-                    fontSize: SizesManager.font16,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-                onPressed: () => showModalBottomSheet(
-                  context: context,
-                  builder: (context) => BlocProvider(
-                    create: (context) => PaymentCubit(),
-                    child: SelectMethodScreen(),
-                  ),
-                ),
+              BlocBuilder<CartCubit, CartState>(
+                builder: (context, state) {
+                  if (state is CartLoaded) {
+                    return CustomButton(
+                      child: Text(
+                        'Pay',
+                        style: TextStyle(
+                          fontSize: SizesManager.font16,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      onPressed: () => showModalBottomSheet(
+                        context: context,
+                        builder: (context) => BlocProvider(
+                          create: (context) => PaymentCubit(),
+                          child: SelectMethodScreen(amount: state.totalAmount),
+                        ),
+                      ),
+                    );
+                  } else {
+                    return const SizedBox.shrink();
+                  }
+                },
               ),
               const SizedBox(height: 20),
             ],
