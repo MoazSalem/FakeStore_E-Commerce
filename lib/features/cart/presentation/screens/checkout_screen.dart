@@ -7,6 +7,7 @@ import 'package:ecommerce/core/widgets/custom_divider.dart';
 import 'package:ecommerce/core/widgets/horizontal_item_widget.dart';
 import 'package:ecommerce/core/widgets/svg_image.dart';
 import 'package:ecommerce/features/cart/presentation/controller/cart_cubit.dart';
+import 'package:ecommerce/features/payment/presentation/controller/payment_cubit.dart';
 import 'package:ecommerce/features/payment/presentation/screens/select_method.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -108,7 +109,10 @@ class CheckoutScreen extends StatelessWidget {
                 ),
                 onPressed: () => showModalBottomSheet(
                   context: context,
-                  builder: (context) => const SelectMethodScreen(),
+                  builder: (context) => BlocProvider(
+                    create: (context) => PaymentCubit(),
+                    child: SelectMethodScreen(),
+                  ),
                 ),
               ),
               const SizedBox(height: 20),
