@@ -14,4 +14,6 @@ class AssetsManager {
   static const String star = 'assets/images/svgs/star.svg.vec';
   static const String brush = 'assets/images/svgs/brush.svg.vec';
   static const String unsave = 'assets/images/svgs/unsave.svg.vec';
+  static const String cards = 'assets/images/svgs/cards.svg.vec';
+  static const String wallet = 'assets/images/svgs/wallet.svg.vec';
 }
