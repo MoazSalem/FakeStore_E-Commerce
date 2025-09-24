@@ -49,7 +49,7 @@ class PaymentCubit extends Cubit<PaymentState> {
                 );
                 emit(PaymentSuccess());
                 if (context.mounted) {
-                  Navigator.pop(context);
+                  Navigator.popUntil(context, (route) => route.isFirst);
                 }
               } else {
                 ScaffoldMessenger.of(context).showSnackBar(
@@ -105,7 +105,7 @@ class PaymentCubit extends Cubit<PaymentState> {
             );
             emit(PaymentSuccess());
             if (context.mounted) {
-              Navigator.pop(context);
+              Navigator.popUntil(context, (route) => route.isFirst);
             }
           } else {
             ScaffoldMessenger.of(context).showSnackBar(

@@ -14,7 +14,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 
 class NavigationManager {
-  static const String mainScreen = '/main';
+  static const String mainScreen = '/';
   static const String createAccountScreen = '/createAccount';
   static const String detailsScreen = '/details';
   static const String loginScreen = '/login';
