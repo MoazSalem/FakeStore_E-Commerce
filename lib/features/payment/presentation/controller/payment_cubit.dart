@@ -1,3 +1,4 @@
+import 'package:ecommerce/core/utils/consts_manager.dart';
 import 'package:ecommerce/core/widgets/snack_bar.dart';
 import 'package:ecommerce/features/payment/domain/enums/payment_enum.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +9,15 @@ part 'payment_state.dart';
 
 class PaymentCubit extends Cubit<PaymentState> {
   PaymentCubit() : super(PaymentInitial());
+
+  static Future<void> initPaymob() async {
+    FlutterPaymob.instance.initialize(
+      apiKey: ConstsManager.paymobApiKey,
+      integrationID: int.parse(ConstsManager.integrationID),
+      walletIntegrationId: int.parse(ConstsManager.walletIntegrationId),
+      iFrameID: int.parse(ConstsManager.iFrameID),
+    );
+  }
 
   void initPayment(
     PaymentMethod paymentMethod,
