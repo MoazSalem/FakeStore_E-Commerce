@@ -17,6 +17,7 @@ jobs:
       - uses: subosito/flutter-action@v2
         with:
           channel: stable
+          cache: true
 
       - run: flutter pub get
       - run: |
@@ -37,19 +38,20 @@ jobs:
 
           echo "$JAVA_KEYSTORE" | base64 -d > android/app/New_Keystore.jks
           echo "$JAVA_KEYSTORE_PROPERTIES" | base64 -d > android/keystore.properties
+          echo "$PAYMOB_KEYS" | base64 -d >keys.json
 
           ## build
 
           flutter pub get
 
-          flutter build apk --release --split-per-abi
+          flutter build apk --release --split-per-abi --obfuscate --split-debug-info=build/android/split_symbols --dart-define-from-file=keys.json
           (cd ./build/app/outputs/flutter-apk/ && {
             mv ./app-arm64-v8a-release.apk "$ARTIFACTS_PATH/$APP_NAME-$app_ver-arm64-v8a.apk"
             mv ./app-armeabi-v7a-release.apk "$ARTIFACTS_PATH/$APP_NAME-$app_ver-armeabi-v7a.apk"
             mv ./app-x86_64-release.apk "$ARTIFACTS_PATH/$APP_NAME-$app_ver-x86_64.apk"
           })
 
-          flutter build apk --release
+          flutter build apk --release --obfuscate --split-debug-info=build/android/symbols --dart-define-from-file=keys.json
           (cd ./build/app/outputs/flutter-apk/ &&
             mv ./app-release.apk "$ARTIFACTS_PATH/$APP_NAME-$app_ver-universal.apk"
           )
@@ -59,6 +61,7 @@ jobs:
         env:
           JAVA_KEYSTORE: ${{ secrets.JAVA_KEYSTORE }}
           JAVA_KEYSTORE_PROPERTIES: ${{ secrets.JAVA_KEYSTORE_PROPERTIES }}
+          PAYMOB_KEYS: ${{ secrets.PAYMOB_KEYS }}
           APP_NAME: ${{ github.event.repository.name }}
 
       - name: Upload Android Artifacts to Release
@@ -79,13 +82,15 @@ jobs:
       - uses: subosito/flutter-action@v2
         with:
           channel: stable
+          cache: true
 
       - run: flutter pub get
-      - name: Build unsigned iOS IPA
+      - name: Build Simulator iOS IPA
         run: |
-          flutter build ios --release --no-codesign
+          echo "$PAYMOB_KEYS" | base64 -d >keys.json
+          flutter build ios --simulator --no-codesign --obfuscate --split-debug-info=build/ios/symbols --dart-define-from-file=keys.json
           mkdir artifacts
-          cd build/ios/iphoneos
+          cd build/ios/iphonesimulator
           mkdir -p Payload
           cp -r Runner.app Payload/
           zip -r app-unsigned.ipa Payload
@@ -98,6 +103,7 @@ jobs:
           files: artifacts/*
         env:
           GITHUB_TOKEN: ${{ secrets.TOKEN }}
+          PAYMOB_KEYS: ${{ secrets.PAYMOB_KEYS }}
 
   # ========== WEB ==========
   web:
@@ -109,13 +115,15 @@ jobs:
       - uses: subosito/flutter-action@v2
         with:
           channel: stable
-
+          cache: true
+      - run: echo "$PAYMOB_KEYS" | base64 -d >keys.json
       - run: flutter pub get
-      - run: flutter build web --release
+      - run: flutter build web --release --dart-define-from-file=keys.json
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.TOKEN }}
+          PAYMOB_KEYS: ${{ secrets.PAYMOB_KEYS }}
           publish_dir: ./build/web
           publish_branch: gh-pages
