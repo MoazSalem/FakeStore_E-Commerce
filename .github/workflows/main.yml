@@ -95,6 +95,8 @@ jobs:
           cp -r Runner.app Payload/
           zip -r ios-app-simulator-unsigned.ipa Payload
           mv ios-app-simulator-unsigned.ipa ../../../artifacts/
+        env:
+          PAYMOB_KEYS: ${{ secrets.PAYMOB_KEYS }}
 
       - name: Upload iOS Artifacts to Release
         uses: softprops/action-gh-release@v1
@@ -103,7 +105,6 @@ jobs:
           files: artifacts/*
         env:
           GITHUB_TOKEN: ${{ secrets.TOKEN }}
-          PAYMOB_KEYS: ${{ secrets.PAYMOB_KEYS }}
 
   # ========== WEB ==========
   web:
@@ -120,11 +121,12 @@ jobs:
           echo "$PAYMOB_KEYS" | base64 -d >keys.json
           flutter pub get
           flutter build web --release --dart-define-from-file=keys.json --base-href /FakeStore_E-Commerce/
+        env:
+          PAYMOB_KEYS: ${{ secrets.PAYMOB_KEYS }}
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.TOKEN }}
-          PAYMOB_KEYS: ${{ secrets.PAYMOB_KEYS }}
           publish_dir: ./build/web
           publish_branch: gh-pages
