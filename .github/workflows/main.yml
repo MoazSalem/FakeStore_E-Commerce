@@ -119,7 +119,7 @@ jobs:
       - run: |
           echo "$PAYMOB_KEYS" | base64 -d >keys.json
           flutter pub get
-          flutter build web --release --dart-define-from-file=keys.json
+          flutter build web --release --dart-define-from-file=keys.json --base-href /FakeStore_E-Commerce/
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3

@@ -43,6 +43,31 @@ class _SelectMethodScreenState extends State<SelectMethodScreen> {
                 ),
               ),
             );
+          case PaymentError():
+            return SizedBox(
+              width: double.infinity,
+              height: 246,
+              child: Center(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  spacing: SizesManager.padding,
+                  children: [
+                    Icon(
+                      Icons.error,
+                      size: SizesManager.buttonHeight48,
+                      color: Theme.of(context).colorScheme.error,
+                    ),
+                    Text(
+                      state.message,
+                      style: TextStyle(
+                        fontSize: SizesManager.font16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            );
           case PaymentWalletNumber():
             return Padding(
               padding: const EdgeInsets.symmetric(

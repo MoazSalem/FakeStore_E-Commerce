@@ -64,11 +64,11 @@ class PaymentCubit extends Cubit<PaymentState> {
               }
             },
           );
+          emit(PaymentInitial());
         } catch (e) {
           debugPrint(e.toString());
           emit(PaymentError(message: e.toString()));
         }
-        emit(PaymentInitial());
         break;
       case PaymentMethod.wallet:
         emit(PaymentWalletNumber());
@@ -118,10 +118,10 @@ class PaymentCubit extends Cubit<PaymentState> {
           }
         },
       );
+      emit(PaymentInitial());
     } catch (e) {
       debugPrint(e.toString());
       emit(PaymentError(message: e.toString()));
     }
-    emit(PaymentInitial());
   }
 }
