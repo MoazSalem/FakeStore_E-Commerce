@@ -2,6 +2,7 @@ import 'package:ecommerce/core/utils/sizes_manager.dart';
 import 'package:ecommerce/core/widgets/circular_button.dart';
 import 'package:ecommerce/core/widgets/custom_app_bar.dart';
 import 'package:ecommerce/core/widgets/custom_button.dart';
+import 'package:ecommerce/core/widgets/snack_bar.dart';
 import 'package:ecommerce/features/user/data/models/user_model.dart';
 import 'package:ecommerce/features/user/presentation/controller/user_cubit.dart';
 import 'package:flutter/material.dart';
@@ -88,9 +89,9 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                       ),
                       controller: imageUrlController,
                       validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return "Please enter an image URL";
-                        } else if (!value.startsWith("https://")) {
+                        if (value != null &&
+                            value.isNotEmpty &&
+                            !value.startsWith("https://")) {
                           return "Please enter a valid image URL";
                         }
                         return null;
@@ -115,6 +116,10 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                             ? null
                             : imageUrlController.text,
                       ),
+                    );
+                    Navigator.pop(context);
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      customSnackBar("Account created successfully"),
                     );
                   }
                 },

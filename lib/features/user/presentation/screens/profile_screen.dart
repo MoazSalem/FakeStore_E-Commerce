@@ -3,6 +3,7 @@ import 'package:ecommerce/core/utils/navigation_manager.dart';
 import 'package:ecommerce/core/utils/sizes_manager.dart';
 import 'package:ecommerce/core/widgets/circular_avatar_image.dart';
 import 'package:ecommerce/core/widgets/custom_app_bar.dart';
+import 'package:ecommerce/core/widgets/snack_bar.dart';
 import 'package:ecommerce/core/widgets/svg_image.dart';
 import 'package:ecommerce/features/user/presentation/controller/user_cubit.dart';
 import 'package:ecommerce/features/user/presentation/widgets/create_account_button.dart';
@@ -51,7 +52,12 @@ class ProfileScreen extends StatelessWidget {
                       height: SizesManager.buttonHeight,
                       child: OutlinedButton(
                         onPressed: () => state is UserLoaded
-                            ? BlocProvider.of<UserCubit>(context).signOut()
+                            ? {
+                                BlocProvider.of<UserCubit>(context).signOut(),
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  customSnackBar("Logout Success"),
+                                ),
+                              }
                             : Navigator.pushNamed(
                                 context,
                                 NavigationManager.loginScreen,

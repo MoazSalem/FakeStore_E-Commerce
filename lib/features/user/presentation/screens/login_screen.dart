@@ -2,6 +2,7 @@ import 'package:ecommerce/core/utils/sizes_manager.dart';
 import 'package:ecommerce/core/widgets/circular_button.dart';
 import 'package:ecommerce/core/widgets/custom_app_bar.dart';
 import 'package:ecommerce/core/widgets/custom_button.dart';
+import 'package:ecommerce/core/widgets/snack_bar.dart';
 import 'package:ecommerce/features/user/presentation/controller/user_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -77,6 +78,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   BlocProvider.of<UserCubit>(
                     context,
                   ).signIn(nameController.text);
+                  ScaffoldMessenger.of(
+                    context,
+                  ).showSnackBar(customSnackBar("Login Success"));
                   Navigator.pop(context);
                 }
               },

@@ -43,7 +43,7 @@ class AppBarUserDetails extends StatelessWidget {
               padding: const EdgeInsets.symmetric(
                 horizontal: SizesManager.padding10,
               ),
-              child: state is UserLoaded
+              child: state is UserLoaded && state.user.avatarUrl != null
                   ? CircleAvatar(
                       radius: SizesManager.userRadius,
                       child: CircularAvatarImage(
