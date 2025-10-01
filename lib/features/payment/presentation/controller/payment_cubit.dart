@@ -66,7 +66,6 @@ class PaymentCubit extends Cubit<PaymentState> {
           );
           emit(PaymentInitial());
         } catch (e) {
-          debugPrint(e.toString());
           emit(PaymentError(message: e.toString()));
         }
         break;
@@ -120,7 +119,6 @@ class PaymentCubit extends Cubit<PaymentState> {
       );
       emit(PaymentInitial());
     } catch (e) {
-      debugPrint(e.toString());
       emit(PaymentError(message: e.toString()));
     }
   }

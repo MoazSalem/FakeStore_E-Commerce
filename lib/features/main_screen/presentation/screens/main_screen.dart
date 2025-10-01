@@ -13,6 +13,7 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
+  bool showSideBar = false;
   final PageController pageController = PageController(
     initialPage: 0,
     keepPage: true,
@@ -25,26 +26,51 @@ class _MainScreenState extends State<MainScreen> {
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    // if the width is greater than the height then use the side bar
+    showSideBar =
+        MediaQuery.sizeOf(context).width > MediaQuery.sizeOf(context).height;
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       extendBody: true,
       body: SafeArea(
         bottom: false,
-        child: PageView(
-          scrollBehavior: const ScrollBehavior().copyWith(
-            scrollbars: false,
-            physics: NeverScrollableScrollPhysics(),
-          ),
-          controller: pageController,
+        child: Row(
           children: [
-            HomeScreen(),
-            CartScreen(),
-            SavedScreen(),
-            ProfileScreen(),
+            if (showSideBar)
+              CustomNavigationBar(
+                isDrawer: true,
+                pageController: pageController,
+              ),
+            Expanded(
+              child: PageView(
+                scrollBehavior: const ScrollBehavior().copyWith(
+                  scrollbars: false,
+                  physics: NeverScrollableScrollPhysics(),
+                ),
+                controller: pageController,
+                children: [
+                  HomeScreen(),
+                  CartScreen(),
+                  SavedScreen(),
+                  ProfileScreen(),
+                ],
+              ),
+            ),
           ],
         ),
       ),
-      bottomNavigationBar: CustomNavigationBar(pageController: pageController),
+
+      bottomNavigationBar: showSideBar
+          ? null
+          : CustomNavigationBar(
+              isDrawer: false,
+              pageController: pageController,
+            ),
     );
   }
 }
